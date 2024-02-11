@@ -34,7 +34,8 @@ int main(){
         cin >> Studentas[i].namu_darbai[j];
         rezultatas += Studentas[i].namu_darbai[j];
     }
-
+    sort(Studentas[i].namu_darbai, Studentas[i].namu_darbai + nd_kiekis);
+    
     cout << "Įveskitę " << i+1 << " studento egzamino rezultatą: ";
     cin >> Studentas[i].egzaminas;
     }
