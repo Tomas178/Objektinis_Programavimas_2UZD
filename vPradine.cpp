@@ -24,6 +24,7 @@ int main() {
 
     wcout << L"Įveskitę kiek bus studentų: ";
     cin >> moksk;
+    cin.ignore();
 
     for (int i = 0; i < moksk; i++) {
         int rezultatas = 0;
@@ -58,11 +59,11 @@ int main() {
     }
 
     wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Vid.)" << setw(20) << L"Galutinis (Med.)" << endl;
-    wcout << L"---------------------------------------------------------------------" << endl;
+    wcout << L"----------------------------------------------------------------------------" << endl;
 
     for (int i = 0; i < moksk; i++) {
         wcout << left << setw(20) << Studentas[i].vardas << setw(20) << Studentas[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
     }
-
+    system("pause");
     return 0;
 }
