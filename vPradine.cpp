@@ -19,6 +19,8 @@ int main(){
     setlocale(LC_ALL, "Lithuanian");
     int nd_kiekis;
     int moksk;
+    double mediana[N];
+    double galutinis_balas[N];
     cout << "Įveskitę kiek bus studentų: ";
     cin >> moksk;
     for(int i = 0; i < moksk; i++){
@@ -38,5 +40,14 @@ int main(){
     
     cout << "Įveskitę " << i+1 << " studento egzamino rezultatą: ";
     cin >> Studentas[i].egzaminas;
+
+    if(nd_kiekis % 2 == 0){
+    mediana[i] = (Studentas[i].namu_darbai[nd_kiekis/2] + Studentas[i].namu_darbai[nd_kiekis/2-1]) / 2.0;
+    } 
+    else{
+    mediana[i] = Studentas[i].namu_darbai[nd_kiekis/2];
+    }
+
+    galutinis_balas[i] = 0.4 * rezultatas / nd_kiekis + 0.6 * Studentas[i].egzaminas;
     }
 }
