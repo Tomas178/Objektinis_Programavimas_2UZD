@@ -21,8 +21,7 @@ int main(){
     int moksk;
     double mediana[N];
     double galutinis_balas[N];
-    cout << "Įveskitę kiek bus studentų: ";
-    cin >> moksk;
+    cout << "Įveskitę kiek bus studentų: "; cin >> moksk;
     for(int i = 0; i < moksk; i++){
     int rezultatas = 0;
     cout << "Įveskitę " << i+1 << " studento vardą: ";
@@ -37,7 +36,7 @@ int main(){
         rezultatas += Studentas[i].namu_darbai[j];
     }
     sort(Studentas[i].namu_darbai, Studentas[i].namu_darbai + nd_kiekis);
-    
+
     cout << "Įveskitę " << i+1 << " studento egzamino rezultatą: ";
     cin >> Studentas[i].egzaminas;
 
@@ -50,4 +49,9 @@ int main(){
 
     galutinis_balas[i] = 0.4 * rezultatas / nd_kiekis + 0.6 * Studentas[i].egzaminas;
     }
+
+    cout << left << setw(20) << "Vardas" << setw(20) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
+    cout << "--------------------------------------------------------" << endl;
+    for (int i = 0; i < moksk; i++)
+        cout << left << setw(20) << Studentas[i].vardas << setw(20) << Studentas[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
 }
