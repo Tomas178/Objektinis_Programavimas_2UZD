@@ -27,8 +27,8 @@ bool validateIntInput(int& value) {
 int main() {
     setlocale(LC_ALL, "");
     int moksk = 0;
-    double mediana[N];
-    double galutinis_balas[N];
+    double* mediana = new double[100];
+    double* galutinis_balas = new double[100];
 
     Studentai* Studentas = new Studentai[100];
 
@@ -71,7 +71,6 @@ int main() {
                 char choice3;
                 cin >> choice3;
                 if(toupper(choice3) != 'Y') break;
-                } else{
                 }
             }
             wcin.clear();
@@ -111,7 +110,12 @@ int main() {
     for (int i = 0; i < moksk; i++) {
         wcout << left << setw(20) << Studentas[i].vardas << setw(20) << Studentas[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
     }
-    system("pause");
+    for (int i = 0; i < moksk; ++i) {
+    delete[] Studentas[i].namu_darbai;
+    }
     delete[] Studentas;
+    delete[] mediana;
+    delete[] galutinis_balas;
+    system("pause");
     return 0;
 }

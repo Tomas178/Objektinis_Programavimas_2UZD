@@ -1,19 +1,20 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include <locale>
 #include <limits>
+#include <vector>
+#include <numeric>
 
 using namespace std;
 
 const int N = 5;
 
-struct Studentas {
+struct Studentokai {
     wstring vardas;
     wstring pavarde;
-    int namu_darbai[N];
+    vector<int> namu_darbai;
     int egzaminas;
-} Studentas[100];
+};
 
 bool validateIntInput(int& value) {
     if (cin.fail()) { // If the input failed (i.e., not an integer)
@@ -26,71 +27,88 @@ bool validateIntInput(int& value) {
 
 int main() {
     setlocale(LC_ALL, "");
+    vector<Studentokai> Studentai;
+    vector<double> mediana;
+    vector<double> galutinis_balas;
 
-    int nd_kiekis;
-    int moksk;
-    double mediana[N];
-    double galutinis_balas[N];
+    do
+    {
+        Studentokai Studentas;
+        wcout << L"Įveskitę " << Studentai.size()+1 << L" studento vardą: ";
+        wcin >> Studentas.vardas;
 
-    do{
-    wcout << L"Įveskitę kiek bus studentų: ";
-    cin >> moksk;
-    } while (!validateIntInput(moksk));
+        wcout << L"Įveskitę " << Studentai.size()+1 << L" studento pavardę: ";
+        wcin >> Studentas.pavarde;
 
-    for (int i = 0; i < moksk; i++) {
-        int rezultatas = 0;
+        wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino rezultatą (1-10): ";
+        wcin >> Studentas.egzaminas;
 
-            wcout << L"Įveskitę " << i + 1 << L" studento vardą: ";
-            wcin >> Studentas[i].vardas;
-
-            wcout << L"Įveskitę " << i + 1 << L" studento pavardę: ";
-            wcin >> Studentas[i].pavarde;
-
-        do {
-            wcout << L"Įveskitę " << i + 1 << L" studento namų darbų tarpinių rezultatų kiekį: ";
-            cin >> nd_kiekis;
-        } while (!validateIntInput(nd_kiekis));
-
-        if(nd_kiekis < 1){
-            rezultatas = 0;
-            do {
-                wcout << L"Įveskitę " << i + 1 << L" studento egzamino rezultatą: ";
-                cin >> Studentas[i].egzaminas;
-                galutinis_balas[i] = 0.6 * Studentas[i].egzaminas;
-            } while (!validateIntInput(Studentas[i].egzaminas));
-        }
-        else{
-            for (int j = 0; j < nd_kiekis; j++) {
-                do {
-                    wcout << L"Įveskite " << i + 1 << L" studento " << j + 1 << L" namų darbo tarpinį rezultatą: ";
-                    cin >> Studentas[i].namu_darbai[j];
-                } while (!validateIntInput(Studentas[i].namu_darbai[j]));
-                rezultatas += Studentas[i].namu_darbai[j];
+        char choice1;
+        while (true) {
+            wcout << L"Ar norėsite įvesti studento namų darbų rezultatus? (Y/N): ";
+            cin >> choice1;
+            choice1 = toupper(choice1);
+            if (choice1 == 'Y' || choice1 == 'N') {
+                break;
             }
-
-            sort(Studentas[i].namu_darbai, Studentas[i].namu_darbai + nd_kiekis);
-
-            do {
-                wcout << L"Įveskitę " << i + 1 << L" studento egzamino rezultatą: ";
-                cin >> Studentas[i].egzaminas;
-            } while (!validateIntInput(Studentas[i].egzaminas));
-
-            if (nd_kiekis % 2 == 0 && nd_kiekis > 0) {
-                mediana[i] = (Studentas[i].namu_darbai[nd_kiekis / 2] + Studentas[i].namu_darbai[nd_kiekis / 2 - 1]) / 2.0;
-            } else {
-                mediana[i] = Studentas[i].namu_darbai[nd_kiekis / 2];
-            }
-
-            galutinis_balas[i] = 0.4 * rezultatas / nd_kiekis + 0.6 * Studentas[i].egzaminas;
+            wcout << L"Prašome įvesti Y arba N." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-    }
+
+        if (choice1 == 'Y') {
+            while (Studentas.namu_darbai.size() <= N-1){
+                wcout << L"Įveskitę " << Studentai.size()+1 << L" studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatą (1-10): ";
+                int nd = 0;
+                wcin >> nd;
+                Studentas.namu_darbai.push_back(nd);
+                if(Studentas.namu_darbai.size() <= N-1){
+                wcout << L"Dar bus pažymių? (Y/N): ";
+                char choice3;
+                cin >> choice3;
+                if(toupper(choice3) != 'Y') break;
+                }
+            }
+            wcin.clear();
+            wcin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
+        
+        double med, gal_bal;
+        if(Studentas.namu_darbai.size() > 0){
+        sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
+        if(Studentas.namu_darbai.size() % 2 == 0 && Studentas.namu_darbai.size() > 0){
+            med = (Studentas.namu_darbai[Studentas.namu_darbai.size()/2-1] + Studentas.namu_darbai[Studentas.namu_darbai.size()/2])/2.0*0.4 + (0.6*Studentas.egzaminas);
+        } else if (Studentas.namu_darbai.size() % 2 == 0 && Studentas.namu_darbai.size() > 0){
+            med = Studentas.namu_darbai[Studentas.namu_darbai.size()]*0.4 + 0.6*Studentas.egzaminas;
+        }
+        } else{
+            med = Studentas.egzaminas*0.6;
+        }
+
+        if(Studentas.namu_darbai.size() > 0){
+            gal_bal = 0.4*accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0)/Studentas.namu_darbai.size() + 0.6*Studentas.egzaminas;
+        } else{
+            gal_bal = 0.6*Studentas.egzaminas;
+        }
+
+        mediana.push_back(med);
+        galutinis_balas.push_back(gal_bal);
+        Studentai.push_back(Studentas);
+
+        wcout << L"Ar norėsite įvesti dar vieną studentą? (Y/N): ";
+        char choice2;
+        cin >> choice2;
+        if(toupper(choice2) != 'Y') break;
+    } while (true);
+
 
     wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Vid.)" << setw(20) << L"Galutinis (Med.)" << endl;
     wcout << L"----------------------------------------------------------------------------" << endl;
 
-    for (int i = 0; i < moksk; i++) {
-        wcout << left << setw(20) << Studentas[i].vardas << setw(20) << Studentas[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
-    }
+    for_each(Studentai.begin(), Studentai.end(), [&](const Studentokai& student) {
+    size_t index = &student - &Studentai[0];
+    wcout << left << setw(20) << student.vardas << setw(20) << student.pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[index] << setw(20) << fixed << setprecision(2) << mediana[index] << endl;
+});
     system("pause");
     return 0;
 }
