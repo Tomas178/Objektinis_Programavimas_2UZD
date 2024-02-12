@@ -87,9 +87,8 @@ int main() {
         } else if (nd_kiekis % 2 != 0 && nd_kiekis > 0){
             mediana[moksk] = Studentas[moksk].namu_darbai[nd_kiekis/2]*0.4 + 0.6*Studentas[moksk].egzaminas;
         }
-        else{
+        }else{
             mediana[moksk] = 0.6*Studentas[moksk].egzaminas;
-        }
         }
 
         if(nd_kiekis > 0){
