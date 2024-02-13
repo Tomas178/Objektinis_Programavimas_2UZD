@@ -18,15 +18,6 @@ struct Studentokai {
     int egzaminas;
 };
 
-bool validateIntInput(int& value) {
-    if (cin.fail()) { // If the input failed (i.e., not an integer)
-        cin.clear(); // Clear the error state
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
-        return false; // Return false to indicate failure
-    }
-    return true; // Return true to indicate success
-}
-
 int main() {
     setlocale(LC_ALL, "");
     vector<Studentokai> Studentai;
@@ -89,6 +80,13 @@ int main() {
                 wcout << L"Įveskitę " << Studentai.size()+1 << L" studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatą (1-10): ";
                 int nd = 0;
                 wcin >> nd;
+                if(wcin.fail()){
+                    wcout << L"Įveskitę skaičių!" << endl;
+                    wcin.clear();
+                    wcin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    continue;
+                }
+                if(nd < 11 && nd > 0){
                 Studentas.namu_darbai.push_back(nd);
                 if(Studentas.namu_darbai.size() <= N-1){
                 wcout << L"Dar bus pažymių? (Y/N): ";
@@ -96,6 +94,9 @@ int main() {
                 cin >> choice3;
                 if(toupper(choice3) != 'Y') break;
                 }
+                }
+                else
+                wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
             }
             wcin.clear();
             wcin.ignore(numeric_limits<streamsize>::max(), '\n'); 
@@ -119,8 +120,22 @@ int main() {
             wcout << Studentai.size()+1 << L" Studento egzamino balas: " << egz << endl;
             Studentas.egzaminas = egz;
         } else {
+            while (true){
+            int egz = 0;
             wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino balą: ";
-            cin >> Studentas.egzaminas;
+            cin >> egz;
+            if(cin.fail()){
+                wcout << L"Įveskitę skaičių!" << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            else if(egz < 11 && egz > 0){
+            Studentas.egzaminas = egz;
+            break;
+            }
+            else
+            wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
+            }
         }
         
         double med, gal_bal;
