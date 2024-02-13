@@ -4,6 +4,8 @@
 #include <limits>
 #include <vector>
 #include <numeric>
+#include <random>
+#include <ctime>
 
 using namespace std;
 
@@ -31,6 +33,8 @@ int main() {
     vector<double> mediana;
     vector<double> galutinis_balas;
 
+    srand(time(nullptr));
+
     do
     {
         Studentokai Studentas;
@@ -39,9 +43,6 @@ int main() {
 
         wcout << L"Įveskitę " << Studentai.size()+1 << L" studento pavardę: ";
         wcin >> Studentas.pavarde;
-
-        wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino rezultatą (1-10): ";
-        wcin >> Studentas.egzaminas;
 
         char choice1;
         while (true) {
@@ -56,7 +57,34 @@ int main() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
-        if (choice1 == 'Y') {
+        char choice4;
+        while (true && choice1 == 'Y') {
+            wcout << L"Ar norite, kad namų darbų pažymiai būtų generuojami atsitiktinai? (Y/N): ";
+            cin >> choice4;
+            choice4 = toupper(choice4);
+            if (choice4 == 'Y' || choice4 == 'N') {
+                break;
+            }
+            wcout << L"Prašome įvesti Y arba N." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        if (choice1 == 'Y' && choice4 == 'Y'){
+            while (Studentas.namu_darbai.size() <= N-1){
+                int nd = rand() % 10 +1;
+                wcout << Studentai.size()+1 << L" Studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatas: " << nd << endl;
+                Studentas.namu_darbai.push_back(nd);
+                if(Studentas.namu_darbai.size() <= N-1){
+                wcout << L"Dar generuoti pažymį? (Y/N): ";
+                char choice3;
+                cin >> choice3;
+                if(toupper(choice3) != 'Y') break;
+                }
+            }
+        }
+
+        if (choice1 == 'Y' && choice4 == 'N') {
             while (Studentas.namu_darbai.size() <= N-1){
                 wcout << L"Įveskitę " << Studentai.size()+1 << L" studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatą (1-10): ";
                 int nd = 0;
@@ -72,14 +100,36 @@ int main() {
             wcin.clear();
             wcin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
+
+        char choice5;
+        while (true) {
+            wcout << L"Ar norite, kad egzamino balas būtų generuojamas atsitiktinai? (Y/N): ";
+            cin >> choice5;
+            choice5 = toupper(choice5);
+            if (choice5 == 'Y' || choice5 == 'N') {
+                break;
+            }
+            wcout << L"Prašome įvesti Y arba N." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        if(choice5 == 'Y'){
+            int egz = rand()%10+1;
+            wcout << Studentai.size()+1 << L" Studento egzamino balas: " << egz << endl;
+            Studentas.egzaminas = egz;
+        } else {
+            wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino balą: ";
+            cin >> Studentas.egzaminas;
+        }
         
         double med, gal_bal;
         if(Studentas.namu_darbai.size() > 0){
         sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
         if(Studentas.namu_darbai.size() % 2 == 0 && Studentas.namu_darbai.size() > 0){
             med = (Studentas.namu_darbai[Studentas.namu_darbai.size()/2-1] + Studentas.namu_darbai[Studentas.namu_darbai.size()/2])/2.0*0.4 + (0.6*Studentas.egzaminas);
-        } else if (Studentas.namu_darbai.size() % 2 == 0 && Studentas.namu_darbai.size() > 0){
-            med = Studentas.namu_darbai[Studentas.namu_darbai.size()]*0.4 + 0.6*Studentas.egzaminas;
+        } else if (Studentas.namu_darbai.size() % 2 != 0 && Studentas.namu_darbai.size() > 0){
+            med = Studentas.namu_darbai[Studentas.namu_darbai.size()/2]*0.4 + 0.6*Studentas.egzaminas;
         }
         } else{
             med = Studentas.egzaminas*0.6;
