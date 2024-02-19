@@ -53,21 +53,19 @@ int main() {
             std::cin >> programos_veikimas;
             if(cin.fail()){
                 std::wcout << L"Prašome įvesti skaičių!\n";
-                std::wcin.clear();
-                std::wcin.ignore(numeric_limits<streamsize>::max(), '\n');
+                std::cin.clear();
+                std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
             }
-            else if(programos_veikimas > 0 || programos_veikimas < 5)
+            if(programos_veikimas > 0 && programos_veikimas < 5)
                 break;
             else
             std::wcout << L"Įveskite skaičių šiame intervale [1-4]\n";
         }
 
         Studentokai Studentas;
-        char choice1;
         char programos_tesinys;
         char choice3;
-        char choice4;
 
         if(programos_veikimas == 4){
             break;
@@ -100,8 +98,7 @@ int main() {
                 }
             }
         }
-
-        if (programos_veikimas == 1){
+        else{
             while (Studentas.namu_darbai.size() <= N-1){
                 std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatą (1-10): ";
                 int nd = 0;
@@ -112,16 +109,16 @@ int main() {
                     std::wcin.ignore(numeric_limits<streamsize>::max(), '\n');
                     continue;
                 }
-                if(nd < 11 && nd > 0){
-                Studentas.namu_darbai.push_back(nd);
-                if(Studentas.namu_darbai.size() <= N-1){
-                std::wcout << L"Dar bus pažymių? (Y/N): ";
-                cin >> choice3;
-                if(toupper(choice3) != 'Y') break;
+                else if(nd < 11 && nd > 0){
+                    Studentas.namu_darbai.push_back(nd);
+                    if(Studentas.namu_darbai.size() <= N-1){
+                    std::wcout << L"Dar bus pažymių? (Y/N): ";
+                    cin >> choice3;
+                    if(toupper(choice3) != 'Y') break;
                 }
                 }
                 else
-                std::wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
+                    std::wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
             }
             std::wcin.clear();
             std::wcin.ignore(numeric_limits<streamsize>::max(), '\n'); 
@@ -135,11 +132,11 @@ int main() {
             while (true){
             int egz = 0;
             std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino balą: ";
-            wcin >> egz;
+            cin >> egz;
             if(cin.fail()){
                 std::wcout << L"Įveskitę skaičių!" << endl;
-                wcin.clear();
-                wcin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
             else if(egz < 11 && egz > 0){
             Studentas.egzaminas = egz;
@@ -166,11 +163,13 @@ int main() {
         if(toupper(programos_tesinys) != 'Y') break;
     } while (true);
 
-    while (true && programos_veikimas != 4){
+    while (Studentai.size() > 0){
     std::wcout << L"1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
     cin >> norimas_isvedimas;
     if(cin.fail()){
         wcout << L"Prašome įvesti skaičių.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     else if(norimas_isvedimas != 1 && norimas_isvedimas != 2){
         wcout << L"Įvedėte netinkamą skaičių.\n";
@@ -179,7 +178,7 @@ int main() {
         break;
     }
 
-    if(norimas_isvedimas == 1){
+    if(norimas_isvedimas == 1 && Studentai.size() > 0){
         std::wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Vid.)" << endl;
         std::wcout << L"--------------------------------------------------------" << endl;
 
@@ -187,7 +186,7 @@ int main() {
         size_t index = &student - &Studentai[0];
         std::wcout << left << setw(20) << student.vardas << setw(20) << student.pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[index] << endl;
     });
-    } else{
+    } else if(norimas_isvedimas == 2 && Studentai.size() > 0){
         std::wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Med.)" << endl;
         std::wcout << L"--------------------------------------------------------" << endl;
 
