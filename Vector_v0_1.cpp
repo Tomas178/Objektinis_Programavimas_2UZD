@@ -57,8 +57,10 @@ int main() {
     vector<Studentokai> Studentai;
     vector<double> mediana;
     vector<double> galutinis_balas;
-    int norimas_isvedimas;
+    int norimas_isvedimo_rezultatas;
+    int norima_isvedimo_vieta;
     int programos_veikimas;
+    int norimas_rikiavimas;
     int failo_skaitymas = 0;
     vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Rūta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
     vector<string> Pavardes = {"Petronis", "Semėnas", "Cesevičiūtė", "Poškus", "Šumskis", "Leonardas", "Petronytė", "Šerelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
@@ -215,14 +217,47 @@ int main() {
     } while (true);
 
     while (Studentai.size() > 0){
-        cout << "1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
-        cin >> norimas_isvedimas;
+        cout << "\n1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
+        cin >> norimas_isvedimo_rezultatas;
         if(cin.fail()){
             cout << "Prašome įvesti skaičių.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-        else if(norimas_isvedimas != 1 && norimas_isvedimas != 2){
+        else if(norimas_isvedimo_rezultatas != 1 && norimas_isvedimo_rezultatas != 2){
+            cout << "Įvedėte netinkamą skaičių.\n";
+        }
+        else
+            break;
+    }
+
+    while(Studentai.size() > 0){
+        cout << "\n1 - Išvesti rezultatą konsolėje\n2 - Išvesti rezultatą faile\nPasirinkite: ";
+        cin >> norima_isvedimo_vieta;
+        if(cin.fail()){
+            cout << "Prašome įvesti skaičių.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else if(norima_isvedimo_vieta != 1 && norima_isvedimo_vieta != 2){
+            cout << "Įvedėte netinkamą skaičių.\n";
+        }
+        else
+            break;
+    }
+
+    while(Studentai.size() > 0){
+        if(norimas_isvedimo_rezultatas == 1)
+            cout << "\n1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal vidurkį\nPasirinkite: ";
+        else if(norimas_isvedimo_rezultatas == 2)
+            cout << "\n1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal medianą\nPasirinkite: ";
+        cin >> norimas_rikiavimas;
+        if(cin.fail()){
+            cout << "Prašome įvesti skaičių.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else if(norimas_rikiavimas < 1 || norimas_rikiavimas > 3){
             cout << "Įvedėte netinkamą skaičių.\n";
         }
         else
@@ -236,21 +271,40 @@ int main() {
         maxSurnameWidth = max(maxSurnameWidth, student.pavarde.length());
     }
 
-    if(norimas_isvedimas == 1 && Studentai.size() > 0){
+    if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
         cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << endl;
         cout << "--------------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
             cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << endl;
         }
-    } else if(norimas_isvedimas == 2 && Studentai.size() > 0){
+    } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
         cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Med.)" << endl;
         cout << "--------------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
             cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
         }
+    } else if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
+        ofstream RF("studenciokai.txt");
+        RF << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << endl;
+        RF << "--------------------------------------------------------" << endl; 
+        for(size_t i = 0; i < Studentai.size(); ++i) {
+            RF << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << endl;
+        }
+        RF.close();
+        cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
+    } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 2){
+        ofstream RF("studenciokai.txt");
+        RF << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Med.)" << endl;
+        RF << "--------------------------------------------------------" << endl;
+        for(size_t i = 0; i < Studentai.size(); ++i) {
+            RF << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
+        }
+        RF.close();
+        cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
     }
+
     system("pause");
     return 0;
 }
