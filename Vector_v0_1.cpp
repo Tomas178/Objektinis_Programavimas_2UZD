@@ -6,14 +6,17 @@
 #include <numeric>
 #include <random>
 #include <ctime>
+#include <fstream>
+#include <locale>
+#include <windows.h>
 
 using namespace std;
 
 const int N = 5;
 
 struct Studentokai {
-    wstring vardas;
-    wstring pavarde;
+    string vardas;
+    string pavarde;
     vector<int> namu_darbai;
     int egzaminas;
 };
@@ -31,36 +34,51 @@ double medianosSkaiciavimas(vector<int>& namu_darbai, int nd_kiekis, int egzamin
     else if(nd_kiekis % 2 != 0 && nd_kiekis > 0)
         return namu_darbai[nd_kiekis/2]*0.4 + 0.6*egzaminas;
     else 
-    return 0.6*egzaminas;
+        return 0.6*egzaminas;
 }
 
 int main() {
-    setlocale(LC_ALL, "");
+    try {
+        // Set the console's code page to UTF-8
+        SetConsoleOutputCP(CP_UTF8);
+
+        // Confirm the new code page setting
+        cout << "Console code page: " << GetConsoleOutputCP() << endl;
+
+        // Your program logic here...
+    } catch (const std::runtime_error& e) {
+        // Handle any errors that occur when setting the code page
+        cerr << "Error setting code page: " << e.what() << endl;
+        return 1; // Exit the program with an error status
+    }
+
+
+    setlocale(LC_ALL, "C");
     vector<Studentokai> Studentai;
     vector<double> mediana;
     vector<double> galutinis_balas;
     int norimas_isvedimas;
     int programos_veikimas;
-    vector<wstring> Vardai = {L"Tomas", L"Matas", L"Kasparas", L"Algirdas", L"Mantas", L"Adomas", L"Simona", L"Gerda", L"Jurgita", L"Rūta", L"Lukas", L"Edvardas", L"Ernestas", L"Rimas"};
-    vector<wstring> Pavardes = {L"Petronis", L"Semėnas", L"Cesevičiūtė", L"Poškus", L"Šumskis", L"Leonardas", L"Petronytė", L"Šerelis", L"Kubilius", L"Katleris", L"Stonkus", L"Sabonis"};
+    int failo_skaitymas = 0;
+    vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Rūta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
+    vector<string> Pavardes = {"Petronis", "Semėnas", "Cesevičiūtė", "Poškus", "Šumskis", "Leonardas", "Petronytė", "Šerelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
 
     srand(time(nullptr));
 
-    do
-    {
-        while(true){
-            std::wcout << L"Pasirinkite programos eigą:\n1 - Vedimas ranka.\n2 - Generuoti pažymius.\n3 - Generuoti ir studentų pažymius, ir vardus bei pavardes.\n4 - Baigti darbą.\nPasirinkite: ";
-            std::cin >> programos_veikimas;
-            if(cin.fail()){
-                std::wcout << L"Prašome įvesti skaičių!\n";
-                std::cin.clear();
-                std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    do {
+        while(true) {
+            cout << "Pasirinkite programos eigą:\n1 - Vedimas ranka.\n2 - Generuoti pažymius.\n3 - Generuoti ir studentų pažymius, ir vardus bei pavardes.\n4 - Baigti darbą.\n5 - imti duomenis iš failo.\nPasirinkite: ";
+            cin >> programos_veikimas;
+            if(cin.fail()) {
+                cout << "Prašome įvesti skaičių!\n";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
             }
-            if(programos_veikimas > 0 && programos_veikimas < 5)
+            if(programos_veikimas > 0 && programos_veikimas < 6)
                 break;
             else
-            std::wcout << L"Įveskite skaičių šiame intervale [1-4]\n";
+                cout << "Įveskite skaičių šiame intervale [1-4]\n";
         }
 
         Studentokai Studentas;
@@ -71,79 +89,103 @@ int main() {
             break;
         }
 
+        if(programos_veikimas == 5){
+            ifstream DF("kursiokai.txt");
+            if(!DF){
+                cout << "Npeavyko atidaryti failo:(" << endl;
+                break;
+            }
+            string line;
+            getline(DF, line);
+            while (DF >> Studentas.vardas >> Studentas.pavarde) {
+            cout << "Studento vardas: " << Studentas.vardas << endl;
+            cout << "Studento pavarde: " << Studentas.pavarde << endl;
+            for(int i = 0; i < 5; i++){
+                int pazymys;
+                DF >> pazymys;
+                cout << i << "-asis pazymy = " << pazymys << endl;
+                Studentas.namu_darbai.push_back(pazymys);
+            }
+            DF >> Studentas.egzaminas;
+            cout << "egzamino balas = " << Studentas.egzaminas << endl;
+            }
+            cout << "Nuskaitymas iš failo pavyko" << endl;
+        }
+
         if(programos_veikimas == 3){
             Studentas.vardas = Vardai[rand()%14];
             Studentas.pavarde = Pavardes[rand()%12];
-            std::wcout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
-            std::wcout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
+            cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
+            cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
         }
-        else{
-        std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento vardą: ";
-        std::wcin >> Studentas.vardas;
+        if(programos_veikimas == 1 || programos_veikimas == 2){
+            cout << "Įveskitę " << Studentai.size()+1 << " studento vardą: ";
+            cin >> Studentas.vardas;
 
-        std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento pavardę: ";
-        std::wcin >> Studentas.pavarde;
+            cout << "Įveskitę " << Studentai.size()+1 << " studento pavardę: ";
+            cin >> Studentas.pavarde;
         }
 
         if (programos_veikimas == 2 || programos_veikimas == 3){
             while (Studentas.namu_darbai.size() <= N-1){
                 int nd = rand() % 10 +1;
-                std::wcout << Studentai.size()+1 << L" Studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatas: " << nd << endl;
+                cout << Studentai.size()+1 << " Studento " << Studentas.namu_darbai.size()+1 << " namų darbo rezultatas: " << nd << endl;
                 Studentas.namu_darbai.push_back(nd);
                 if(Studentas.namu_darbai.size() <= N-1){
-                std::wcout << L"Dar generuoti pažymį? (Y/N): ";
-                char choice3;
-                cin >> choice3;
-                if(toupper(choice3) != 'Y') break;
+                    cout << "Dar generuoti pažymį? (Y/N): ";
+                    char choice3;
+                    cin >> choice3;
+                    if(toupper(choice3) != 'Y') break;
                 }
             }
         }
-        else{
+        if(programos_veikimas == 1){
             while (Studentas.namu_darbai.size() <= N-1){
-                std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento " << Studentas.namu_darbai.size()+1 << L" namų darbo rezultatą (1-10): ";
+                cout << "Įveskitę " << Studentai.size()+1 << " studento " << Studentas.namu_darbai.size()+1 << " namų darbo rezultatą (1-10): ";
                 int nd = 0;
-                std::wcin >> nd;
-                if(std::wcin.fail()){
-                    std::wcout << L"Įveskitę skaičių!" << endl;
-                    std::wcin.clear();
-                    std::wcin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin >> nd;
+                if(cin.fail()){
+                    cout << "Įveskitę skaičių!" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     continue;
                 }
                 else if(nd < 11 && nd > 0){
                     Studentas.namu_darbai.push_back(nd);
                     if(Studentas.namu_darbai.size() <= N-1){
-                    std::wcout << L"Dar bus pažymių? (Y/N): ";
-                    cin >> choice3;
-                    if(toupper(choice3) != 'Y') break;
-                }
+                        cout << "Dar bus pažymių? (Y/N): ";
+                        cin >> choice3;
+                        if(toupper(choice3) != 'Y') break;
+                    }
                 }
                 else
-                    std::wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
+                    cout << "Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
             }
-            std::wcin.clear();
-            std::wcin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
 
         if(programos_veikimas == 2 || programos_veikimas == 3){
             int egz = rand()%10+1;
-            std::wcout << Studentai.size()+1 << L" Studento egzamino balas: " << egz << endl;
+            cout << Studentai.size()+1 << " Studento egzamino balas: " << egz << endl;
             Studentas.egzaminas = egz;
-        } else {
+        }
+        if(programos_veikimas == 1){
             while (true){
-            int egz = 0;
-            std::wcout << L"Įveskitę " << Studentai.size()+1 << L" studento egzamino balą: ";
-            cin >> egz;
-            if(cin.fail()){
-                std::wcout << L"Įveskitę skaičių!" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                int egz = 0;
+                cout << "Įveskitę " << Studentai.size()+1 << " studento egzamino balą: ";
+                cin >> egz;
+                if(cin.fail()){
+                    cout << "Įveskitę skaičių!" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-            else if(egz < 11 && egz > 0){
-            Studentas.egzaminas = egz;
-            break;
-            }
-            else
-            std::wcout << L"Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
+                else if(egz < 11 && egz > 0){
+                    Studentas.egzaminas = egz;
+                    break;
+                }
+                else
+                    cout << "Įvedėtę netinkamą skaičių, prašome pakartoti! " << endl;
             }
         }
     
@@ -158,45 +200,48 @@ int main() {
         
         Studentai.push_back(Studentas);
 
-        std::wcout << L"Ar norėsite įvesti dar vieną studentą? (Y/N): ";
+        cout << "Ar norėsite įvesti dar vieną studentą? (Y/N): ";
         cin >> programos_tesinys;
         if(toupper(programos_tesinys) != 'Y') break;
     } while (true);
 
     while (Studentai.size() > 0){
-    std::wcout << L"1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
-    cin >> norimas_isvedimas;
-    if(cin.fail()){
-        wcout << L"Prašome įvesti skaičių.\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
+        cin >> norimas_isvedimas;
+        if(cin.fail()){
+            cout << "Prašome įvesti skaičių.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else if(norimas_isvedimas != 1 && norimas_isvedimas != 2){
+            cout << "Įvedėte netinkamą skaičių.\n";
+        }
+        else
+            break;
     }
-    else if(norimas_isvedimas != 1 && norimas_isvedimas != 2){
-        wcout << L"Įvedėte netinkamą skaičių.\n";
-    }
-    else
-        break;
+
+    size_t maxNameWidth = 0;
+    size_t maxSurnameWidth = 0;
+    for (const auto& student : Studentai) {
+        maxNameWidth = max(maxNameWidth, student.vardas.length());
+        maxSurnameWidth = max(maxSurnameWidth, student.pavarde.length());
     }
 
     if(norimas_isvedimas == 1 && Studentai.size() > 0){
-        std::wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Vid.)" << endl;
-        std::wcout << L"--------------------------------------------------------" << endl;
+        cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << endl;
+        cout << "--------------------------------------------------------" << endl;
 
-        std::for_each(Studentai.begin(), Studentai.end(), [&](const Studentokai& student) {
-        size_t index = &student - &Studentai[0];
-        std::wcout << left << setw(20) << student.vardas << setw(20) << student.pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[index] << endl;
-    });
+        for(size_t i = 0; i < Studentai.size(); ++i) {
+            cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << endl;
+        }
     } else if(norimas_isvedimas == 2 && Studentai.size() > 0){
-        std::wcout << left << setw(20) << L"Vardas" << setw(20) << L"Pavardė" << setw(20) << L"Galutinis (Med.)" << endl;
-        std::wcout << L"--------------------------------------------------------" << endl;
+        cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Med.)" << endl;
+        cout << "--------------------------------------------------------" << endl;
 
-        std::for_each(Studentai.begin(), Studentai.end(), [&](const Studentokai& student) {
-        size_t index = &student - &Studentai[0];
-        std::wcout << left << setw(20) << student.vardas << setw(20) << student.pavarde << setw(20) << fixed << setprecision(2) << mediana[index] << endl;
-    });
+        for(size_t i = 0; i < Studentai.size(); ++i) {
+            cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
+        }
     }
     system("pause");
     return 0;
-
 }
-
