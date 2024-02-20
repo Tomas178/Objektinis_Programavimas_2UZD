@@ -92,7 +92,7 @@ int main() {
         }
 
         if(programos_veikimas == 5){
-            ifstream DF("kursiokai.txt");
+            ifstream DF("studentai1000000.txt");
             if(!DF){
                 cout << "Nepavyko atidaryti failo:(" << endl;
                 break;
@@ -100,17 +100,17 @@ int main() {
             string line;
             getline(DF, line);
             while (DF >> Studentas.vardas >> Studentas.pavarde) {
-            cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
-            cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
+            // cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
+            // cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
             Studentas.namu_darbai.clear();
-            for(int i = 0; i < 5; i++){
+            for(int i = 0; i < 7; i++){
                 int pazymys;
                 DF >> pazymys;
-                cout << Studentai.size()+1 << " studento " << i+1 << "-asis pazymys = " << pazymys << endl;
+                // cout << Studentai.size()+1 << " studento " << i+1 << "-asis pazymys = " << pazymys << endl;
                 Studentas.namu_darbai.push_back(pazymys);
             }
             DF >> Studentas.egzaminas;
-            cout << Studentai.size()+1 << " studento egzamino balas = " << Studentas.egzaminas << endl;
+            // cout << Studentai.size()+1 << " studento egzamino balas = " << Studentas.egzaminas << endl;
             if(Studentas.namu_darbai.size() > 0){
                 double vid, med;
                 sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
@@ -121,6 +121,7 @@ int main() {
             }
             Studentai.push_back(Studentas);
             }
+            cout << "Nuskaitymas sėkmingas:)" << endl;
         }
 
         if(programos_veikimas == 3){
@@ -272,34 +273,34 @@ int main() {
     }
 
     if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << endl;
-        cout << "--------------------------------------------------------" << endl;
+        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Vid.)" << endl;
+        cout << "--------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << endl;
+            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << galutinis_balas[i] << endl;
         }
     } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Med.)" << endl;
-        cout << "--------------------------------------------------------" << endl;
+        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Med.)" << endl;
+        cout << "--------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            cout << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
+            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << mediana[i] << endl;
         }
     } else if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
         ofstream RF("studenciokai.txt");
-        RF << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << endl;
-        RF << "--------------------------------------------------------" << endl; 
+        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Vid.)" << endl;
+        RF << "----------------------------------------------------" << endl; 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << galutinis_balas[i] << endl;
+            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << galutinis_balas[i] << endl;
         }
         RF.close();
         cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
     } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 2){
         ofstream RF("studenciokai.txt");
-        RF << left << setw(maxNameWidth+10) << "Vardas" << setw(maxSurnameWidth+10) << "Pavardė" << setw(20) << "Galutinis (Med.)" << endl;
-        RF << "--------------------------------------------------------" << endl;
+        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Med.)" << endl;
+        RF << "----------------------------------------------------" << endl;
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(maxNameWidth+10) << Studentai[i].vardas << setw(maxSurnameWidth+10) << Studentai[i].pavarde << setw(20) << fixed << setprecision(2) << mediana[i] << endl;
+            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << mediana[i] << endl;
         }
         RF.close();
         cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
