@@ -92,24 +92,33 @@ int main() {
         if(programos_veikimas == 5){
             ifstream DF("kursiokai.txt");
             if(!DF){
-                cout << "Npeavyko atidaryti failo:(" << endl;
+                cout << "Nepavyko atidaryti failo:(" << endl;
                 break;
             }
             string line;
             getline(DF, line);
             while (DF >> Studentas.vardas >> Studentas.pavarde) {
-            cout << "Studento vardas: " << Studentas.vardas << endl;
-            cout << "Studento pavarde: " << Studentas.pavarde << endl;
+            cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
+            cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
+            Studentas.namu_darbai.clear();
             for(int i = 0; i < 5; i++){
                 int pazymys;
                 DF >> pazymys;
-                cout << i << "-asis pazymy = " << pazymys << endl;
+                cout << Studentai.size()+1 << " studento " << i+1 << "-asis pazymys = " << pazymys << endl;
                 Studentas.namu_darbai.push_back(pazymys);
             }
             DF >> Studentas.egzaminas;
-            cout << "egzamino balas = " << Studentas.egzaminas << endl;
+            cout << Studentai.size()+1 << " studento egzamino balas = " << Studentas.egzaminas << endl;
+            if(Studentas.namu_darbai.size() > 0){
+                double vid, med;
+                sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
+                med = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
+                vid = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
+                galutinis_balas.push_back(vid);
+                mediana.push_back(med);
             }
-            cout << "Nuskaitymas iš failo pavyko" << endl;
+            Studentai.push_back(Studentas);
+            }
         }
 
         if(programos_veikimas == 3){
@@ -189,16 +198,16 @@ int main() {
             }
         }
     
-        if(Studentas.namu_darbai.size() > 0){
-            double gal_bal, med;
+        if(Studentas.namu_darbai.size() > 0 && programos_veikimas != 5){
+            double vid, med;
             sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
             med = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-            gal_bal = Vidurkis(Studentas.namu_darbai.size(),accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
-            galutinis_balas.push_back(gal_bal);
+            vid = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
+            galutinis_balas.push_back(vid);
             mediana.push_back(med);
         }
-        
-        Studentai.push_back(Studentas);
+        if(programos_veikimas != 5)
+            Studentai.push_back(Studentas);
 
         cout << "Ar norėsite įvesti dar vieną studentą? (Y/N): ";
         cin >> programos_tesinys;
