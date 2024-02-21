@@ -19,6 +19,8 @@ struct Studentokai {
     string pavarde;
     vector<int> namu_darbai;
     int egzaminas;
+    double mediana;
+    double vidurkis;
 };
 
 double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas){
@@ -28,13 +30,29 @@ double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas){
         return 0.6*egzaminas;
 }
 
-double medianosSkaiciavimas(vector<int>& namu_darbai, int nd_kiekis, int egzaminas){
+double medianosSkaiciavimas(const vector<int>& namu_darbai, int nd_kiekis, int egzaminas){
     if(nd_kiekis % 2 == 0 && nd_kiekis > 0)
         return (namu_darbai[nd_kiekis/2-1] + namu_darbai[nd_kiekis/2])/2.0*0.4 + 0.6*egzaminas;
     else if(nd_kiekis % 2 != 0 && nd_kiekis > 0)
         return namu_darbai[nd_kiekis/2]*0.4 + 0.6*egzaminas;
     else 
         return 0.6*egzaminas;
+}
+
+bool palygintiPagalVarda(const Studentokai &a, const Studentokai &b) {
+    return a.vardas < b.vardas;
+}
+
+bool palygintiPagalPavarde(const Studentokai &a, const Studentokai &b) {
+    return a.pavarde < b.pavarde;
+}
+
+bool palygintiPagalVidurki(const Studentokai &a, const Studentokai &b) {
+    return a.vidurkis < b.vidurkis;
+}
+
+bool palygintiPagalMediana(const Studentokai &a, const Studentokai &b) {
+    return a.mediana < b.mediana;
 }
 
 int main() {
@@ -55,13 +73,9 @@ int main() {
 
     setlocale(LC_ALL, "C");
     vector<Studentokai> Studentai;
-    vector<double> mediana;
-    vector<double> galutinis_balas;
-    int norimas_isvedimo_rezultatas;
     int norima_isvedimo_vieta;
     int programos_veikimas;
     int norimas_rikiavimas;
-    int failo_skaitymas = 0;
     vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Rūta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
     vector<string> Pavardes = {"Petronis", "Semėnas", "Cesevičiūtė", "Poškus", "Šumskis", "Leonardas", "Petronytė", "Šerelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
 
@@ -91,38 +105,46 @@ int main() {
             break;
         }
 
-        if(programos_veikimas == 5){
-            ifstream DF("studentai1000000.txt");
-            if(!DF){
+        if (programos_veikimas == 5) {
+            ifstream DF("studentai10000.txt");
+            if (!DF) {
                 cout << "Nepavyko atidaryti failo:(" << endl;
                 break;
             }
+
             string line;
             getline(DF, line);
-            while (DF >> Studentas.vardas >> Studentas.pavarde) {
-            // cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
-            // cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
-            Studentas.namu_darbai.clear();
-            for(int i = 0; i < 7; i++){
+
+            while (getline(DF, line)) {
+                istringstream iss(line);
+
+                if (!(iss >> Studentas.vardas >> Studentas.pavarde)) {
+                    cerr << "Failed to read vardas and pavarde." << endl;
+                }
+
                 int pazymys;
-                DF >> pazymys;
-                // cout << Studentai.size()+1 << " studento " << i+1 << "-asis pazymys = " << pazymys << endl;
-                Studentas.namu_darbai.push_back(pazymys);
+                Studentas.namu_darbai.clear();
+                while (iss >> pazymys) {
+                    Studentas.namu_darbai.push_back(pazymys);
+                }
+
+                if (!Studentas.namu_darbai.empty()) {
+                    Studentas.egzaminas = Studentas.namu_darbai.back();
+                    Studentas.namu_darbai.pop_back();
+                }
+
+                if (!Studentas.namu_darbai.empty()) {
+                    sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
+                    Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
+                    Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
+                }
+                Studentai.push_back(Studentas);
             }
-            DF >> Studentas.egzaminas;
-            // cout << Studentai.size()+1 << " studento egzamino balas = " << Studentas.egzaminas << endl;
-            if(Studentas.namu_darbai.size() > 0){
-                double vid, med;
-                sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
-                med = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-                vid = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
-                galutinis_balas.push_back(vid);
-                mediana.push_back(med);
-            }
-            Studentai.push_back(Studentas);
-            }
+
+            DF.close();
             cout << "Nuskaitymas sėkmingas:)" << endl;
-        }
+}
+
 
         if(programos_veikimas == 3){
             Studentas.vardas = Vardai[rand()%14];
@@ -202,12 +224,9 @@ int main() {
         }
     
         if(Studentas.namu_darbai.size() > 0 && programos_veikimas != 5){
-            double vid, med;
             sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
-            med = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-            vid = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
-            galutinis_balas.push_back(vid);
-            mediana.push_back(med);
+            Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
+            Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
         }
         if(programos_veikimas != 5)
             Studentai.push_back(Studentas);
@@ -216,21 +235,6 @@ int main() {
         cin >> programos_tesinys;
         if(toupper(programos_tesinys) != 'Y') break;
     } while (true);
-
-    while (Studentai.size() > 0){
-        cout << "\n1 - Išvesti rezultatą su vidurkiu\n2 - Išvesti rezultatą su mediana\nPasirinkite: ";
-        cin >> norimas_isvedimo_rezultatas;
-        if(cin.fail()){
-            cout << "Prašome įvesti skaičių.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-        else if(norimas_isvedimo_rezultatas != 1 && norimas_isvedimo_rezultatas != 2){
-            cout << "Įvedėte netinkamą skaičių.\n";
-        }
-        else
-            break;
-    }
 
     while(Studentai.size() > 0){
         cout << "\n1 - Išvesti rezultatą konsolėje\n2 - Išvesti rezultatą faile\nPasirinkite: ";
@@ -248,21 +252,31 @@ int main() {
     }
 
     while(Studentai.size() > 0){
-        if(norimas_isvedimo_rezultatas == 1)
-            cout << "\n1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal vidurkį\nPasirinkite: ";
-        else if(norimas_isvedimo_rezultatas == 2)
-            cout << "\n1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal medianą\nPasirinkite: ";
+        cout << "\n1 - Rikiuoti pagal vardą\n2 - Rikiuoti pagal pavardę\n3 - Rikiuoti pagal vidurkį\n4 - Rikiuoti pagal medianą\nPasirinkite: ";
         cin >> norimas_rikiavimas;
         if(cin.fail()){
             cout << "Prašome įvesti skaičių.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-        else if(norimas_rikiavimas < 1 || norimas_rikiavimas > 3){
+        else if(norimas_rikiavimas < 1 || norimas_rikiavimas > 4){
             cout << "Įvedėte netinkamą skaičių.\n";
         }
-        else
+        else{
+            if(norimas_rikiavimas == 1){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalVarda);
             break;
+        } else if(norimas_rikiavimas == 2){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalPavarde);
+            break;
+        } else if(norimas_rikiavimas == 3){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            break;
+        } else if(norimas_rikiavimas == 4){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            break;
+        } 
+        }
     }
 
     size_t maxNameWidth = 0;
@@ -272,40 +286,28 @@ int main() {
         maxSurnameWidth = max(maxSurnameWidth, student.pavarde.length());
     }
 
-    if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Vid.)" << endl;
-        cout << "--------------------------------------------------" << endl;
+    if(Studentai.size() > 0 && norima_isvedimo_vieta == 1){
+        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
+        << "Galutinis (Med.)" << endl;
+        cout << "-------------------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << galutinis_balas[i] << endl;
+            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(20)
+             << fixed << setprecision(2) << Studentai[i].vidurkis<< setw(20) << fixed << setprecision(2) << Studentai[i].mediana << endl;
         }
-    } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Med.)" << endl;
-        cout << "--------------------------------------------------" << endl;
-
-        for(size_t i = 0; i < Studentai.size(); ++i) {
-            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << mediana[i] << endl;
-        }
-    } else if(norimas_isvedimo_rezultatas == 1 && Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
+    } else if(Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
         ofstream RF("studenciokai.txt");
-        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Vid.)" << endl;
-        RF << "----------------------------------------------------" << endl; 
+        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
+        << "Galutinis(Med.)" << endl;
+        RF << "---------------------------------------------------------------" << endl; 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << galutinis_balas[i] << endl;
-        }
-        RF.close();
-        cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
-    } else if(norimas_isvedimo_rezultatas == 2 && Studentai.size() > 0 && norima_isvedimo_vieta == 2){
-        ofstream RF("studenciokai.txt");
-        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(10) << "Galutinis (Med.)" << endl;
-        RF << "----------------------------------------------------" << endl;
-        for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(10) << fixed << setprecision(2) << mediana[i] << endl;
+            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(20) 
+            << fixed << setprecision(2) << Studentai[i].vidurkis << setw(20) << fixed << setprecision(2) << Studentai[i].mediana << endl;
         }
         RF.close();
         cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
     }
-
+    cout << maxSurnameWidth << " " << maxNameWidth << endl;
     system("pause");
     return 0;
 }
