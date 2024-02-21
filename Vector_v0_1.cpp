@@ -106,7 +106,7 @@ int main() {
         }
 
         if (programos_veikimas == 5) {
-            ifstream DF("studentai10000.txt");
+            ifstream DF("studentai1000000.txt");
             if (!DF) {
                 cout << "Nepavyko atidaryti failo:(" << endl;
                 break;
@@ -279,35 +279,35 @@ int main() {
         }
     }
 
-    size_t maxNameWidth = 0;
-    size_t maxSurnameWidth = 0;
+    size_t IlgiausiasVardas = 0;
+    size_t IlgiausiaPavarde = 0;
     for (const auto& student : Studentai) {
-        maxNameWidth = max(maxNameWidth, student.vardas.length());
-        maxSurnameWidth = max(maxSurnameWidth, student.pavarde.length());
+        IlgiausiasVardas = max(IlgiausiasVardas, student.vardas.length());
+        IlgiausiaPavarde = max(IlgiausiaPavarde, student.pavarde.length());
     }
 
     if(Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
+        cout << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
         << "Galutinis (Med.)" << endl;
         cout << "-------------------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            cout << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(20)
+            cout << left << setw(IlgiausiasVardas+5) << Studentai[i].vardas << setw(IlgiausiaPavarde+5) << Studentai[i].pavarde << setw(20)
              << fixed << setprecision(2) << Studentai[i].vidurkis<< setw(20) << fixed << setprecision(2) << Studentai[i].mediana << endl;
         }
     } else if(Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
         ofstream RF("studenciokai.txt");
-        RF << left << setw(maxNameWidth+5) << "Vardas" << setw(maxSurnameWidth+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
+        RF << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
         << "Galutinis(Med.)" << endl;
         RF << "---------------------------------------------------------------" << endl; 
         for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(maxNameWidth+5) << Studentai[i].vardas << setw(maxSurnameWidth+5) << Studentai[i].pavarde << setw(20) 
+            RF << left << setw(IlgiausiasVardas+5) << Studentai[i].vardas << setw(IlgiausiaPavarde+5) << Studentai[i].pavarde << setw(20) 
             << fixed << setprecision(2) << Studentai[i].vidurkis << setw(20) << fixed << setprecision(2) << Studentai[i].mediana << endl;
         }
         RF.close();
         cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
     }
-    cout << maxSurnameWidth << " " << maxNameWidth << endl;
+    
     system("pause");
     return 0;
 }
