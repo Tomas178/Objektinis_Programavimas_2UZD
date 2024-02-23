@@ -106,7 +106,8 @@ int main() {
         }
 
         if (programos_veikimas == 5) {
-            ifstream DF("studentai1000000.txt");
+            system("dir *.txt");
+            ifstream DF("studentai10000.txt");
             if (!DF) {
                 cout << "Nepavyko atidaryti failo:(" << endl;
                 break;
