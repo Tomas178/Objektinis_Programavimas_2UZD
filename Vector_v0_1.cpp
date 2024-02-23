@@ -143,6 +143,9 @@ int main() {
 
             DF.close();
             cout << "Nuskaitymas sėkmingas:)" << endl;
+            Studentai.shrink_to_fit();
+            cout << "Vektoriaus capacity: " << Studentai.capacity() << endl;
+            cout << "Vektoriaus size: " << Studentai.size() << endl;
 }
 
 
@@ -287,9 +290,9 @@ int main() {
     }
 
     if(Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
-        << "Galutinis (Med.)" << endl;
-        cout << "-------------------------------------------------------------" << endl;
+        cout << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << " Galutinis (Vid.)" << setw(20)
+        << " Galutinis (Med.)" << endl;
+        cout << "--------------------------------------------------------------------" << endl;
 
         for(size_t i = 0; i < Studentai.size(); ++i) {
             cout << left << setw(IlgiausiasVardas+5) << Studentai[i].vardas << setw(IlgiausiaPavarde+5) << Studentai[i].pavarde << setw(20)
@@ -297,12 +300,12 @@ int main() {
         }
     } else if(Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
         ofstream RF("studenciokai.txt");
-        RF << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << "Galutinis (Vid.)" << setw(20)
-        << "Galutinis(Med.)" << endl;
-        RF << "---------------------------------------------------------------" << endl; 
-        for(size_t i = 0; i < Studentai.size(); ++i) {
-            RF << left << setw(IlgiausiasVardas+5) << Studentai[i].vardas << setw(IlgiausiaPavarde+5) << Studentai[i].pavarde << setw(20) 
-            << fixed << setprecision(2) << Studentai[i].vidurkis << setw(20) << fixed << setprecision(2) << Studentai[i].mediana << endl;
+        RF << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavardė" << setw(20) << " Galutinis (Vid.)" << setw(20)
+        << " Galutinis(Med.)" << endl;
+        RF << "----------------------------------------------------------------------" << endl; 
+        for(const auto &studentai : Studentai) {
+            RF << left << setw(IlgiausiasVardas+5) << studentai.vardas << setw(IlgiausiaPavarde+5) << studentai.pavarde << setw(20) 
+            << fixed << setprecision(2) << studentai.vidurkis << setw(20) << fixed << setprecision(2) << studentai.mediana << endl;
         }
         RF.close();
         cout << "Rezultatai išvesti studenciokai.txt faile." << endl;
