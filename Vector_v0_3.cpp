@@ -98,6 +98,7 @@ int main() {
             try {
             int KiekisGeneravimui;
             cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
+            Studentai.reserve(KiekisGeneravimui);
 
             for(int i = 0; i < KiekisGeneravimui; i++){
                 cout << Studentai.size() << endl;
@@ -122,7 +123,7 @@ int main() {
             }
             catch(const exception& e)
             {
-                cerr << e.what() << '\n';
+                cerr << "Klaida generuojant studento duomenis. "<< e.what() << '\n';
             }
             
         }
@@ -282,6 +283,7 @@ int main() {
     
     system("pause");
     return 0;
+
     } catch(const exception& e) {
         cerr << "An exception occurred: " << e.what() << endl;
         return 1; // Exit with error status
