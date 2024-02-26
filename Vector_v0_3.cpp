@@ -63,13 +63,6 @@ int main() {
         // Confirm the new code page setting
         cout << "Console code page: " << GetConsoleOutputCP() << endl;
 
-        // Your program logic here...
-    } catch (const std::runtime_error& e) {
-        // Handle any errors that occur when setting the code page
-        cerr << "Error setting code page: " << e.what() << endl;
-        return 1; // Exit the program with an error status
-    }
-
 
     setlocale(LC_ALL, "C");
     vector<Studentokai> Studentai;
@@ -314,4 +307,9 @@ int main() {
     
     system("pause");
     return 0;
+
+    } catch (const std::runtime_error& e) {
+        cerr << "Error setting code page: " << e.what() << endl;
+        return 1;
+    }
 }
