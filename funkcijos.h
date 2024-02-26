@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+//#define N = 5;
+
 struct Studentokai {
     std::string vardas;
     std::string pavarde;
