@@ -1,3 +1,4 @@
+#include "funkcijos.h"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -9,20 +10,14 @@
 #include <fstream>
 #include <locale>
 #include <windows.h>
-#include "funkcijos.h"
 
-using namespace std;
-
-const int N = 5;
+const int N = 10;
 
 
 int main() {
     try {
         // Set the console's code page to UTF-8
         SetConsoleOutputCP(CP_UTF8);
-
-        // Confirm the new code page setting
-        cout << "Console code page: " << GetConsoleOutputCP() << endl;
 
 
     setlocale(LC_ALL, "C");
@@ -48,7 +43,7 @@ int main() {
             if(programos_veikimas > 0 && programos_veikimas < 6)
                 break;
             else
-                cout << "Įveskite skaičių šiame intervale [1-4]\n";
+                cout << "Įveskite skaičių šiame intervale [1-5]\n";
         }
 
         Studentokai Studentas;
@@ -61,10 +56,10 @@ int main() {
 
         if (programos_veikimas == 5) {
             system("dir *.txt");
-            ifstream DF("studentai10000.txt");
+            ifstream DF("studentai1000000.txt");
             if (!DF) {
                 cout << "Nepavyko atidaryti failo:(" << endl;
-                break;
+                return;
             }
 
             string line;
@@ -105,11 +100,29 @@ int main() {
 
 
         if(programos_veikimas == 3){
-            Studentas.vardas = Vardai[rand()%14];
-            Studentas.pavarde = Pavardes[rand()%12];
-            cout << Studentai.size()+1 << " Studento vardas: " << Studentas.vardas << endl;
-            cout << Studentai.size()+1 << " Studento pavarde: " << Studentas.pavarde << endl;
+            try {
+            int KiekisGeneravimui;
+            cout << "Kiek studentų generuoti?: "; cin >> KiekisGeneravimui; 
+            for(int i =0; i < KiekisGeneravimui; i++){
+                Studentas.vardas = Vardai[sizeof(Vardai)];
+                Studentas.pavarde = Pavardes[sizeof(Pavardes)];
+                int nd_kiekis = rand()%N+1;
+                Studentas.namu_darbai.reserve(nd_kiekis);
+                for(int j = 0; j < nd_kiekis; j++){
+                    int nd = rand()%10+1;
+                    Studentas.namu_darbai.push_back(nd);
+                }
+                Studentas.egzaminas = rand()%10+1;
+            }
+                cout << "Generavimas baigtas:)" << endl;
+            }
+            catch(const exception& e)
+            {
+                cerr << e.what() << '\n';
+            }
+            
         }
+
         if(programos_veikimas == 1 || programos_veikimas == 2){
             cout << "Įveskitę " << Studentai.size()+1 << " studento vardą: ";
             cin >> Studentas.vardas;
@@ -118,19 +131,19 @@ int main() {
             cin >> Studentas.pavarde;
         }
 
-        if (programos_veikimas == 2 || programos_veikimas == 3){
+        if (programos_veikimas == 2){
             while (Studentas.namu_darbai.size() <= N-1){
-                int nd = rand() % 10 +1;
-                cout << Studentai.size()+1 << " Studento " << Studentas.namu_darbai.size()+1 << " namų darbo rezultatas: " << nd << endl;
-                Studentas.namu_darbai.push_back(nd);
-                if(Studentas.namu_darbai.size() <= N-1){
-                    cout << "Dar generuoti pažymį? (Y/N): ";
-                    char choice3;
-                    cin >> choice3;
-                    if(toupper(choice3) != 'Y') break;
+                int kiekisNDgeneravimui = rand()%N+1;
+                Studentas.namu_darbai.reserve(kiekisNDgeneravimui);
+                for(int i = 0; i < kiekisNDgeneravimui; i++){
+                    int nd = rand() % 10 +1;
+                    Studentas.namu_darbai.push_back(nd);
                 }
             }
+            Studentas.egzaminas = rand()%10+1;
+            cout << "Skaičių generavimas baigtas sėkmingai:)" << endl;
         }
+
         if(programos_veikimas == 1){
             while (Studentas.namu_darbai.size() <= N-1){
                 cout << "Įveskitę " << Studentai.size()+1 << " studento " << Studentas.namu_darbai.size()+1 << " namų darbo rezultatą (1-10): ";
@@ -155,13 +168,9 @@ int main() {
             }
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            
         }
 
-        if(programos_veikimas == 2 || programos_veikimas == 3){
-            int egz = rand()%10+1;
-            cout << Studentai.size()+1 << " Studento egzamino balas: " << egz << endl;
-            Studentas.egzaminas = egz;
-        }
         if(programos_veikimas == 1){
             while (true){
                 int egz = 0;
