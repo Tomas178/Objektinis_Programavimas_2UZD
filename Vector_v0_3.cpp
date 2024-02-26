@@ -27,20 +27,28 @@ int main() {
     srand(time(nullptr));
 
     do {
-        while(true) {
-            cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\nPasirinkite: ";
-            cin >> programos_veikimas;
-            if(cin.fail()) {
-                cout << "Prasome ivesti skaiciu!\n";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;
-            }
-            if(programos_veikimas > 0 && programos_veikimas < 6)
-                break;
-            else
-                cout << "Iveskite skaiciu siame intervale [1-5]\n";
+        try {
+    while (true) {
+        cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\nPasirinkite: ";
+        cin >> programos_veikimas;
+        if (cin.fail()) {
+            cout << "Prasome ivesti skaiciu!\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
         }
+        if (programos_veikimas > 0 && programos_veikimas < 6)
+            break;
+        else
+            cout << "Iveskite skaiciu siame intervale [1-5]\n";
+    }
+} catch (const invalid_argument& e) {
+    cerr << "Invalid argument: " << e.what() << endl;
+} catch (const out_of_range& e) {
+    cerr << "Out of range: " << e.what() << endl;
+} catch (const exception& e) {
+    cerr << "An exception occurred: " << e.what() << endl;
+}
 
         Studentokai Studentas;
         char programos_tesinys;
@@ -101,7 +109,6 @@ int main() {
             Studentai.reserve(KiekisGeneravimui);
 
             for(int i = 0; i < KiekisGeneravimui; i++){
-                cout << Studentai.size() << endl;
                 Studentas.vardas = Vardai[rand() % Vardai.size()];
                 Studentas.pavarde = Pavardes[rand() % Pavardes.size()];
                 int nd_kiekis = rand()%N+1;
@@ -110,10 +117,6 @@ int main() {
                     int nd = rand()%10+1;
                     Studentas.namu_darbai.push_back(nd);
                 }
-                for(const auto &student : Studentas.namu_darbai){
-                    cout << student << " ";
-                }
-                cout << endl;
                 Studentas.egzaminas = rand()%10+1;
                 Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
                 Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
