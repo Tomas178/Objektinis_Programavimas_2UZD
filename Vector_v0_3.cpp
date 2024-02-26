@@ -42,13 +42,13 @@ int main() {
         else
             cout << "Iveskite skaiciu siame intervale [1-5]\n";
     }
-} catch (const invalid_argument& e) {
-    cerr << "Invalid argument: " << e.what() << endl;
-} catch (const out_of_range& e) {
-    cerr << "Out of range: " << e.what() << endl;
-} catch (const exception& e) {
-    cerr << "An exception occurred: " << e.what() << endl;
-}
+    } catch (const invalid_argument& e) {
+        cerr << "Invalid argument: " << e.what() << endl;
+    } catch (const out_of_range& e) {
+        cerr << "Out of range: " << e.what() << endl;
+    } catch (const exception& e) {
+        cerr << "An exception occurred: " << e.what() << endl;
+    }
 
         Studentokai Studentas;
         char programos_tesinys;
@@ -59,11 +59,15 @@ int main() {
         }
 
         if (programos_veikimas == 5) {
+            try{
             system("dir *.txt");
-            ifstream DF("studentai1000000.txt");
-            if (!DF) {
-                cout << "Nepavyko atidaryti failo:(" << endl;
-                return 1;
+            string fileName;
+            cout << "Iveskite failo pavadinima: ";
+            cin >> fileName;
+
+            ifstream DF(fileName);
+            if (!DF.is_open()) { 
+                throw runtime_error("Nepavyko atidaryti failo");
             }
 
             string line;
@@ -100,6 +104,9 @@ int main() {
             Studentai.shrink_to_fit();
             cout << "Vektoriaus capacity: " << Studentai.capacity() << endl;
             cout << "Vektoriaus size: " << Studentai.size() << endl;
+            } catch(const exception& e){
+                cerr << "Klaida: " << e.what() << endl;
+            }
         }
 
         if(programos_veikimas == 3){
@@ -132,10 +139,10 @@ int main() {
         }
 
         if(programos_veikimas == 1 || programos_veikimas == 2){
-            cout << "Iveskitę " << Studentai.size()+1 << " studento varda: ";
+            cout << "Iveskite " << Studentai.size()+1 << " studento varda: ";
             cin >> Studentas.vardas;
 
-            cout << "Iveskitę " << Studentai.size()+1 << " studento pavardę: ";
+            cout << "Iveskite " << Studentai.size()+1 << " studento pavarde: ";
             cin >> Studentas.pavarde;
         }
 
