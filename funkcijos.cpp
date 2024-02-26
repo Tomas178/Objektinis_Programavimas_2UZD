@@ -3,6 +3,7 @@
 #include <numeric>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 
 double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas){
     if(nd_kiekis > 0)
