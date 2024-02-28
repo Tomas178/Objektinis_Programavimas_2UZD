@@ -16,14 +16,14 @@ const int N = 10;
 int main() {
     try {
 
-    setlocale(LC_ALL, "C");
-    vector<Studentokai> Studentai;
-    int norima_isvedimo_vieta;
-    int programos_veikimas;
-    int norimas_rikiavimas;
     vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Ruta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
     vector<string> Pavardes = {"Petronis", "Semenas", "Ceseviciute", "Poskus", "Sumskis", "Leonardas", "Petronyte", "Serelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
 
+    int norima_isvedimo_vieta;
+    int programos_veikimas;
+    int norimas_rikiavimas;
+    setlocale(LC_ALL, "C");
+    vector<Studentokai> Studentai;
     srand(time(nullptr));
 
     do {
