@@ -32,22 +32,23 @@ int main() {
         cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\nPasirinkite: ";
         cin >> programos_veikimas;
         if (cin.fail()) {
-            cout << "Prasome ivesti skaiciu!\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
+            throw runtime_error("Iveskite skaiciu!");
         }
         if (programos_veikimas > 0 && programos_veikimas < 6)
             break;
         else
-            cout << "Iveskite skaiciu siame intervale [1-5]\n";
+            throw runtime_error("Iveskite skaiciu intervale [1, 5]");
     }
     } catch (const invalid_argument& e) {
-        cerr << "Invalid argument: " << e.what() << endl;
+        cerr << "Klaida: " << e.what() << endl;
     } catch (const out_of_range& e) {
-        cerr << "Out of range: " << e.what() << endl;
+        cerr << "Klaida: " << e.what() << endl;
     } catch (const exception& e) {
-        cerr << "An exception occurred: " << e.what() << endl;
+        cerr << "Klaida: " << e.what() << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
         Studentokai Studentas;
@@ -160,11 +161,11 @@ int main() {
 
         if(programos_veikimas == 1){
             while (Studentas.namu_darbai.size() <= N-1){
-                cout << "Iveskitę " << Studentai.size()+1 << " studento " << Studentas.namu_darbai.size()+1 << " namu darbo rezultata (1-10): ";
+                cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentas.namu_darbai.size()+1 << " namu darbo rezultata (1-10): ";
                 int nd = 0;
                 cin >> nd;
                 if(cin.fail()){
-                    cout << "Iveskitę skaiciu!" << endl;
+                    cout << "Iveskite skaiciu!" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     continue;
@@ -178,7 +179,7 @@ int main() {
                     }
                 }
                 else
-                    cout << "Ivedetę netinkama skaiciu, prasome pakartoti! " << endl;
+                    cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
             }
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
@@ -188,10 +189,10 @@ int main() {
         if(programos_veikimas == 1){
             while (true){
                 int egz = 0;
-                cout << "Iveskitę " << Studentai.size()+1 << " studento egzamino bala: ";
+                cout << "Iveskite " << Studentai.size()+1 << " studento egzamino bala: ";
                 cin >> egz;
                 if(cin.fail()){
-                    cout << "Iveskitę skaiciu!" << endl;
+                    cout << "Iveskite skaiciu!" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
@@ -200,7 +201,7 @@ int main() {
                     break;
                 }
                 else
-                    cout << "Ivedetę netinkama skaiciu, prasome pakartoti! " << endl;
+                    cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
             }
         }
     
@@ -217,7 +218,7 @@ int main() {
         if(toupper(programos_tesinys) != 'Y') break;
     } while (true);
 
-    while(Studentai.size() > 0){
+    while(!Studentai.empty()){
         cout << "\n1 - Isvesti rezultata konsoleje\n2 - Isvesti rezultata faile\nPasirinkite: ";
         cin >> norima_isvedimo_vieta;
         if(cin.fail()){
@@ -232,7 +233,7 @@ int main() {
             break;
     }
 
-    while(Studentai.size() > 0){
+    while(!Studentai.empty()){
         cout << "\n1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal vidurki\n4 - Rikiuoti pagal mediana\nPasirinkite: ";
         cin >> norimas_rikiavimas;
         if(cin.fail()){
