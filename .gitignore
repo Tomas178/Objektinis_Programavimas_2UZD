@@ -4,3 +4,4 @@ bin/
 *.layout
 *.txt
 .gitignore
+.vscode
