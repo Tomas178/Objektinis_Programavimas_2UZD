@@ -8,7 +8,6 @@
 #include <random>
 #include <ctime>
 #include <fstream>
-#include <locale>
 
 const int N = 10;
 
@@ -22,7 +21,6 @@ int main() {
     int norima_isvedimo_vieta;
     int programos_veikimas;
     int norimas_rikiavimas;
-    setlocale(LC_ALL, "C");
     vector<Studentokai> Studentai;
     srand(time(nullptr));
 
@@ -61,6 +59,7 @@ int main() {
 
         if (programos_veikimas == 5) {
             try{
+            cout << "Cia jusu failai: " << endl;
             system("dir *.txt");
             string fileName;
             cout << "Iveskite failo pavadinima: ";
@@ -210,7 +209,7 @@ int main() {
             Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
             Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
         }
-        if(programos_veikimas != 5 && programos_veikimas != 3)
+        if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentas.namu_darbai.empty())
             Studentai.push_back(Studentas);
 
         cout << "Ar noresite ivesti dar viena studenta? (Y/N): ";
