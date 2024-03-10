@@ -317,9 +317,9 @@ int main() {
     }
 
     if(Studentai.size() > 0){
-        IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        IsvestiRezultatus("Kieti", Kieti, 2);
-        IsvestiRezultatus("Lievi", Lievi, 2);
+        // IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
+        // IsvestiRezultatus("Kieti", Kieti, 2);
+        // IsvestiRezultatus("Lievi", Lievi, 2);
     }
     
     system("pause");
