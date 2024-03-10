@@ -1,17 +1,17 @@
 # V1.0
 
-<div style="text-align:center;">Studentai1000.txt</div>
+            Studentai1000.txt<br/>
 
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 0,16s                         | s                             |
+| Skaitymas iš failo =  | s                    | 0,0132s                         | s                             |
 | Studentų rūšiavimas = | s                    | 0s                            | s                             |
-| Studentų skirstymas = | s                    | 0,005s                        | s                             |
+| Studentų skirstymas = | s                    | 0,0092s                        | s                             |
 
-<div style="text-align:center;">Studentai10000.txt</div>
+            Studentai1000.txt<br/>
 
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 0,16s                         | s                             |
-| Studentų rūšiavimas = | s                    | 0s                            | s                             |
-| Studentų skirstymas = | s                    | 0,005s                        | s                             |
+| Skaitymas iš failo =  | s                    | 0,1036s                         | s                             |
+| Studentų rūšiavimas = | s                    | 0,014s                            | s                             |
+| Studentų skirstymas = | s                    | 0,0584s                        | s                             |
