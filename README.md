@@ -1,5 +1,7 @@
 # V1.0
-<center>Studentai1000.txt</center>
+
+<div style="text-align:center;">Studentai1000.txt</div>
+
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
 | Skaitymas iš failo =  | s                    | 0,16s                         | s                             |
