@@ -1,5 +1,12 @@
 # V1.0
 
+- Visi tyrimai yra atlikti iš 5 bandymų.
+### Naudojami sistemos parametrai
+- CPU(Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz, 2400 Mhz, 2 branduolių, 4 loginiai procesoriai)
+- RAM(16,0 GB)
+- HDD(TOSHIBA MQ01ABD100 512GB)
+
+
                                                  1000 Studentų
 
 |                       | Vector                     | List                          | Deque                         |
