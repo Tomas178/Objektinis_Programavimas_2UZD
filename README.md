@@ -6,6 +6,7 @@
 - RAM(16,0 GB)
 - HDD(TOSHIBA MQ01ABD100 512GB)
 
+### Tyrimai
 
                                                  1000 Studentų
 
