@@ -266,25 +266,51 @@ int main() {
             cout << "Ivedete netinkama skaiciu.\n";
         }
         else{
-            if(norimas_rikiavimas == 1){
+          if(norimas_rikiavimas == 1){
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
             Studentai.sort(palygintiPagalVarda);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
             break;
         } else if(norimas_rikiavimas == 2){
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
             Studentai.sort(palygintiPagalPavarde);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
             break;
         } else if(norimas_rikiavimas == 3){
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
             Studentai.sort(palygintiPagalVidurki);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+            
+            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.vidurkis < 5.0) Lievi.emplace_back(stud);
                 else Kieti.emplace_back(stud);
             }
+            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } else if(norimas_rikiavimas == 4){
-            Studentai.sort(palygintiPagalMediana);;
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
+            Studentai.sort(palygintiPagalMediana);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+
+            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.mediana < 5.0) Lievi.emplace_back(stud);
                 else Kieti.emplace_back(stud);
             }
+            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } 
         }
