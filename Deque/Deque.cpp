@@ -68,6 +68,8 @@ int main() {
                 throw runtime_error("Nepavyko atidaryti failo");
             }
 
+            auto Pradzia_Skaitymo = std::chrono::high_resolution_clock::now(); 
+
             string line;
             getline(DF, line);
 
@@ -105,6 +107,10 @@ int main() {
 
             DF.close();
             cout << "Nuskaitymas sekmingas:)" << endl;
+            auto Pabaiga_Skaitymo = std::chrono::high_resolution_clock::now();
+
+            auto Skaitymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Pabaiga_Skaitymo - Pradzia_Skaitymo).count();
+            cout << "Failas Nuskaitytas per: " << Skaitymo_trukme/1000.0 << " s." << endl;
             
             } catch(const exception& e){
                 cerr << "Klaida: " << e.what() << endl;
@@ -267,27 +273,45 @@ int main() {
             sort(Studentai.begin(), Studentai.end(), palygintiPagalPavarde);
             break;
         } else if(norimas_rikiavimas == 3){
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
             sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+
+            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.vidurkis < 5.0) Lievi.emplace_back(stud);
                 else Kieti.emplace_back(stud);
             }
+            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } else if(norimas_rikiavimas == 4){
+            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
             sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+
+            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.mediana < 5.0) Lievi.emplace_back(stud);
                 else Kieti.emplace_back(stud);
             }
+            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } 
         }
     }
 
     if(Studentai.size() > 0){
-        IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        IsvestiRezultatus("Kieti", Kieti, 2);
-        IsvestiRezultatus("Lievi", Lievi, 2);
+        // IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
+        // IsvestiRezultatus("Kieti", Kieti, 2);
+        // IsvestiRezultatus("Lievi", Lievi, 2);
     }
     
     system("pause");

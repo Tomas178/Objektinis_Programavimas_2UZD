@@ -1,41 +1,41 @@
 # V1.0
 
-            1000 Studentų<br/>
+                                                 1000 Studentų
 
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 0,0132s                       | s                             |
-| Studentų rūšiavimas = | s                    | 0s                            | s                             |
-| Studentų skirstymas = | s                    | 0,0092s                       | s                             |
+| Skaitymas iš failo =  | s                    | 0,0132s                       | 0,017s                        |
+| Studentų rūšiavimas = | s                    | 0s                            | 0,0046s                       |
+| Studentų skirstymas = | s                    | 0,0092s                       | 0,0054s                       |
 
-            10000 Studentų<br/>
-
-|              | Vector                        | List                          | Deque                         |
-|--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 0,1036s                       | s                             |
-| Studentų rūšiavimas = | s                    | 0,014s                        | s                             |
-| Studentų skirstymas = | s                    | 0,0584s                       | s                             |
-
-            100000 Studentų<br/>
+                                                 10000 Studentų
 
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 0,764s                        | s                             |
-| Studentų rūšiavimas = | s                    | 0,1234s                       | s                             |
-| Studentų skirstymas = | s                    | 0,4188s                       | s                             |
+| Skaitymas iš failo =  | s                    | 0,1036s                       | 0,083s                        |
+| Studentų rūšiavimas = | s                    | 0,014s                        | 0,0508s                       |
+| Studentų skirstymas = | s                    | 0,0584s                       | 0,0308s                       |
 
-            1000000 Studentų<br/>
-
-|              | Vector                        | List                          | Deque                         |
-|--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 7,7828s                       | s                             |
-| Studentų rūšiavimas = | s                    | 1,8082s                       | s                             |
-| Studentų skirstymas = | s                    | 4,4738s                       | s                             |
-
-            10000000 Studentų<br/>
+                                                 100000 Studentų
 
 |              | Vector                        | List                          | Deque                         |
 |--------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | s                    | 102,728s                      | s                             |
-| Studentų rūšiavimas = | s                    | 21,5344s                      | s                             |
-| Studentų skirstymas = | s                    | 58,242s                       | s                             |
+| Skaitymas iš failo =  | s                    | 0,764s                        | 0,599s                        |
+| Studentų rūšiavimas = | s                    | 0,1234s                       | 0,6058s                       |
+| Studentų skirstymas = | s                    | 0,4188s                       | 0,259s                        |
+
+                                                 1000000 Studentų
+
+|              | Vector                        | List                          | Deque                         |
+|--------------|-------------------------------|-------------------------------|-------------------------------|
+| Skaitymas iš failo =  | s                    | 7,7828s                       | 6,1738s                       |
+| Studentų rūšiavimas = | s                    | 1,8082s                       | 8,2234s                       |
+| Studentų skirstymas = | s                    | 4,4738s                       | 2,5364s                       |
+
+                                                 10000000 Studentų
+
+|              | Vector                        | List                          | Deque                         |
+|--------------|-------------------------------|-------------------------------|-------------------------------|
+| Skaitymas iš failo =  | s                    | 102,728s                      | 70,3016s                      |
+| Studentų rūšiavimas = | s                    | 21,5344s                      | 93,503s                       |
+| Studentų skirstymas = | s                    | 58,242s                       | 42,3836s                      |
