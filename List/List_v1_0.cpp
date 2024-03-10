@@ -68,6 +68,8 @@ int main() {
                 throw runtime_error("Nepavyko atidaryti failo");
             }
 
+            auto Pradzia_Skaitymo = std::chrono::high_resolution_clock::now();
+
             string line;
             getline(DF, line);
 
@@ -105,6 +107,10 @@ int main() {
 
             DF.close();
             cout << "Nuskaitymas sekmingas:)" << endl;
+            auto Pabaiga_Skaitymo = std::chrono::high_resolution_clock::now();
+
+            auto Skaitymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Pabaiga_Skaitymo - Pradzia_Skaitymo).count();
+            cout << "Failas Nuskaitytas per: " << Skaitymo_trukme/1000.0 << " s." << endl;  
             
             } catch(const exception& e){
                 cerr << "Klaida: " << e.what() << endl;
