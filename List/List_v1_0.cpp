@@ -290,7 +290,13 @@ int main() {
             auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.vidurkis < 5.0) Lievi.emplace_back(stud);
-                else Kieti.emplace_back(stud);
+            }
+            for (auto studentas = Studentai.begin(); studentas != Studentai.end();) {
+                if (studentas->vidurkis < 5.0) {
+                    studentas = Studentai.erase(studentas);
+                } else {
+                    ++studentas;
+                }
             }
             auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
             auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
@@ -306,7 +312,13 @@ int main() {
             auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
                 if(stud.mediana < 5.0) Lievi.emplace_back(stud);
-                else Kieti.emplace_back(stud);
+            }
+            for (auto studentas = Studentai.begin(); studentas != Studentai.end();) {
+                if (studentas->mediana < 5.0) {
+                    studentas = Studentai.erase(studentas);
+                } else {
+                    ++studentas;
+                }
             }
             auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
             auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
@@ -315,11 +327,9 @@ int main() {
         } 
         }
     }
-
     if(Studentai.size() > 0){
-        // IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        // IsvestiRezultatus("Kieti", Kieti, 2);
-        // IsvestiRezultatus("Lievi", Lievi, 2);
+        IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
     }
     
     system("pause");
