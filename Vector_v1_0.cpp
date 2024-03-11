@@ -14,7 +14,6 @@ int main() {
     int programos_veikimas;
     int norimas_rikiavimas;
     vector<Studentokai> Studentai;
-    vector<Studentokai> Kieti;
     vector<Studentokai> Lievi;
     srand(time(nullptr));
 
@@ -280,9 +279,15 @@ int main() {
 
             auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
-                if(stud.vidurkis < 5.0) Lievi.push_back(stud);
-                else Kieti.push_back(stud);
+                if(stud.vidurkis < 5.0){
+                    Lievi.push_back(stud);
+                }
             }
+            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
+                               [](const auto& stud) {
+                                   return stud.vidurkis < 5.0;
+                               }),
+                Studentai.end());
             auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
             auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
             cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
@@ -296,9 +301,15 @@ int main() {
 
             auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
-                if(stud.mediana < 5.0) Lievi.push_back(stud);
-                else Kieti.push_back(stud);
+                if(stud.vidurkis < 5.0){
+                    Lievi.push_back(stud);
+                }
             }
+            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
+                               [](const auto& stud) {
+                                   return stud.vidurkis < 5.0;
+                               }),
+                Studentai.end());
             auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
             auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
             cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
@@ -307,12 +318,10 @@ int main() {
         }
     }
     Lievi.shrink_to_fit();
-    Kieti.shrink_to_fit();
 
     if(Studentai.size() > 0){
-        // IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        // IsvestiRezultatus("Kieti", Kieti, 2);
-        // IsvestiRezultatus("Lievi", Lievi, 2);
+        IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
     }
     
     system("pause");
