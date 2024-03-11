@@ -301,13 +301,13 @@ int main() {
 
             auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
-                if(stud.vidurkis < 5.0){
+                if(stud.mediana < 5.0){
                     Lievi.push_back(stud);
                 }
             }
             Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
                                [](const auto& stud) {
-                                   return stud.vidurkis < 5.0;
+                                   return stud.mediana < 5.0;
                                }),
                 Studentai.end());
             auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
