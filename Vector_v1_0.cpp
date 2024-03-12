@@ -320,8 +320,8 @@ int main() {
     Lievi.shrink_to_fit();
 
     if(Studentai.size() > 0){
-        IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
+        //IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
+        //IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
     }
     
     system("pause");
