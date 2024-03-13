@@ -14,7 +14,7 @@ int main() {
     int programos_veikimas;
     int norimas_rikiavimas;
     vector<Studentokai> Studentai;
-    vector<Studentokai> Lievi;
+    vector<Studentokai> Kieti;
     srand(time(nullptr));
 
     do {
@@ -67,7 +67,7 @@ int main() {
                 throw runtime_error("Nepavyko atidaryti failo");
             }
 
-            auto Pradzia_Skaitymo = std::chrono::high_resolution_clock::now(); 
+            auto Pradzia_Skaitymo = chrono::high_resolution_clock::now(); 
 
             string line;
             getline(DF, line);
@@ -107,9 +107,9 @@ int main() {
             DF.close();
             cout << "Nuskaitymas sekmingas:)" << endl;
             Studentai.shrink_to_fit();
-            auto Pabaiga_Skaitymo = std::chrono::high_resolution_clock::now();
+            auto Pabaiga_Skaitymo = chrono::high_resolution_clock::now();
 
-            auto Skaitymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Pabaiga_Skaitymo - Pradzia_Skaitymo).count();
+            auto Skaitymo_trukme = chrono::duration_cast<chrono::milliseconds>(Pabaiga_Skaitymo - Pradzia_Skaitymo).count();
             cout << "Failas Nuskaitytas per: " << Skaitymo_trukme/1000.0 << " s." << endl;
 
             cout << "Vektoriaus capacity: " << Studentai.capacity() << endl;
@@ -271,57 +271,51 @@ int main() {
             sort(Studentai.begin(), Studentai.end(), palygintiPagalPavarde);
             break;
         } else if(norimas_rikiavimas == 3){
-            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
-            sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
-            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
-            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
+            stable_partition(Studentai.begin(), Studentai.end(), [](const Studentokai &stud ) {return stud.vidurkis < 5.0;} );
+            sort(execution::par, Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
             cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
 
-            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
-                if(stud.vidurkis < 5.0){
-                    Lievi.push_back(stud);
+                if(stud.vidurkis >= 5.0){
+                    Kieti.push_back(stud);
                 }
             }
-            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                               [](const auto& stud) {
-                                   return stud.vidurkis < 5.0;
-                               }),
-                Studentai.end());
-            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
-            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            PasalintiKietusStudentus(Studentai, norimas_rikiavimas);
+            auto Skirstymo_pabaiga = chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = chrono::duration_cast<chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
             cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } else if(norimas_rikiavimas == 4){
-            auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
-            sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
-            auto Rusiavimo_pabaiga = std::chrono::high_resolution_clock::now();
-            auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+            auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
+            stable_partition(Studentai.begin(), Studentai.end(), [](const Studentokai &stud) { return stud.mediana < 5.0; });
+            sort(execution::par, Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
+            auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
             cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
 
-            auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
+            auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
             for(auto stud : Studentai){
-                if(stud.mediana < 5.0){
-                    Lievi.push_back(stud);
+                if(stud.mediana >= 5.0){
+                    Kieti.push_back(stud);
                 }
             }
-            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                               [](const auto& stud) {
-                                   return stud.mediana < 5.0;
-                               }),
-                Studentai.end());
-            auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
-            auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+            PasalintiKietusStudentus(Studentai, norimas_rikiavimas);
+            auto Skirstymo_pabaiga = chrono::high_resolution_clock::now();
+            auto Skirstymo_trukme = chrono::duration_cast<chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
             cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
             break;
         } 
         }
     }
-    Lievi.shrink_to_fit();
+    Kieti.shrink_to_fit();
 
     if(Studentai.size() > 0){
-        //IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-        //IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
+        IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
     }
     
     system("pause");

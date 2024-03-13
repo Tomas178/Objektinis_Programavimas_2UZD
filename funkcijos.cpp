@@ -32,6 +32,38 @@ bool palygintiPagalMediana(const Studentokai &a, const Studentokai &b) {
     return a.mediana < b.mediana;
 }
 
+void PasalintiKietusStudentus(vector<Studentokai> &Studentai, int norimas_rikiavimas){
+    try{
+    if (norimas_rikiavimas == 3) {
+        auto it = find_if(Studentai.begin(), Studentai.end(),
+                               [](const Studentokai &stud) {
+                                   return stud.vidurkis >= 5.0;
+                               });
+
+        if (it != Studentai.end()) {
+            Studentai.erase(it, Studentai.end());
+        } else {
+            throw runtime_error("Nera studento su vidurkiu >= 5.0");
+        }
+    }
+
+    if (norimas_rikiavimas == 4) {
+        auto it = find_if(Studentai.begin(), Studentai.end(),
+                               [](const Studentokai &stud) {
+                                   return stud.mediana >= 5.0;
+                               });
+
+        if (it != Studentai.end()) {
+            Studentai.erase(it, Studentai.end());
+        } else {
+            throw runtime_error("Nera studento su mediana >= 5.0");
+        }
+    }
+    } catch (const exception &e){
+                cerr << e.what() << endl;
+    }
+}
+
 void GeneruotiFaila(int kiekis, int nd_kiekis){
     string FailoPavadinimas = "Studentai" + to_string(kiekis) + ".txt";
     ofstream RF(FailoPavadinimas);
