@@ -12,7 +12,6 @@
 #include <ctime>
 #include <fstream>
 #include <chrono>
-#include <execution>
 
 using namespace std;
 

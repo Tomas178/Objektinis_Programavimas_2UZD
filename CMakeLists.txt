@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.25)
+project(V1_0)
+include_directories(Headers)
+file(GLOB SOURCES "Sources/*.cpp")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Debug)
+add_executable(${PROJECT_NAME} ${SOURCES})
