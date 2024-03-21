@@ -89,3 +89,8 @@
 | Skaitymas iš failo =  | 51,466s                       | 98,927s                       | 67,8274s                      |
 | Studentų rūšiavimas = | 37,2356s                      | 23,1012s                      | 94,4442s                      |
 | Studentų skirstymas = | 8,6152s                       | 49,4404s                      | 21,478s                       |
+
+# Instaliavimo instrukcija
+- Jeigu neturite CMake, tuomet reikia atsisiųsti iš https://cmake.org/download/ ir instaliuojant programą pasirinkti, kad nustatytų sistemos kintamuosius arba galite žiūrėti šitą video: https://www.youtube.com/watch?v=8_X5Iq9niDE.
+- Tuomet tam folderyje, raskite run.bat script'ą ir jums viska sutvarkys automatiškai.
+- V1_0.exe failą rasite Debug folderyje, kuris atsiras po CMake įvykdymo.
