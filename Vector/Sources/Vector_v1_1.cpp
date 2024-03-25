@@ -73,21 +73,26 @@ int main() {
 
             string line;
             getline(DF, line);
+            cout << "Pirma eilute pasalinta!!!!" << endl;
 
             while (getline(DF, line)) {
                 istringstream iss(line);
 
                 string vardas, pavarde;
+                cout << "Pradedamas vardo ir pavardes skaitymas!!!" << endl;
                 if (!(iss >> vardas >> pavarde)) {
                     cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
                 } else {
                     Studentokai.SetVardas(vardas);
+                    cout << "Vardas pridetas!!!" << endl;
                     Studentokai.SetPavarde(pavarde);
+                    cout << "Vardas ir Pavarde prideti!!!" << endl;
                 }
 
+                cout << "Pradedamas ND irasymas!!!" << endl;
                 int pazymys;
-                Studentokai.Get_Nd().clear();
                 vector<int> papildomas_nd;
+                papildomas_nd.clear();
                 try{
                     while (iss >> pazymys) {
                         papildomas_nd.push_back(pazymys);
@@ -97,19 +102,27 @@ int main() {
                     exit(1);
                 }
 
+                cout << "SU nd viskas ivyko sekmingai!!!" << endl;
                 if (!papildomas_nd.empty()) {
                     Studentokai.setEgzaminas(papildomas_nd.back());
+                    cout << "Egzamino balas pridetas sekmingai!!!" << endl;
                     papildomas_nd.pop_back();
+                    cout << "Nd paskutinis pazymys pasalintas sekmingai!!!" << endl;
                     Studentokai.setNd(papildomas_nd);
+                    cout << "Nd prideti i Studento klase!!!" << endl;
                 }
 
                 if (!Studentokai.Get_Nd().empty()) {
                     sort(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end());
+                    cout << "Isrusiuota sekmingai!!!" << endl;
                     Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
-                    Studentokai.setVidurkis((Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
+                    cout << "Mediana suskaiciuota sekmingai!!!" << endl;
+                    Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
+                    cout << "Vidurkis suskaiciuota sekmingai!!!" << endl;
                 }
 
                 Studentai.push_back(Studentokai);
+                cout << "Studento duomenis prideti sekmingai i Studentai vektoriu" << endl;
             }
 
             DF.close();
