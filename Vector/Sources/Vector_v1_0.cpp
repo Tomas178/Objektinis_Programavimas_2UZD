@@ -381,7 +381,7 @@ int main() {
                 break;
             } else if(norimas_rikiavimas == 3){
                 auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
-                stable_partition(Studentai.begin(), Studentai.end(), [](const Studentokai &stud ) {return stud.vidurkis < 5.0;} );
+                sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
                 auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
                 auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
                 cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
@@ -399,7 +399,6 @@ int main() {
                 break;
             } else if(norimas_rikiavimas == 4){
                 auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
-                stable_partition(Studentai.begin(), Studentai.end(), [](const Studentokai &stud) { return stud.mediana < 5.0; });
                 sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
                 auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
                 auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
