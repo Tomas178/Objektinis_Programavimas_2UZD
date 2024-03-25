@@ -32,6 +32,10 @@ class Studentas {
         int Get_Egzaminas() const { return egzaminas; }
         double Get_Mediana() const { return mediana; }
         double Get_Vidurkis() const { return vidurkis; }
+        bool Nd_tuscia_ar_netuscia() const { return namu_darbai.empty(); }
+        int Nd_dydis() const { return namu_darbai.size(); }
+        void nd_rusiavimas() { sort(namu_darbai.begin(), namu_darbai.end()); }
+        int Nd_Suma() { accumulate(namu_darbai.begin(), namu_darbai.end(), 0); }
         istream& readStudent(istream&);
 
         void SetVardas(string vard) { vardas = vard; }
@@ -40,6 +44,8 @@ class Studentas {
         void setEgzaminas(int egz) { egzaminas = egz; }
         void SetMediana(double med) { mediana = med; }
         void setVidurkis(double vid) { vidurkis = vid; }
+        double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
+        double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
 };
 
 extern int norima_isvedimo_vieta;
@@ -54,9 +60,6 @@ extern vector<Studentas> Kieti;
 extern vector<Studentas> Lievi;
 extern vector<Studentas> Studentai;
 
-
-double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
-double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
 bool palygintiPagalVarda(const Studentas &a, const Studentas &b);
 bool palygintiPagalPavarde(const Studentas &a, const Studentas &b);
 bool palygintiPagalVidurki(const Studentas &a, const Studentas &b);

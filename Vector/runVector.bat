@@ -4,4 +4,4 @@ cmake --build .
 mkdir DebugVector
 copy Sources\*.txt DebugVector\*.txt
 cd DebugVector
-V1_0_Vector.exe
+V1_1_Vector.exe

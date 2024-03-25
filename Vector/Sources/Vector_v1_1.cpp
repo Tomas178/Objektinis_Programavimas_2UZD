@@ -111,13 +111,15 @@ int main() {
                     Studentokai.setNd(papildomas_nd);
                     cout << "Nd prideti i Studento klase!!!" << endl;
                 }
-
-                if (!Studentokai.Get_Nd().empty()) {
-                    sort(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end());
+                cout << "Namu darbu vektoriaus dydis = " << Studentokai.Nd_dydis() << endl;
+                cout << "Papildomas_nd vektoriaus dydis = " << papildomas_nd.size() << endl;
+                cout << "Prasideda rusiavimo, ir vidurkiu bei medianos skaicivimu eile!!!" << endl;
+                if (!Studentokai.Nd_tuscia_ar_netuscia()) {
+                    Studentokai.nd_rusiavimas();
                     cout << "Isrusiuota sekmingai!!!" << endl;
-                    Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
+                    Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
                     cout << "Mediana suskaiciuota sekmingai!!!" << endl;
-                    Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
+                    Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
                     cout << "Vidurkis suskaiciuota sekmingai!!!" << endl;
                 }
 
@@ -168,8 +170,8 @@ int main() {
                 }
                 Studentokai.setNd(papildomas_nd);
                 Studentokai.setEgzaminas(rand()%10+1);
-                Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
-                Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
+                Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
+                Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
                 Studentai.push_back(Studentokai);
             }
                 cout << "Generavimas baigtas:)" << endl;
@@ -194,7 +196,7 @@ int main() {
 
         if (programos_veikimas == 2){
             vector<int> papildomas_nd;
-            while (Studentokai.Get_Nd().size() <= N-1){
+            while (Studentokai.Nd_dydis() <= N-1){
                 int kiekisNDgeneravimui = rand()%N+1;
                 for(int i = 0; i < kiekisNDgeneravimui; i++){
                     int nd = rand() % 10 +1;
@@ -208,8 +210,8 @@ int main() {
 
         if(programos_veikimas == 1){
             vector<int> papildomas_nd;
-            while (Studentokai.Get_Nd().size() <= N-1){
-                cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentokai.Get_Nd().size()+1 << " namu darbo rezultata (1-10): ";
+            while (Studentokai.Nd_dydis() <= N-1){
+                cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentokai.Nd_dydis()+1 << " namu darbo rezultata (1-10): ";
                 int nd = 0;
                 cin >> nd;
                 if(cin.fail()){
@@ -220,7 +222,7 @@ int main() {
                 }
                 else if(nd < 11 && nd > 0){
                     papildomas_nd.push_back(nd);
-                    if(Studentokai.Get_Nd().size() <= N-1){
+                    if(Studentokai.Nd_dydis() <= N-1){
                         cout << "Dar bus pazymiu? (Y/N): ";
                         cin >> choice3;
                         if(toupper(choice3) != 'Y') break;
@@ -254,10 +256,10 @@ int main() {
             }
         }
     
-        if(Studentokai.Get_Nd().size() > 0 && programos_veikimas != 5){
-            sort(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end());
-            Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
-            Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
+        if(Studentokai.Nd_dydis() > 0 && programos_veikimas != 5){
+            Studentokai.nd_rusiavimas();
+            Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
+            Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
         }
         if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentokai.Get_Nd().empty())
             Studentai.push_back(Studentokai);
