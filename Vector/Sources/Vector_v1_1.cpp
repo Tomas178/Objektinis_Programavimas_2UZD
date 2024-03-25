@@ -84,12 +84,9 @@ int main() {
                     cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
                 } else {
                     Studentokai.SetVardas(vardas);
-                    cout << "Vardas pridetas!!!" << endl;
                     Studentokai.SetPavarde(pavarde);
-                    cout << "Vardas ir Pavarde prideti!!!" << endl;
                 }
 
-                cout << "Pradedamas ND irasymas!!!" << endl;
                 int pazymys;
                 vector<int> papildomas_nd;
                 papildomas_nd.clear();
@@ -105,26 +102,16 @@ int main() {
                 cout << "SU nd viskas ivyko sekmingai!!!" << endl;
                 if (!papildomas_nd.empty()) {
                     Studentokai.setEgzaminas(papildomas_nd.back());
-                    cout << "Egzamino balas pridetas sekmingai!!!" << endl;
                     papildomas_nd.pop_back();
-                    cout << "Nd paskutinis pazymys pasalintas sekmingai!!!" << endl;
                     Studentokai.setNd(papildomas_nd);
-                    cout << "Nd prideti i Studento klase!!!" << endl;
                 }
-                cout << "Namu darbu vektoriaus dydis = " << Studentokai.Nd_dydis() << endl;
-                cout << "Papildomas_nd vektoriaus dydis = " << papildomas_nd.size() << endl;
-                cout << "Prasideda rusiavimo, ir vidurkiu bei medianos skaicivimu eile!!!" << endl;
                 if (!Studentokai.Nd_tuscia_ar_netuscia()) {
                     Studentokai.nd_rusiavimas();
-                    cout << "Isrusiuota sekmingai!!!" << endl;
                     Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
-                    cout << "Mediana suskaiciuota sekmingai!!!" << endl;
                     Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
-                    cout << "Vidurkis suskaiciuota sekmingai!!!" << endl;
                 }
 
                 Studentai.push_back(Studentokai);
-                cout << "Studento duomenis prideti sekmingai i Studentai vektoriu" << endl;
             }
 
             DF.close();
