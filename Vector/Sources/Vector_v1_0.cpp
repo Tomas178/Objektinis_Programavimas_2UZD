@@ -1,13 +1,5 @@
-#include "funkcijos.h"
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <limits>
-#include <vector>
-#include <numeric>
-#include <random>
-#include <ctime>
-#include <fstream>
+#include "../Headers/funkcijos.h"
+
 
 const int N = 10;
 
@@ -21,32 +13,38 @@ int main() {
     int norima_isvedimo_vieta;
     int programos_veikimas;
     int norimas_rikiavimas;
+    int norima_strategija;
     vector<Studentokai> Studentai;
+    vector<Studentokai> Kieti;
+    vector<Studentokai> Lievi;
     srand(time(nullptr));
 
     do {
         try {
     while (true) {
-        cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\nPasirinkite: ";
+        cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\n6 - Generuoti faila.\nPasirinkite: ";
         cin >> programos_veikimas;
         if (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             throw runtime_error("Iveskite skaiciu!");
         }
-        if (programos_veikimas > 0 && programos_veikimas < 6)
+        if (programos_veikimas > 0 && programos_veikimas < 7)
             break;
         else
-            throw runtime_error("Iveskite skaiciu intervale [1, 5]");
+            throw runtime_error("Iveskite skaiciu intervale [1, 6]");
     }
     } catch (const invalid_argument& e) {
         cerr << "Klaida: " << e.what() << endl;
+        continue;
     } catch (const out_of_range& e) {
         cerr << "Klaida: " << e.what() << endl;
+        continue;
     } catch (const exception& e) {
         cerr << "Klaida: " << e.what() << endl;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        continue;
     }
 
         Studentokai Studentas;
@@ -58,6 +56,7 @@ int main() {
         }
 
         if (programos_veikimas == 5) {
+            
             try{
             cout << "Cia jusu failai: " << endl;
             system("dir *.txt");
@@ -70,6 +69,8 @@ int main() {
                 throw runtime_error("Nepavyko atidaryti failo");
             }
 
+            auto Pradzia_Skaitymo = chrono::high_resolution_clock::now(); 
+
             string line;
             getline(DF, line);
 
@@ -77,13 +78,18 @@ int main() {
                 istringstream iss(line);
 
                 if (!(iss >> Studentas.vardas >> Studentas.pavarde)) {
-                    cerr << "Failed to read vardas and pavarde." << endl;
+                    cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
                 }
 
                 int pazymys;
                 Studentas.namu_darbai.clear();
-                while (iss >> pazymys) {
+                try{
+                    while (iss >> pazymys) {
                     Studentas.namu_darbai.push_back(pazymys);
+                    }
+                } catch(const exception &e) {
+                    cerr << "Nepavyko nuskaityti namu darbu balo " << Studentai.size() << " eiluteje:(" << endl;
+                    exit(1);
                 }
 
                 if (!Studentas.namu_darbai.empty()) {
@@ -96,17 +102,33 @@ int main() {
                     Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
                     Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
                 }
+
                 Studentai.push_back(Studentas);
             }
 
             DF.close();
             cout << "Nuskaitymas sekmingas:)" << endl;
             Studentai.shrink_to_fit();
+            auto Pabaiga_Skaitymo = chrono::high_resolution_clock::now();
+
+            auto Skaitymo_trukme = chrono::duration_cast<chrono::milliseconds>(Pabaiga_Skaitymo - Pradzia_Skaitymo).count();
+            cout << "Failas Nuskaitytas per: " << Skaitymo_trukme/1000.0 << " s." << endl;
+
             cout << "Vektoriaus capacity: " << Studentai.capacity() << endl;
             cout << "Vektoriaus size: " << Studentai.size() << endl;
+            
             } catch(const exception& e){
                 cerr << "Klaida: " << e.what() << endl;
+                continue;
             }
+        }
+
+        if(programos_veikimas == 6){
+            int kiekis;
+            int nd_kiekis;
+            cout << "Keliu studentu faila generuoti?: "; cin >> kiekis;
+            cout << "Kiek norite, kad studentas turetu namu darbu?: "; cin >> nd_kiekis;
+            GeneruotiFaila(kiekis, nd_kiekis);
         }
 
         if(programos_veikimas == 3){
@@ -233,6 +255,22 @@ int main() {
     }
 
     while(!Studentai.empty()){
+        cout << "\n1 - Programa vykdyti pagal 1 strategija\n2 - Programa vykdyti pagal 2 strategija\n3 - Programa vykdyti pagal 3 strategija\nPasirinkite: ";
+        cin >> norima_strategija;
+        if(cin.fail()){
+            cout << "Prasome ivesti skaiciu.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else if(norima_strategija != 1 && norima_strategija != 2 && norima_strategija != 3){
+            cout << "Ivedete netinkama skaiciu.\n";
+        }
+        else
+            break;
+    }
+
+    if(norima_strategija == 1){
+        while(!Studentai.empty()){
         cout << "\n1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal vidurki\n4 - Rikiuoti pagal mediana\nPasirinkite: ";
         cin >> norimas_rikiavimas;
         if(cin.fail()){
@@ -252,50 +290,152 @@ int main() {
             break;
         } else if(norimas_rikiavimas == 3){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            for(auto stud : Studentai){
+                if(stud.vidurkis < 5.0) Lievi.push_back(stud);
+                else Kieti.push_back(stud);
+            }
             break;
         } else if(norimas_rikiavimas == 4){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            for(auto stud : Studentai){
+                if(stud.mediana < 5.0) Lievi.push_back(stud);
+                else Kieti.push_back(stud);
+            }
             break;
         } 
         }
     }
-
-    if(Studentai.size() > 0){
-        size_t IlgiausiasVardas = 0;
-        size_t IlgiausiaPavarde = 0;
-        for (const auto& student : Studentai) {
-            IlgiausiasVardas = max(IlgiausiasVardas, student.vardas.length());
-            IlgiausiaPavarde = max(IlgiausiaPavarde, student.pavarde.length());
+    Lievi.shrink_to_fit();
+    Kieti.shrink_to_fit();
     }
 
-    if(Studentai.size() > 0 && norima_isvedimo_vieta == 1){
-        cout << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
-        << "Galutinis (Med.)" << endl;
-        cout << "--------------------------------------------------------------------" << endl;
-
-        for(const auto &studentai : Studentai) {
-            cout << left << setw(IlgiausiasVardas+5) << studentai.vardas << setw(IlgiausiaPavarde+5) << studentai.pavarde << setw(20)
-             << fixed << setprecision(2) << studentai.vidurkis << setw(20) << fixed << setprecision(2) << studentai.mediana << endl;
+    if(norima_strategija == 2){
+        while(!Studentai.empty()){
+        cout << "\n1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal vidurki\n4 - Rikiuoti pagal mediana\nPasirinkite: ";
+        cin >> norimas_rikiavimas;
+        if(cin.fail()){
+            cout << "Prasome ivesti skaiciu.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-    } else if(Studentai.size() > 0 && norima_isvedimo_vieta == 2) {
-        ofstream RF("studenciokai.txt");
-        RF << left << setw(IlgiausiasVardas+5) << "Vardas" << setw(IlgiausiaPavarde+5) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
-        << "Galutinis(Med.)" << endl;
-        RF << "----------------------------------------------------------------------" << endl; 
-        for(const auto &studentai : Studentai) {
-            RF << left << setw(IlgiausiasVardas+5) << studentai.vardas << setw(IlgiausiaPavarde+5) << studentai.pavarde << setw(20) 
-            << fixed << setprecision(2) << studentai.vidurkis << setw(20) << fixed << setprecision(2) << studentai.mediana << endl;
+        else if(norimas_rikiavimas < 1 || norimas_rikiavimas > 4){
+            cout << "Ivedete netinkama skaiciu.\n";
         }
-        RF.close();
-        cout << "Rezultatai isvesti studenciokai.txt faile." << endl;
+        else{
+            if(norimas_rikiavimas == 1){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalVarda);
+            break;
+        } else if(norimas_rikiavimas == 2){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalPavarde);
+            break;
+        } else if(norimas_rikiavimas == 3){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            for(auto stud : Studentai){
+                if(stud.vidurkis > 5.0){
+                    Kieti.push_back(stud);
+                }
+            }
+            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
+                               [](const auto& stud) {
+                                   return stud.vidurkis > 5.0;
+                               }),
+                Studentai.end());
+            break;
+        } else if(norimas_rikiavimas == 4){
+            sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            for(auto stud : Studentai){
+                if(stud.mediana > 5.0){
+                    Kieti.push_back(stud);
+                }
+            }
+            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
+                               [](const auto& stud) {
+                                   return stud.mediana > 5.0;
+                               }),
+                Studentai.end());
+            break;
+        } 
+        }
     }
+    Kieti.shrink_to_fit();
+    }
+
+    if(norima_strategija == 3){
+        while(!Studentai.empty()){
+            cout << "\n1 - Rikiuoti pagal varda\n2 - Rikiuoti pagal pavarde\n3 - Rikiuoti pagal vidurki\n4 - Rikiuoti pagal mediana\nPasirinkite: ";
+            cin >> norimas_rikiavimas;
+            if(cin.fail()){
+                cout << "Prasome ivesti skaiciu.\n";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+            else if(norimas_rikiavimas < 1 || norimas_rikiavimas > 4){
+                cout << "Ivedete netinkama skaiciu.\n";
+            }
+            else{
+                if(norimas_rikiavimas == 1){
+                sort(Studentai.begin(), Studentai.end(), palygintiPagalVarda);
+                break;
+            } else if(norimas_rikiavimas == 2){
+                sort(Studentai.begin(), Studentai.end(), palygintiPagalPavarde);
+                break;
+            } else if(norimas_rikiavimas == 3){
+                auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
+                sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+                auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
+                auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+                cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+
+                auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
+                for(auto stud : Studentai){
+                    if(stud.vidurkis >= 5.0){
+                        Kieti.push_back(stud);
+                    }
+                }
+                PasalintiKietusStudentus(Studentai, norimas_rikiavimas);
+                auto Skirstymo_pabaiga = chrono::high_resolution_clock::now();
+                auto Skirstymo_trukme = chrono::duration_cast<chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+                cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
+                break;
+            } else if(norimas_rikiavimas == 4){
+                auto Rusiavimo_pradzia = chrono::high_resolution_clock::now();
+                sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+                auto Rusiavimo_pabaiga = chrono::high_resolution_clock::now();
+                auto Rusiavimo_trukme = chrono::duration_cast<chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
+                cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
+
+                auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
+                for(auto stud : Studentai){
+                    if(stud.mediana >= 5.0){
+                        Kieti.push_back(stud);
+                    }
+                }
+                PasalintiKietusStudentus(Studentai, norimas_rikiavimas);
+                auto Skirstymo_pabaiga = chrono::high_resolution_clock::now();
+                auto Skirstymo_trukme = chrono::duration_cast<chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
+                cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
+                break;
+            } 
+            }
+        }
+    Kieti.shrink_to_fit();
+    }
+
+    if(norima_strategija == 1){
+        IsvestiRezultatus("VisiStudentai", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
+    }
+    if(norima_strategija == 2 || norima_strategija == 3){
+        IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
+        IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
     }
     
     system("pause");
     return 0;
 
     } catch(const exception& e) {
-        cerr << "An exception occurred: " << e.what() << endl;
-        return 1; // Exit with error status
+        cerr << e.what() << endl;
+        return 1;
     }
 }

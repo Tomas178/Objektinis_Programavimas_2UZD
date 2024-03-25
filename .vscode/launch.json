@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/tomas/Desktop/Vilniaus Universiteto/Objektinis-Programavimas",
-      "program": "c:/Users/tomas/Desktop/Vilniaus Universiteto/Objektinis-Programavimas/build/Debug/outDebug",
+      "cwd": "c:/Users/tomas/Desktop/2Uzduotis Objektinio Programavimo",
+      "program": "c:/Users/tomas/Desktop/2Uzduotis Objektinio Programavimo/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
