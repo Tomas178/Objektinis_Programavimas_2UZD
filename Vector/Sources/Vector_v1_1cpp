@@ -14,9 +14,9 @@ int main() {
     int programos_veikimas;
     int norimas_rikiavimas;
     int norima_strategija;
-    vector<Studentokai> Studentai;
-    vector<Studentokai> Kieti;
-    vector<Studentokai> Lievi;
+    vector<Studentas> Studentai;
+    vector<Studentas> Kieti;
+    vector<Studentas> Lievi;
     srand(time(nullptr));
 
     do {
@@ -47,7 +47,7 @@ int main() {
         continue;
     }
 
-        Studentokai Studentas;
+        Studentas Studentokai;
         char programos_tesinys;
         char choice3;
 
@@ -77,33 +77,39 @@ int main() {
             while (getline(DF, line)) {
                 istringstream iss(line);
 
-                if (!(iss >> Studentas.vardas >> Studentas.pavarde)) {
+                string vardas, pavarde;
+                if (!(iss >> vardas >> pavarde)) {
                     cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
+                } else {
+                    Studentokai.SetVardas(vardas);
+                    Studentokai.SetPavarde(pavarde);
                 }
 
                 int pazymys;
-                Studentas.namu_darbai.clear();
+                Studentokai.Get_Nd().clear();
+                vector<int> papildomas_nd;
                 try{
                     while (iss >> pazymys) {
-                    Studentas.namu_darbai.push_back(pazymys);
+                        papildomas_nd.push_back(pazymys);
                     }
                 } catch(const exception &e) {
                     cerr << "Nepavyko nuskaityti namu darbu balo " << Studentai.size() << " eiluteje:(" << endl;
                     exit(1);
                 }
 
-                if (!Studentas.namu_darbai.empty()) {
-                    Studentas.egzaminas = Studentas.namu_darbai.back();
-                    Studentas.namu_darbai.pop_back();
+                if (!papildomas_nd.empty()) {
+                    Studentokai.setEgzaminas(papildomas_nd.back());
+                    papildomas_nd.pop_back();
+                    Studentokai.setNd(papildomas_nd);
                 }
 
-                if (!Studentas.namu_darbai.empty()) {
-                    sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
-                    Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-                    Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
+                if (!Studentokai.Get_Nd().empty()) {
+                    sort(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end());
+                    Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
+                    Studentokai.setVidurkis((Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
                 }
 
-                Studentai.push_back(Studentas);
+                Studentai.push_back(Studentokai);
             }
 
             DF.close();
@@ -133,23 +139,25 @@ int main() {
 
         if(programos_veikimas == 3){
             try {
+            vector<int> papildomas_nd;
             int KiekisGeneravimui;
             cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
             Studentai.reserve(KiekisGeneravimui);
 
             for(int i = 0; i < KiekisGeneravimui; i++){
-                Studentas.vardas = Vardai[rand() % Vardai.size()];
-                Studentas.pavarde = Pavardes[rand() % Pavardes.size()];
+                Studentokai.SetVardas(Vardai[rand() % Vardai.size()]);
+                Studentokai.SetPavarde(Pavardes[rand() % Pavardes.size()]);
                 int nd_kiekis = rand()%N+1;
-                Studentas.namu_darbai.clear();
+                Studentokai.Get_Nd().clear();
                 for(int j = 0; j < nd_kiekis; j++){
                     int nd = rand()%10+1;
-                    Studentas.namu_darbai.push_back(nd);
+                    papildomas_nd.push_back(nd);
                 }
-                Studentas.egzaminas = rand()%10+1;
-                Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
-                Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-                Studentai.push_back(Studentas);
+                Studentokai.setNd(papildomas_nd);
+                Studentokai.setEgzaminas(rand()%10+1);
+                Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
+                Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
+                Studentai.push_back(Studentokai);
             }
                 cout << "Generavimas baigtas:)" << endl;
             }
@@ -161,28 +169,34 @@ int main() {
         }
 
         if(programos_veikimas == 1 || programos_veikimas == 2){
+            string vardas, pavarde;
             cout << "Iveskite " << Studentai.size()+1 << " studento varda: ";
-            cin >> Studentas.vardas;
+            cin >> vardas;
+            Studentokai.SetVardas(vardas);
 
             cout << "Iveskite " << Studentai.size()+1 << " studento pavarde: ";
-            cin >> Studentas.pavarde;
+            cin >> pavarde;
+            Studentokai.SetPavarde(pavarde);
         }
 
         if (programos_veikimas == 2){
-            while (Studentas.namu_darbai.size() <= N-1){
+            vector<int> papildomas_nd;
+            while (Studentokai.Get_Nd().size() <= N-1){
                 int kiekisNDgeneravimui = rand()%N+1;
                 for(int i = 0; i < kiekisNDgeneravimui; i++){
                     int nd = rand() % 10 +1;
-                    Studentas.namu_darbai.push_back(nd);
+                    papildomas_nd.push_back(nd);
                 }
             }
-            Studentas.egzaminas = rand()%10+1;
+            Studentokai.setNd(papildomas_nd);
+            Studentokai.setEgzaminas(rand()%10+1);
             cout << "Skaiciu generavimas baigtas sekmingai:)" << endl;
         }
 
         if(programos_veikimas == 1){
-            while (Studentas.namu_darbai.size() <= N-1){
-                cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentas.namu_darbai.size()+1 << " namu darbo rezultata (1-10): ";
+            vector<int> papildomas_nd;
+            while (Studentokai.Get_Nd().size() <= N-1){
+                cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentokai.Get_Nd().size()+1 << " namu darbo rezultata (1-10): ";
                 int nd = 0;
                 cin >> nd;
                 if(cin.fail()){
@@ -192,8 +206,8 @@ int main() {
                     continue;
                 }
                 else if(nd < 11 && nd > 0){
-                    Studentas.namu_darbai.push_back(nd);
-                    if(Studentas.namu_darbai.size() <= N-1){
+                    papildomas_nd.push_back(nd);
+                    if(Studentokai.Get_Nd().size() <= N-1){
                         cout << "Dar bus pazymiu? (Y/N): ";
                         cin >> choice3;
                         if(toupper(choice3) != 'Y') break;
@@ -202,6 +216,7 @@ int main() {
                 else
                     cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
             }
+            Studentokai.setNd(papildomas_nd);
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 
@@ -218,7 +233,7 @@ int main() {
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
                 else if(egz < 11 && egz > 0){
-                    Studentas.egzaminas = egz;
+                    Studentokai.setEgzaminas(egz);
                     break;
                 }
                 else
@@ -226,13 +241,13 @@ int main() {
             }
         }
     
-        if(Studentas.namu_darbai.size() > 0 && programos_veikimas != 5){
-            sort(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end());
-            Studentas.mediana = medianosSkaiciavimas(Studentas.namu_darbai, Studentas.namu_darbai.size(), Studentas.egzaminas);
-            Studentas.vidurkis = Vidurkis(Studentas.namu_darbai.size(), accumulate(Studentas.namu_darbai.begin(), Studentas.namu_darbai.end(), 0), Studentas.egzaminas);
+        if(Studentokai.Get_Nd().size() > 0 && programos_veikimas != 5){
+            sort(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end());
+            Studentokai.SetMediana(medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Get_Nd().size(), Studentokai.Get_Egzaminas()));
+            Studentokai.setVidurkis(Vidurkis(Studentokai.Get_Nd().size(), accumulate(Studentokai.Get_Nd().begin(), Studentokai.Get_Nd().end(), 0), Studentokai.Get_Egzaminas()));
         }
-        if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentas.namu_darbai.empty())
-            Studentai.push_back(Studentas);
+        if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentokai.Get_Nd().empty())
+            Studentai.push_back(Studentokai);
 
         cout << "Ar noresite ivesti dar viena studenta? (Y/N): ";
         cin >> programos_tesinys;
@@ -291,14 +306,14 @@ int main() {
         } else if(norimas_rikiavimas == 3){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
             for(auto stud : Studentai){
-                if(stud.vidurkis < 5.0) Lievi.push_back(stud);
+                if(stud.Get_Vidurkis() < 5.0) Lievi.push_back(stud);
                 else Kieti.push_back(stud);
             }
             break;
         } else if(norimas_rikiavimas == 4){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
             for(auto stud : Studentai){
-                if(stud.mediana < 5.0) Lievi.push_back(stud);
+                if(stud.Get_Mediana() < 5.0) Lievi.push_back(stud);
                 else Kieti.push_back(stud);
             }
             break;
@@ -331,26 +346,26 @@ int main() {
         } else if(norimas_rikiavimas == 3){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
             for(auto stud : Studentai){
-                if(stud.vidurkis > 5.0){
+                if(stud.Get_Vidurkis() > 5.0){
                     Kieti.push_back(stud);
                 }
             }
             Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
                                [](const auto& stud) {
-                                   return stud.vidurkis > 5.0;
+                                   return stud.Get_Vidurkis() > 5.0;
                                }),
                 Studentai.end());
             break;
         } else if(norimas_rikiavimas == 4){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
             for(auto stud : Studentai){
-                if(stud.mediana > 5.0){
+                if(stud.Get_Mediana() > 5.0){
                     Kieti.push_back(stud);
                 }
             }
             Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
                                [](const auto& stud) {
-                                   return stud.mediana > 5.0;
+                                   return stud.Get_Mediana() > 5.0;
                                }),
                 Studentai.end());
             break;
@@ -388,7 +403,7 @@ int main() {
 
                 auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
                 for(auto stud : Studentai){
-                    if(stud.vidurkis >= 5.0){
+                    if(stud.Get_Vidurkis() >= 5.0){
                         Kieti.push_back(stud);
                     }
                 }
@@ -406,7 +421,7 @@ int main() {
 
                 auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
                 for(auto stud : Studentai){
-                    if(stud.mediana >= 5.0){
+                    if(stud.Get_Mediana() >= 5.0){
                         Kieti.push_back(stud);
                     }
                 }
