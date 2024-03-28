@@ -37,6 +37,7 @@ class Studentas {
         void nd_rusiavimas() { sort(namu_darbai.begin(), namu_darbai.end()); }
         int Nd_Suma() { accumulate(namu_darbai.begin(), namu_darbai.end(), 0); }
         istream& readStudent(istream&);
+        ~Studentas() {}
 
         void SetVardas(string vard) { vardas = vard; }
         void SetPavarde(string pav) { pavarde = pav; }

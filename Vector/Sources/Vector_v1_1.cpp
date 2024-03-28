@@ -73,13 +73,11 @@ int main() {
 
             string line;
             getline(DF, line);
-            cout << "Pirma eilute pasalinta!!!!" << endl;
 
             while (getline(DF, line)) {
                 istringstream iss(line);
 
                 string vardas, pavarde;
-                cout << "Pradedamas vardo ir pavardes skaitymas!!!" << endl;
                 if (!(iss >> vardas >> pavarde)) {
                     cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
                 } else {
@@ -99,7 +97,6 @@ int main() {
                     exit(1);
                 }
 
-                cout << "SU nd viskas ivyko sekmingai!!!" << endl;
                 if (!papildomas_nd.empty()) {
                     Studentokai.setEgzaminas(papildomas_nd.back());
                     papildomas_nd.pop_back();
