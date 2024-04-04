@@ -24,7 +24,8 @@ class Studentas {
         double mediana;
         double vidurkis;
     public:
-        Studentas() : egzaminas(0), mediana(0), vidurkis(0) {};
+        Studentas();
+        Studentas(string vard, string pavard);
         Studentas(istream &is);
         inline string Vardas() const { return vardas; }
         inline string Pavarde() const { return pavarde; }
@@ -39,12 +40,12 @@ class Studentas {
         istream& readStudent(istream&);
         ~Studentas() {}
 
-        void SetVardas(string vard) { vardas = vard; }
-        void SetPavarde(string pav) { pavarde = pav; }
-        void setNd(vector<int> nd) { namu_darbai = nd;}
-        void setEgzaminas(int egz) { egzaminas = egz; }
-        void SetMediana(double med) { mediana = med; }
-        void setVidurkis(double vid) { vidurkis = vid; }
+        void SetVardas(string vard) { this->vardas = vard; }
+        void SetPavarde(string pav) { this->pavarde = pav; }
+        void setNd(vector<int> nd) { this->namu_darbai = nd;}
+        void setEgzaminas(int egz) { this->egzaminas = egz; }
+        void SetMediana(double med) { this->mediana = med; }
+        void setVidurkis(double vid) { this->vidurkis = vid; }
         double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
         double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
 };
