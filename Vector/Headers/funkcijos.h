@@ -15,14 +15,13 @@
 
 using namespace std;
 
-class Studentokai {
-    public:
-        string vardas;
-        string pavarde;
-        vector<int> namu_darbai;
-        int egzaminas;
-        double mediana;
-        double vidurkis;
+struct Studentokai {
+    string vardas;
+    string pavarde;
+    vector<int> namu_darbai;
+    int egzaminas;
+    double mediana;
+    double vidurkis;
 };
 
 extern int norima_isvedimo_vieta;
