@@ -16,6 +16,10 @@ Studentas::Studentas(string vard, string pavard) : namu_darbai({0}) {
     vidurkis = 0.0;
 }
 
+Studentas::~Studentas(){
+    namu_darbai.clear();
+}
+
 double Studentas::Vidurkis(int nd_kiekis, int nd_suma, int egzaminas){
     if(nd_kiekis > 0)
         return 0.4*nd_suma/nd_kiekis + 0.6*egzaminas;
@@ -33,11 +37,11 @@ double Studentas::medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_ki
 }
 
 bool palygintiPagalVarda(const Studentas &a, const Studentas &b) {
-    return a.Vardas() < b.Vardas();
+    return a.Get_Vardas() < b.Get_Vardas();
 }
 
 bool palygintiPagalPavarde(const Studentas &a, const Studentas &b) {
-    return a.Pavarde() < b.Pavarde();
+    return a.Get_Pavarde() < b.Get_Pavarde();
 }
 
 bool palygintiPagalVidurki(const Studentas &a, const Studentas &b) {
@@ -121,8 +125,8 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
         size_t IlgiausiasVardas = 0;
         size_t IlgiausiaPavarde = 0;
         for (const auto& student : Studentai) {
-            IlgiausiasVardas = max(IlgiausiasVardas, student.Vardas().length());
-            IlgiausiaPavarde = max(IlgiausiaPavarde, student.Pavarde().length());
+            IlgiausiasVardas = max(IlgiausiasVardas, student.Get_Vardas().length());
+            IlgiausiaPavarde = max(IlgiausiaPavarde, student.Get_Pavarde().length());
     }
 
     if (Studentai.size() > 0) {
@@ -132,7 +136,7 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
             cout << "--------------------------------------------------------------------" << endl;
 
             for (const auto& studentas : Studentai) {
-                cout << left << setw(IlgiausiasVardas + 5) << studentas.Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Pavarde() << setw(20)
+                cout << left << setw(IlgiausiasVardas + 5) << studentas.Get_Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Get_Pavarde() << setw(20)
                     << fixed << setprecision(2) << studentas.Get_Vidurkis() << setw(20) << fixed << setprecision(2) << studentas.Get_Mediana() << endl;
             }
         } else if (norima_isvedimo_vieta == 2) {
@@ -143,7 +147,7 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
                 << "Galutinis(Med.)" << endl;
             RF << "----------------------------------------------------------------------" << endl;
             for (const auto& studentas : Studentai) {
-                RF << left << setw(IlgiausiasVardas + 5) << studentas.Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Pavarde() << setw(20)
+                RF << left << setw(IlgiausiasVardas + 5) << studentas.Get_Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Get_Pavarde() << setw(20)
                     << fixed << setprecision(2) << studentas.Get_Vidurkis() << setw(20) << fixed << setprecision(2) << studentas.Get_Mediana() << endl;
             }
             FF << RF.str();
@@ -152,14 +156,4 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
             cout << "Rezultatai isvesti " << FailoPavadinimas <<" faile." << endl;
         }
     }
-}
-
-Studentas::Studentas(std::istream& is) { 
-  // kreipiasi į Studentas::readStudent;
-  readStudent(is);  
-}
-
-istream& Studentas::readStudent(std::istream&) {
-  // Member funkcijos realizacija paremta ankstesniojo 2-ojo darbo funkcija: 
-  std::istream& readStudent(std::istream&, Studentas&);
 }

@@ -26,26 +26,28 @@ class Studentas {
     public:
         Studentas();
         Studentas(string vard, string pavard);
-        Studentas(istream &is);
-        inline string Vardas() const { return vardas; }
-        inline string Pavarde() const { return pavarde; }
+        inline string Get_Vardas() const { return vardas; }
+        inline string Get_Pavarde() const { return pavarde; }
         vector<int> Get_Nd() const { return namu_darbai; }
         int Get_Egzaminas() const { return egzaminas; }
         double Get_Mediana() const { return mediana; }
         double Get_Vidurkis() const { return vidurkis; }
-        bool Nd_tuscia_ar_netuscia() const { return namu_darbai.empty(); }
+        bool Nd_empty() const { return namu_darbai.empty(); }
         int Nd_dydis() const { return namu_darbai.size(); }
         void nd_rusiavimas() { sort(namu_darbai.begin(), namu_darbai.end()); }
-        int Nd_Suma() { accumulate(namu_darbai.begin(), namu_darbai.end(), 0); }
-        istream& readStudent(istream&);
-        ~Studentas() {}
+        int Nd_Suma() { return accumulate(namu_darbai.begin(), namu_darbai.end(), 0); }
+        int Get_Last_Nd() { return namu_darbai.back(); }
+        //istream& readStudent(istream&);
+        ~Studentas();
 
         void SetVardas(string vard) { this->vardas = vard; }
         void SetPavarde(string pav) { this->pavarde = pav; }
-        void setNd(vector<int> nd) { this->namu_darbai = nd;}
         void setEgzaminas(int egz) { this->egzaminas = egz; }
         void SetMediana(double med) { this->mediana = med; }
         void setVidurkis(double vid) { this->vidurkis = vid; }
+        void setNd(int nd) { this->namu_darbai.push_back(nd); }
+        void DeleteLastNd() { this->namu_darbai.pop_back(); }
+        void ND_clear() { this->namu_darbai.clear(); } 
         double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
         double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
 };
@@ -58,7 +60,6 @@ extern char choice3;
 
 extern vector<string> Vardai;
 extern vector<string> Pavardes;
-extern vector<Studentas> Kieti;
 extern vector<Studentas> Lievi;
 extern vector<Studentas> Studentai;
 
