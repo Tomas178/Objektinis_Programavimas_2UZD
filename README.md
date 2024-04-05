@@ -15,7 +15,7 @@
 | Skaitymas iš failo =  | 0,286667s                     | 0,295667s                     | 0,326667s                     |
 | Studentų rūšiavimas = | 0,01s                         | 0,009333s                     | 0,013333s                     |
 | Studentų skirstymas = | 0,044333s                     | 0,047333s                     | 0,041667s                     |
-| .exe failo dydis =    | 0,044333s                     | 0,047333s                     | 207Kb                         |
+| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
 
                                                  1000000 Studentų
 
@@ -24,7 +24,7 @@
 | Skaitymas iš failo =  | 2,852333s                     | 2,983333s                     | 2,785333s                     |
 | Studentų rūšiavimas = | 0,102s                        | 0,170667s                     | 0,103s                        |
 | Studentų skirstymas = | 0,432333s                     | 0,401s                        | 0,338333s                     |
-| .exe failo dydis =    | 0,044333s                     | 0,047333s                     | 207Kb                         |
+| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
 
                                                  10000000 Studentų
 
@@ -33,7 +33,7 @@
 | Skaitymas iš failo =  | 27,665s                       | 27,487s                       | 27,12333s                     |
 | Studentų rūšiavimas = | 1,0515s                       | 1,145s                        | 1,057333s                     |
 | Studentų skirstymas = | 3,6785s                       | 3,617667s                     | 4,127s                        |
-| .exe failo dydis =    | 0,044333s                     | 0,047333s                     | 207Kb                         |
+| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
 
 ### TYRIMŲ REZULTATAI SU CLASS
                                                  100000 Studentų
