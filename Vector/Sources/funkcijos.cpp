@@ -42,8 +42,35 @@ Studentas::Studentas(Studentas&& LaikinasStudentas) noexcept{
     LaikinasStudentas.namu_darbai.clear();
 }
 
-Studentas::Studentas& operator=(const Studentas &LaikinasStudentas){
-    
+Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
+    if(this != &LaikinasStudentas){
+        vardas = LaikinasStudentas.vardas;
+        pavarde = LaikinasStudentas.pavarde;
+        namu_darbai = LaikinasStudentas.namu_darbai;
+        egzaminas = LaikinasStudentas.egzaminas;
+        mediana = LaikinasStudentas.mediana;
+        vidurkis = LaikinasStudentas.vidurkis;
+    }
+    return *this;
+}
+
+Studentas& Studentas::operator=(Studentas&& LaikinasStudentas){
+    if(this != &LaikinasStudentas){
+        vardas = move(LaikinasStudentas.vardas);
+        pavarde = move(LaikinasStudentas.pavarde);
+        namu_darbai = move(LaikinasStudentas.namu_darbai);
+        egzaminas = LaikinasStudentas.egzaminas;
+        mediana = LaikinasStudentas.mediana;
+        vidurkis = LaikinasStudentas.vidurkis;
+
+        LaikinasStudentas.vardas = "Nera Vardo";
+        LaikinasStudentas.pavarde = "Nera Pavardes";
+        LaikinasStudentas.egzaminas = 0;
+        LaikinasStudentas.mediana = 0.0;
+        LaikinasStudentas.vidurkis = 0.0;
+        LaikinasStudentas.namu_darbai.clear();
+    }
+    return *this;
 }
 
 Studentas::~Studentas(){

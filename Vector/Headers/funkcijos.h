@@ -54,6 +54,7 @@ class Studentas {
         Studentas(const Studentas &LaikinasStudentas);
         Studentas(Studentas&& LaikinasStudentas) noexcept;
         Studentas& operator=(const Studentas &LaikinasStudentas);
+        Studentas& operator=(Studentas&& LaikinasStudentas);
 };
 
 extern int norima_isvedimo_vieta;
