@@ -26,7 +26,7 @@ Studentas::Studentas(const Studentas &LaikinasStudentas) {
     vidurkis = LaikinasStudentas.vidurkis;
 }
 
-Studentas::Studentas(Studentas&& LaikinasStudentas) noexcept{
+Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept{
     vardas = move(LaikinasStudentas.vardas);
     pavarde = move(LaikinasStudentas.pavarde);
     namu_darbai = move(LaikinasStudentas.namu_darbai);
@@ -54,7 +54,7 @@ Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
     return *this;
 }
 
-Studentas& Studentas::operator=(Studentas&& LaikinasStudentas){
+Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
     if(this != &LaikinasStudentas){
         vardas = move(LaikinasStudentas.vardas);
         pavarde = move(LaikinasStudentas.pavarde);
