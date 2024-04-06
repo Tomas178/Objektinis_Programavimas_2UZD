@@ -50,6 +50,10 @@ class Studentas {
         void ND_clear() { this->namu_darbai.clear(); } 
         double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
         double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
+
+        Studentas(const Studentas &LaikinasStudentas);
+        Studentas(Studentas&& LaikinasStudentas) noexcept;
+        Studentas& operator=(const Studentas &LaikinasStudentas);
 };
 
 extern int norima_isvedimo_vieta;

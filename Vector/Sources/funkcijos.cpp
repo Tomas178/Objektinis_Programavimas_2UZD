@@ -16,6 +16,36 @@ Studentas::Studentas(string vard, string pavard) : namu_darbai({0}) {
     vidurkis = 0.0;
 }
 
+//Kopijavimo konstruktorius
+Studentas::Studentas(const Studentas &LaikinasStudentas) {
+    vardas = LaikinasStudentas.vardas;
+    pavarde = LaikinasStudentas.pavarde;
+    namu_darbai = LaikinasStudentas.namu_darbai;
+    egzaminas = LaikinasStudentas.egzaminas;
+    mediana = LaikinasStudentas.mediana;
+    vidurkis = LaikinasStudentas.vidurkis;
+}
+
+Studentas::Studentas(Studentas&& LaikinasStudentas) noexcept{
+    vardas = move(LaikinasStudentas.vardas);
+    pavarde = move(LaikinasStudentas.pavarde);
+    namu_darbai = move(LaikinasStudentas.namu_darbai);
+    egzaminas = LaikinasStudentas.egzaminas;
+    mediana = LaikinasStudentas.mediana;
+    vidurkis = LaikinasStudentas.vidurkis;
+
+    LaikinasStudentas.vardas = "Nera Vardo";
+    LaikinasStudentas.pavarde = "Nera Pavardes";
+    LaikinasStudentas.egzaminas = 0;
+    LaikinasStudentas.mediana = 0.0;
+    LaikinasStudentas.vidurkis = 0.0;
+    LaikinasStudentas.namu_darbai.clear();
+}
+
+Studentas::Studentas& operator=(const Studentas &LaikinasStudentas){
+    
+}
+
 Studentas::~Studentas(){
     namu_darbai.clear();
 }
