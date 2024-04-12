@@ -330,29 +330,25 @@ int main() {
             break;
         } else if(norimas_rikiavimas == 3){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalVidurki);
+            int i = 0;
             for(auto stud : Studentai){
-                if(stud.vidurkis > 5.0){
+                if(stud.vidurkis >= 5.0){
                     Kieti.push_back(stud);
+                    i++;
                 }
             }
-            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                               [](const auto& stud) {
-                                   return stud.vidurkis > 5.0;
-                               }),
-                Studentai.end());
+            Studentai.resize(Studentai.size()-i);
             break;
         } else if(norimas_rikiavimas == 4){
             sort(Studentai.begin(), Studentai.end(), palygintiPagalMediana);
+            int i = 0;
             for(auto stud : Studentai){
-                if(stud.mediana > 5.0){
+                if(stud.mediana >= 5.0){
                     Kieti.push_back(stud);
+                    i++;
                 }
             }
-            Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                               [](const auto& stud) {
-                                   return stud.mediana > 5.0;
-                               }),
-                Studentai.end());
+            Studentai.resize(Studentai.size()-i);
             break;
         } 
         }

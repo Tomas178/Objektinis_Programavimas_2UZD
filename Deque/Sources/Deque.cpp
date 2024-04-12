@@ -334,20 +334,18 @@ int main() {
                 auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
                 cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
 
+                int i = 0;
                 auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
                 for(auto stud : Studentai){
-                    if(stud.vidurkis < 5.0){
-                        Lievi.push_back(stud);
+                    if(stud.vidurkis >= 5.0){
+                        Kieti.push_back(stud);
+                        i++;
                     }
                 }
-                Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                                [](const auto& stud) {
-                                    return stud.vidurkis < 5.0;
-                                }),
-                    Studentai.end());
                 auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
                 auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
                 cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
+                Studentai.resize(Studentai.size()-i);
                 break;
             } else if(norimas_rikiavimas == 4){
                 auto Rusiavimo_pradzia = std::chrono::high_resolution_clock::now();
@@ -356,20 +354,18 @@ int main() {
                 auto Rusiavimo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Rusiavimo_pabaiga - Rusiavimo_pradzia).count();
                 cout << "Studentu rusiavimo didejant trukme: " << Rusiavimo_trukme/1000.0 << " s." << endl;
 
+                int i = 0;
                 auto Skirstymo_pradzia = std::chrono::high_resolution_clock::now();
                 for(auto stud : Studentai){
-                    if(stud.mediana < 5.0){
-                        Lievi.push_back(stud);
+                    if(stud.mediana >= 5.0){
+                        Kieti.push_back(stud);
+                        i++;
                     }
                 }
-                Studentai.erase(remove_if(Studentai.begin(), Studentai.end(),
-                                [](const auto& stud) {
-                                    return stud.mediana < 5.0;
-                                }),
-                    Studentai.end());
                 auto Skirstymo_pabaiga = std::chrono::high_resolution_clock::now();
                 auto Skirstymo_trukme = std::chrono::duration_cast<std::chrono::milliseconds>(Skirstymo_pabaiga - Skirstymo_pradzia).count();
                 cout << "Studentu Skirstymo i lievus ir kietus trukme: " << Skirstymo_trukme/1000.0 << " s." << endl;
+                Studentai.resize(Studentai.size()-i);
                 break;
             } 
             }
@@ -383,8 +379,8 @@ int main() {
             IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
         }
         if(norima_strategija == 2){
-            IsvestiRezultatus("Studenciokai", Studentai, norima_isvedimo_vieta);
-            IsvestiRezultatus("Lievi", Lievi, norima_isvedimo_vieta);
+            IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
+            IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
         }
     }
     
