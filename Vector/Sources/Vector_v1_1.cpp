@@ -93,7 +93,7 @@ int main() {
                             Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
                             Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
                         }
-                        Studentai.push_back(Studentokai);
+                        Studentai.push_back(move(Studentokai));
                     }
 
                     DF.close();
@@ -139,7 +139,7 @@ int main() {
                         Studentokai.setEgzaminas(rand()%10+1);
                         Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
                         Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
-                        Studentai.push_back(Studentokai);
+                        Studentai.push_back(move(Studentokai));
                     }
                     cout << "Generavimas baigtas:)" << endl;
                 }
@@ -223,7 +223,7 @@ int main() {
                 Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
             }
             if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentokai.Get_Nd().empty())
-                Studentai.push_back(Studentokai);
+                Studentai.push_back(move(Studentokai));
 
             cout << "Ar noresite ivesti dar viena studenta? (Y/N): ";
             cin >> programos_tesinys;
@@ -273,7 +273,7 @@ int main() {
                     auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
                     for(auto stud : Studentai){
                         if(stud.Get_Vidurkis() >= 5.0){
-                            Kieti.push_back(stud);
+                            Kieti.push_back(move(stud));
                         }
                     }
                     Kieti.shrink_to_fit();
@@ -292,7 +292,7 @@ int main() {
                     auto Skirstymo_pradzia = chrono::high_resolution_clock::now();
                     for(auto stud : Studentai){
                         if(stud.Get_Mediana() >= 5.0){
-                            Kieti.push_back(stud);
+                            Kieti.push_back(move(stud));
                         }
                     }
                     Kieti.shrink_to_fit();
