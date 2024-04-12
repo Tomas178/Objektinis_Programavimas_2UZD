@@ -5,6 +5,6 @@ file(GLOB SOURCES "Sources/*.cpp")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/DebugVector)
 
 # Cia galite keisti optimizavimo flag'us pasirenkart tarp (-O1, -O2, -O3)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 add_executable(${PROJECT_NAME} ${SOURCES})

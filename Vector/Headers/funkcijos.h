@@ -47,6 +47,7 @@ class Studentas {
         void setVidurkis(double vid) { this->vidurkis = vid; }
         void setNd(int nd) { this->namu_darbai.push_back(nd); }
         void DeleteLastNd() { this->namu_darbai.pop_back(); }
+        void ClearEverything() { this->vardas.clear(); this->pavarde.clear(); this->namu_darbai.clear(); this->egzaminas = 0; this->mediana = 0.0; this->vidurkis = 0.0; }
         void ND_clear() { this->namu_darbai.clear(); } 
         double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
         double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);

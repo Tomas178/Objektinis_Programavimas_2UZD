@@ -66,7 +66,6 @@ int main() {
 
                     auto Pradzia_Skaitymo = chrono::high_resolution_clock::now();
 
-                    Studentas Studenciokai;
                     string line;
                     getline(DF, line);
 
@@ -78,23 +77,23 @@ int main() {
                             cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
                         }
 
-                        Studenciokai.SetVardas(vardas);
-                        Studenciokai.SetPavarde(pavarde);
+                        Studentokai.SetVardas(vardas);
+                        Studentokai.SetPavarde(pavarde);
 
                         int pazymys;
-                        Studenciokai.ND_clear();
+                        Studentokai.ND_clear();
                         while (iss >> pazymys) {
-                            Studenciokai.setNd(pazymys);
+                            Studentokai.setNd(pazymys);
                         }
 
-                        if (!Studenciokai.Nd_empty()) {
-                            Studenciokai.setEgzaminas(Studenciokai.Get_Last_Nd());
-                            Studenciokai.DeleteLastNd();
-                            Studenciokai.nd_rusiavimas();
-                            Studenciokai.SetMediana(Studenciokai.medianosSkaiciavimas(Studenciokai.Get_Nd(), Studenciokai.Nd_dydis(), Studenciokai.Get_Egzaminas()));
-                            Studenciokai.setVidurkis(Studenciokai.Vidurkis(Studenciokai.Nd_dydis(), Studenciokai.Nd_Suma(), Studenciokai.Get_Egzaminas()));
+                        if (!Studentokai.Nd_empty()) {
+                            Studentokai.setEgzaminas(Studentokai.Get_Last_Nd());
+                            Studentokai.DeleteLastNd();
+                            Studentokai.nd_rusiavimas();
+                            Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
+                            Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
                         }
-                        Studentai.push_back(Studenciokai);
+                        Studentai.push_back(Studentokai);
                     }
 
                     DF.close();
