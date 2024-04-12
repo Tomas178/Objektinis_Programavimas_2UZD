@@ -57,6 +57,7 @@ class Studentas {
         Studentas& operator=(const Studentas &LaikinasStudentas);
         Studentas& operator=(Studentas &&LaikinasStudentas);
         friend istream& operator>>(istream& in, Studentas &LaikinasStudentas);
+        friend ostream& operator<<(ostream& out, const Studentas &LaikinasStudentas);
 };
 
 extern int norima_isvedimo_vieta;

@@ -89,6 +89,13 @@ istream& operator>>(istream& in, Studentas &LaikinasStudentas){
     return in;
 }
 
+ostream& operator<<(ostream& out, const Studentas &LaikinasStudentas){
+    out << left << setw(20) << LaikinasStudentas.Get_Vardas() << setw(20) << LaikinasStudentas.Get_Pavarde() <<
+    setw(20) << fixed << setprecision(2) << LaikinasStudentas.Get_Vidurkis() << fixed << setw(20) << LaikinasStudentas.Get_Mediana();
+    //cout << "As esu operatoriuje <<" << endl;
+    return out;
+}
+
 Studentas::~Studentas(){
     namu_darbai.clear();
 }
@@ -194,34 +201,24 @@ void GeneruotiFaila(int kiekis, int nd_kiekis){
 }
 
 void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, int norima_isvedimo_vieta) {
-
-        size_t IlgiausiasVardas = 0;
-        size_t IlgiausiaPavarde = 0;
-        for (const auto& student : Studentai) {
-            IlgiausiasVardas = max(IlgiausiasVardas, student.Get_Vardas().length());
-            IlgiausiaPavarde = max(IlgiausiaPavarde, student.Get_Pavarde().length());
-    }
-
     if (Studentai.size() > 0) {
         if (norima_isvedimo_vieta == 1) {
-            cout << left << setw(IlgiausiasVardas + 5) << "Vardas" << setw(IlgiausiaPavarde + 5) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
+            cout << left << setw(20) << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
                 << "Galutinis (Med.)" << endl;
             cout << "--------------------------------------------------------------------" << endl;
 
             for (const auto& studentas : Studentai) {
-                cout << left << setw(IlgiausiasVardas + 5) << studentas.Get_Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Get_Pavarde() << setw(20)
-                    << fixed << setprecision(2) << studentas.Get_Vidurkis() << setw(20) << fixed << setprecision(2) << studentas.Get_Mediana() << endl;
+                cout << studentas << endl;
             }
         } else if (norima_isvedimo_vieta == 2) {
             string FailoPavadinimas = pavadinimas + ".txt";
             ofstream FF(FailoPavadinimas);
             stringstream RF;
-            RF << left << setw(IlgiausiasVardas + 5) << "Vardas" << setw(IlgiausiaPavarde + 5) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
+            RF << left << setw(20) << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
                 << "Galutinis(Med.)" << endl;
             RF << "----------------------------------------------------------------------" << endl;
             for (const auto& studentas : Studentai) {
-                RF << left << setw(IlgiausiasVardas + 5) << studentas.Get_Vardas() << setw(IlgiausiaPavarde + 5) << studentas.Get_Pavarde() << setw(20)
-                    << fixed << setprecision(2) << studentas.Get_Vidurkis() << setw(20) << fixed << setprecision(2) << studentas.Get_Mediana() << endl;
+                RF << studentas << endl;
             }
             FF << RF.str();
             RF.clear();
