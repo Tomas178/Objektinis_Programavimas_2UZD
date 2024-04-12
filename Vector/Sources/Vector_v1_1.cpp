@@ -71,28 +71,7 @@ int main() {
 
                     while (getline(DF, line)) {
                         istringstream iss(line);
-
-                        string vardas, pavarde;
-                        if (!(iss >> vardas >> pavarde)) {
-                            cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
-                        }
-
-                        Studentokai.SetVardas(vardas);
-                        Studentokai.SetPavarde(pavarde);
-
-                        int pazymys;
-                        Studentokai.ND_clear();
-                        while (iss >> pazymys) {
-                            Studentokai.setNd(pazymys);
-                        }
-
-                        if (!Studentokai.Nd_empty()) {
-                            Studentokai.setEgzaminas(Studentokai.Get_Last_Nd());
-                            Studentokai.DeleteLastNd();
-                            Studentokai.nd_rusiavimas();
-                            Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
-                            Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
-                        }
+                        iss >> Studentokai;
                         Studentai.push_back(move(Studentokai));
                     }
 

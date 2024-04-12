@@ -45,7 +45,7 @@ class Studentas {
         void setEgzaminas(int egz) { this->egzaminas = egz; }
         void SetMediana(double med) { this->mediana = med; }
         void setVidurkis(double vid) { this->vidurkis = vid; }
-        void setNd(int nd) { this->namu_darbai.push_back(nd); }
+        void setNd(int nd) { this->namu_darbai.push_back(move(nd)); }
         void DeleteLastNd() { this->namu_darbai.pop_back(); }
         void ClearEverything() { this->vardas.clear(); this->pavarde.clear(); this->namu_darbai.clear(); this->egzaminas = 0; this->mediana = 0.0; this->vidurkis = 0.0; }
         void ND_clear() { this->namu_darbai.clear(); } 
@@ -56,6 +56,7 @@ class Studentas {
         Studentas(Studentas &&LaikinasStudentas) noexcept;
         Studentas& operator=(const Studentas &LaikinasStudentas);
         Studentas& operator=(Studentas &&LaikinasStudentas);
+        friend istream& operator>>(istream& in, Studentas &LaikinasStudentas);
 };
 
 extern int norima_isvedimo_vieta;

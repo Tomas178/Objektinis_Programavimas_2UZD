@@ -30,9 +30,9 @@ Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept{
     vardas = move(LaikinasStudentas.vardas);
     pavarde = move(LaikinasStudentas.pavarde);
     namu_darbai = move(LaikinasStudentas.namu_darbai);
-    egzaminas = LaikinasStudentas.egzaminas;
-    mediana = LaikinasStudentas.mediana;
-    vidurkis = LaikinasStudentas.vidurkis;
+    egzaminas = move(LaikinasStudentas.egzaminas);
+    mediana = move(LaikinasStudentas.mediana);
+    vidurkis = move(LaikinasStudentas.vidurkis);
 
     LaikinasStudentas.ClearEverything();
 }
@@ -54,13 +54,39 @@ Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
         vardas = move(LaikinasStudentas.vardas);
         pavarde = move(LaikinasStudentas.pavarde);
         namu_darbai = move(LaikinasStudentas.namu_darbai);
-        egzaminas = LaikinasStudentas.egzaminas;
-        mediana = LaikinasStudentas.mediana;
-        vidurkis = LaikinasStudentas.vidurkis;
+        egzaminas = move(LaikinasStudentas.egzaminas);
+        mediana = move(LaikinasStudentas.mediana);
+        vidurkis = move(LaikinasStudentas.vidurkis);
 
         LaikinasStudentas.ClearEverything();
     }
     return *this;
+}
+
+istream& operator>>(istream& in, Studentas &LaikinasStudentas){
+    string vardas, pavarde;
+    if (!(in >> vardas >> pavarde)) {
+        cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
+    }
+
+    LaikinasStudentas.SetVardas(vardas);
+    LaikinasStudentas.SetPavarde(pavarde);
+
+    int pazymys;
+    LaikinasStudentas.ND_clear();
+    while (in >> pazymys) {
+        LaikinasStudentas.setNd(pazymys);
+    }
+
+    if (!LaikinasStudentas.Nd_empty()) {
+        LaikinasStudentas.setEgzaminas(LaikinasStudentas.Get_Last_Nd());
+        LaikinasStudentas.DeleteLastNd();
+        LaikinasStudentas.nd_rusiavimas();
+        LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
+        LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
+    }
+    //cout << "As esu operatoriuje >>" << endl;
+    return in;
 }
 
 Studentas::~Studentas(){
