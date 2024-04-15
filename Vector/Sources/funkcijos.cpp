@@ -85,12 +85,60 @@ istringstream& operator>>(istringstream& filename, Studentas &LaikinasStudentas)
         LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
         LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
     }
-    //cout << "As esu operatoriuje >>" << endl;
+    cout << "As esu ivedimo is failo operatoriuje >>" << endl;
     return filename;
 }
 
 istream& operator>>(istream& manual, Studentas &LaikinasStudentas){
-    
+    string vardas, pavarde;
+    char choice3;
+    cout << "Iveskite studento varda: ";
+    manual >> vardas;
+    LaikinasStudentas.SetVardas(vardas);
+    cout << "Iveskite studento pavarde: ";
+    manual >> pavarde;
+    LaikinasStudentas.SetPavarde(pavarde);
+    while (LaikinasStudentas.Nd_dydis() <= 9){
+        cout << "Iveskite studento " << LaikinasStudentas.Nd_dydis()+1 << " namu darbo rezultata (1-10): ";
+        int nd = 0;
+        manual >> nd;
+        if(manual.fail()){
+            cout << "Iveskite skaiciu!" << endl;
+            manual.clear();
+            manual.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        else if(nd < 11 && nd > 0){
+            LaikinasStudentas.setNd(nd);
+            if(LaikinasStudentas.Nd_dydis() <= 9){
+                cout << "Dar bus pazymiu? (Y/N): ";
+                manual >> choice3;
+                if(toupper(choice3) != 'Y') break;
+            }
+        }
+        else
+            cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
+    }
+    manual.clear();
+    manual.ignore(numeric_limits<streamsize>::max(), '\n');
+    while (true){
+        int egz = 0;
+        cout << "Iveskite studento egzamino bala: ";
+        manual >> egz;
+        if(manual.fail()){
+            cout << "Iveskite skaiciu!" << endl;
+            manual.clear();
+            manual.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        else if(egz < 11 && egz > 0){
+            LaikinasStudentas.setEgzaminas(egz);
+            break;
+        }
+        else
+            cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
+    }
+    cout << "As esu rankinio budi ivedimo operatoriuje >>" << endl;
+    return manual;
 }
 
 ostream& operator<<(ostream& console, const Studentas &LaikinasStudentas){

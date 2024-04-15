@@ -128,7 +128,11 @@ int main() {
                 }
             }
 
-            if(programos_veikimas == 1 || programos_veikimas == 2){
+            if(programos_veikimas == 1){
+                cin >> Studentokai;
+            }
+
+            if(programos_veikimas == 2){
                 string vardas, pavarde;
                 cout << "Iveskite " << Studentai.size()+1 << " studento varda: ";
                 cin >> vardas;
@@ -149,51 +153,6 @@ int main() {
                 }
                 Studentokai.setEgzaminas(rand()%10+1);
                 cout << "Skaiciu generavimas baigtas sekmingai:)" << endl;
-            }
-
-            if(programos_veikimas == 1){
-                while (Studentokai.Nd_dydis() <= N-1){
-                    cout << "Iveskite " << Studentai.size()+1 << " studento " << Studentokai.Nd_dydis()+1 << " namu darbo rezultata (1-10): ";
-                    int nd = 0;
-                    cin >> nd;
-                    if(cin.fail()){
-                        cout << "Iveskite skaiciu!" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        continue;
-                    }
-                    else if(nd < 11 && nd > 0){
-                        Studentokai.setNd(nd);
-                        if(Studentokai.Nd_dydis() <= N-1){
-                            cout << "Dar bus pazymiu? (Y/N): ";
-                            cin >> choice3;
-                            if(toupper(choice3) != 'Y') break;
-                        }
-                    }
-                    else
-                        cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
-                }
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-            }
-
-            if(programos_veikimas == 1){
-                while (true){
-                    int egz = 0;
-                    cout << "Iveskite " << Studentai.size()+1 << " studento egzamino bala: ";
-                    cin >> egz;
-                    if(cin.fail()){
-                        cout << "Iveskite skaiciu!" << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    }
-                    else if(egz < 11 && egz > 0){
-                        Studentokai.setEgzaminas(egz);
-                        break;
-                    }
-                    else
-                        cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
-                }
             }
 
             if(Studentokai.Nd_dydis() > 0 && programos_veikimas != 5){
