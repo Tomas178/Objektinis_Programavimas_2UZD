@@ -37,12 +37,15 @@
 ## Aprašymas apie perdengtus metodus
 
 ### Įvesties perdengimo metodai
-- Duomenų įvestis rankiniu ir automatiniu būdu įvyksta, kai duomenų skaitymui yra naudojamas istream objektas (šios programos atveju cin), o tada žiūrima pagal vartotojo pasirinkta programos veikimą. Jei programos_veikimas == 1, tai rankiniu būdu, jei programos_veikimas == 2, tai vardą ir pavardę rankiniu būdu, o pažymiai yra sugeneruojami, jei programos_veikimas == 3, tai studentų yra sugeneruojama tiek, kiek nori vartotojas.
-- Duomenų įvestis iš failo įvyksta, kai duomenų skaitymui naudojamas istringstream objektas.
+- Duomenų įvestis rankiniu ir automatiniu būdu įvyksta, kai duomenų skaitymui yra naudojamas istream objektas (šios programos atveju cin), o tada žiūrima pagal vartotojo pasirinkta programos veikimą. 
+    - Jei programos_veikimas == 1, tai rankiniu būdu.
+    - Jei programos_veikimas == 2, tai vardą ir pavardę rankiniu būdu, o pažymiai yra sugeneruojami.
+    - Jei programos_veikimas == 3, tai studentų yra sugeneruojama tiek, kiek nori vartotojas.
+- Duomenų įvestis iš failo įvyksta, kai duomenų skaitymui naudojamas `istringstream` objektas.
 
 ### Išvesties perdengimo metodai
-- Duomenų išvedimas per konsolę įvyksta, kai duomenų išvedimui yra naudojamas ostream objektas (Šios programos atveju cout).
-- Duomenų išvedimas į failą įvyksta, kai duomenų išvedimui yra naudojamas ofstream objektas. 
+- Duomenų išvedimas per konsolę įvyksta, kai duomenų išvedimui yra naudojamas `ostream` objektas (Šios programos atveju cout).
+- Duomenų išvedimas į failą įvyksta, kai duomenų išvedimui yra naudojamas `ofstream` objektas. 
 
 # Instaliavimo instrukcija
 - Jeigu neturite CMake, tuomet reikia atsisiųsti iš https://cmake.org/download/ ir instaliuojant programą pasirinkti, kad nustatytų sistemos kintamuosius arba galite žiūrėti šitą video: https://www.youtube.com/watch?v=8_X5Iq9niDE.
