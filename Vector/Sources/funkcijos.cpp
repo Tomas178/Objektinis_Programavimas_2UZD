@@ -63,9 +63,9 @@ Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
     return *this;
 }
 
-istream& operator>>(istream& in, Studentas &LaikinasStudentas){
+istringstream& operator>>(istringstream& filename, Studentas &LaikinasStudentas){
     string vardas, pavarde;
-    if (!(in >> vardas >> pavarde)) {
+    if (!(filename >> vardas >> pavarde)) {
         cerr << "Nepavyko nuskaityti vardo ir pavardes" << endl;
     }
 
@@ -74,7 +74,7 @@ istream& operator>>(istream& in, Studentas &LaikinasStudentas){
 
     int pazymys;
     LaikinasStudentas.ND_clear();
-    while (in >> pazymys) {
+    while (filename >> pazymys) {
         LaikinasStudentas.setNd(pazymys);
     }
 
@@ -86,14 +86,29 @@ istream& operator>>(istream& in, Studentas &LaikinasStudentas){
         LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
     }
     //cout << "As esu operatoriuje >>" << endl;
-    return in;
+    return filename;
 }
 
-ostream& operator<<(ostream& out, const Studentas &LaikinasStudentas){
-    out << left << setw(20) << LaikinasStudentas.Get_Vardas() << setw(20) << LaikinasStudentas.Get_Pavarde() <<
+istream& operator>>(istream& manual, Studentas &LaikinasStudentas){
+    
+}
+
+ostream& operator<<(ostream& console, const Studentas &LaikinasStudentas){
+    console << left << setw(20) << LaikinasStudentas.Get_Vardas() << setw(20) << LaikinasStudentas.Get_Pavarde() <<
     setw(20) << fixed << setprecision(2) << LaikinasStudentas.Get_Vidurkis() << fixed << setw(20) << LaikinasStudentas.Get_Mediana();
-    //cout << "As esu operatoriuje <<" << endl;
-    return out;
+    //cout << "As esu isvedimo i konsole operatoriuje <<" << endl;
+    return console;
+
+}
+
+ofstream& operator<<(ofstream& filename, const Studentas &LaikinasStudentas){
+    stringstream RF;
+    RF << left << setw(20) << LaikinasStudentas.Get_Vardas() << setw(20) << LaikinasStudentas.Get_Pavarde() <<
+    setw(20) << fixed << setprecision(2) << LaikinasStudentas.Get_Vidurkis() << fixed << setw(20) << LaikinasStudentas.Get_Mediana();
+    //cout << "As esu isvedimo i faila operatoriuje <<" << endl;
+    filename << RF.str();
+    RF.clear();
+    return filename;
 }
 
 Studentas::~Studentas(){
@@ -208,21 +223,18 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
             cout << "--------------------------------------------------------------------" << endl;
 
             for (const auto& studentas : Studentai) {
-                cout << studentas << endl;
+                 cout << studentas << endl;
             }
         } else if (norima_isvedimo_vieta == 2) {
             string FailoPavadinimas = pavadinimas + ".txt";
-            ofstream FF(FailoPavadinimas);
-            stringstream RF;
+            ofstream RF(FailoPavadinimas);
             RF << left << setw(20) << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20)
                 << "Galutinis(Med.)" << endl;
             RF << "----------------------------------------------------------------------" << endl;
             for (const auto& studentas : Studentai) {
                 RF << studentas << endl;
             }
-            FF << RF.str();
-            RF.clear();
-            FF.close();
+            RF.close();
             cout << "Rezultatai isvesti " << FailoPavadinimas <<" faile." << endl;
         }
     }

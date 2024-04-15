@@ -56,8 +56,10 @@ class Studentas {
         Studentas(Studentas &&LaikinasStudentas) noexcept;
         Studentas& operator=(const Studentas &LaikinasStudentas);
         Studentas& operator=(Studentas &&LaikinasStudentas);
-        friend istream& operator>>(istream& in, Studentas &LaikinasStudentas);
-        friend ostream& operator<<(ostream& out, const Studentas &LaikinasStudentas);
+        friend istringstream& operator>>(istringstream& filename, Studentas &LaikinasStudentas);
+        friend istream& operator>>(istream& manual, Studentas &LaikinasStudentas);
+        friend ostream& operator<<(ostream& console, const Studentas &LaikinasStudentas);
+        friend ofstream& operator<<(ofstream& filename, const Studentas &LaikinasStudentas);
 };
 
 extern int norima_isvedimo_vieta;
