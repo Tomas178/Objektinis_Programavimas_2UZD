@@ -287,3 +287,23 @@ void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, i
         }
     }
 }
+
+void GeneruotiPazymius(Studentas &LaikinasStudentas){
+    int nd_kiekis = rand() % 10 + 1;
+    LaikinasStudentas.ND_clear();
+    for(int i = 0; i < nd_kiekis; i++){
+        LaikinasStudentas.setNd(rand() % 10 + 1);
+    }
+    LaikinasStudentas.setEgzaminas(rand() % 10 + 1);
+}
+
+void GeneruotiStudenta(Studentas &LaikinasStudentas){
+    vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Ruta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
+    vector<string> Pavardes = {"Petronis", "Semenas", "Ceseviciute", "Poskus", "Sumskis", "Leonardas", "Petronyte", "Serelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
+    LaikinasStudentas.SetVardas(Vardai[rand() % Vardai.size()]);
+    LaikinasStudentas.SetPavarde(Pavardes[rand() % Pavardes.size()]);
+    GeneruotiPazymius(LaikinasStudentas);
+    LaikinasStudentas.nd_rusiavimas();
+    LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
+    LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
+}

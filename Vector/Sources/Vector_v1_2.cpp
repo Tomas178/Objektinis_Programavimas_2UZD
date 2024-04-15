@@ -4,9 +4,6 @@ const int N = 10;
 
 int main() {
     try {
-        vector<string> Vardai = {"Tomas", "Matas", "Kasparas", "Algirdas", "Mantas", "Adomas", "Simona", "Gerda", "Jurgita", "Ruta", "Lukas", "Edvardas", "Ernestas", "Rimas"};
-        vector<string> Pavardes = {"Petronis", "Semenas", "Ceseviciute", "Poskus", "Sumskis", "Leonardas", "Petronyte", "Serelis", "Kubilius", "Katleris", "Stonkus", "Sabonis"};
-
         int norima_isvedimo_vieta;
         int programos_veikimas;
         int norimas_rikiavimas;
@@ -101,31 +98,14 @@ int main() {
             }
 
             if(programos_veikimas == 3){
-                try {
-                    int KiekisGeneravimui;
-                    cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
-                    Studentai.reserve(KiekisGeneravimui);
-
-                    for(int i = 0; i < KiekisGeneravimui; i++){
-                        Studentokai.SetVardas(Vardai[rand() % Vardai.size()]);
-                        Studentokai.SetPavarde(Pavardes[rand() % Pavardes.size()]);
-                        int nd_kiekis = rand()%N+1;
-                        Studentokai.Get_Nd().clear();
-                        for(int j = 0; j < nd_kiekis; j++){
-                            int nd = rand()%10+1;
-                            Studentokai.setNd(nd);
-                        }
-                        Studentokai.setEgzaminas(rand()%10+1);
-                        Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
-                        Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
-                        Studentai.push_back(move(Studentokai));
-                    }
-                    cout << "Generavimas baigtas:)" << endl;
+                int KiekisGeneravimui;
+                cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
+                Studentai.reserve(KiekisGeneravimui);
+                for(int i = 0; i < KiekisGeneravimui; i++){
+                    GeneruotiStudenta(Studentokai);
+                    Studentai.push_back(move(Studentokai));
                 }
-                catch(const exception& e)
-                {
-                    cerr << "Klaida generuojant studento duomenis. "<< e.what() << '\n';
-                }
+                cout << "Generavimas baigtas:)" << endl;
             }
 
             if(programos_veikimas == 1){
@@ -141,21 +121,11 @@ int main() {
                 cout << "Iveskite " << Studentai.size()+1 << " studento pavarde: ";
                 cin >> pavarde;
                 Studentokai.SetPavarde(pavarde);
-            }
-
-            if (programos_veikimas == 2){
-                while (Studentokai.Nd_dydis() <= N-1){
-                    int kiekisNDgeneravimui = rand()%N+1;
-                    for(int i = 0; i < kiekisNDgeneravimui; i++){
-                        int nd = rand() % 10 +1;
-                        Studentokai.setNd(nd);
-                    }
-                }
-                Studentokai.setEgzaminas(rand()%10+1);
+                GeneruotiPazymius(Studentokai);
                 cout << "Skaiciu generavimas baigtas sekmingai:)" << endl;
             }
 
-            if(Studentokai.Nd_dydis() > 0 && programos_veikimas != 5){
+            if(Studentokai.Nd_dydis() > 0 && programos_veikimas != 5 && programos_veikimas != 6){
                 Studentokai.nd_rusiavimas();
                 Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
                 Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));

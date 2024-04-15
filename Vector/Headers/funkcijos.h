@@ -79,6 +79,8 @@ bool palygintiPagalVidurki(const Studentas &a, const Studentas &b);
 bool palygintiPagalMediana(const Studentas &a, const Studentas &b);
 void PasalintiKietusStudentus(vector<Studentas> &Studentai, int norimas_rikiavimas);
 void GeneruotiFaila(int kiekis, int nd_kiekis);
+void GeneruotiPazymius(Studentas &LaikinasStudentas);
+void GeneruotiStudenta(Studentas &LaikinasStudentas);
 void IsvestiRezultatus(string pavadinimas, const vector<Studentas> &Studentai, int norima_isvedimo_vieta);
 
 #endif
