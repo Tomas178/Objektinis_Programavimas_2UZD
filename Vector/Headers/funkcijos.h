@@ -37,7 +37,6 @@ class Studentas {
         void nd_rusiavimas() { sort(namu_darbai.begin(), namu_darbai.end()); }
         int Nd_Suma() { return accumulate(namu_darbai.begin(), namu_darbai.end(), 0); }
         int Get_Last_Nd() { return namu_darbai.back(); }
-        //istream& readStudent(istream&);
         ~Studentas();
 
         void SetVardas(string vard) { this->vardas = vard; }

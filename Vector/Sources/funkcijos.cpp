@@ -1,16 +1,18 @@
 #include "../Headers/funkcijos.h"
 
-Studentas::Studentas() : namu_darbai({0}) {
+Studentas::Studentas() {
     vardas = "Nera Vardo";
     pavarde = "Nera Pavardes";
+    namu_darbai.clear();
     egzaminas = 0;
     mediana = 0.0;
     vidurkis = 0.0;
 }
 
-Studentas::Studentas(string vard, string pavard) : namu_darbai({0}) {
+Studentas::Studentas(string vard, string pavard) {
     vardas = vard;
     pavarde = pavard;
+    namu_darbai.clear();
     egzaminas = 0;
     mediana = 0.0;
     vidurkis = 0.0;
