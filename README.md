@@ -1,4 +1,4 @@
-# V1.1
+# V1.2
 
 - Visi tyrimai yra atlikti iš 5 bandymų.
 - Visi failai turi po 7 namų darbus.
@@ -7,63 +7,44 @@
 - RAM(16,0 GB)
 - HDD(TOSHIBA MQ01ABD100 512GB)
 
-### TYRIMŲ REZULTATAI SU STRUCT
                                                  100000 Studentų
 
 |                       | -O1                           | -O2                           | -O3                           |
 |-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 0,286667s                     | 0,295667s                     | 0,326667s                     |
-| Studentų rūšiavimas = | 0,01s                         | 0,009333s                     | 0,013333s                     |
-| Studentų skirstymas = | 0,044333s                     | 0,047333s                     | 0,041667s                     |
-| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
+| Skaitymas iš failo =  | 0,3592s                       | 0,3131s                       | 0,267s                        |
+| Studentų rūšiavimas = | 0,0554s                       | 0,0958s                       | 0,0317s                       |
+| Studentų skirstymas = | 0,056s                        | 0,0605s                       | 0,0333s                       |
+| .exe failo dydis =    | 194Kb                         | 194Kb                         | 197Kb                         |
 
                                                  1000000 Studentų
 
 |                       | -O1                           | -O2                           | -O3                           |
 |-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 2,852333s                     | 2,983333s                     | 2,785333s                     |
-| Studentų rūšiavimas = | 0,102s                        | 0,170667s                     | 0,103s                        |
-| Studentų skirstymas = | 0,432333s                     | 0,401s                        | 0,338333s                     |
-| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
+| Skaitymas iš failo =  | 4,127s                        | 2,6258s                       | 2,6665s                       |
+| Studentų rūšiavimas = | 0,551s                        | 0,434s                        | 0,407s                        |
+| Studentų skirstymas = | 0,6174s                       | 0,3862s                       | 0,3843s                       |
+| .exe failo dydis =    | 194Kb                         | 194Kb                         | 197Kb                         |
 
                                                  10000000 Studentų
 
 |                       | -O1                           | -O2                           | -O3                           |
 |-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 27,665s                       | 27,487s                       | 27,12333s                     |
-| Studentų rūšiavimas = | 1,0515s                       | 1,145s                        | 1,057333s                     |
-| Studentų skirstymas = | 3,6785s                       | 3,617667s                     | 4,127s                        |
-| .exe failo dydis =    | 214Kb                         | 204Kb                         | 230Kb                         |
+| Skaitymas iš failo =  | 30,5662s                      | 26,4068s                      | 26,43s                        |
+| Studentų rūšiavimas = | 15,4674s                      | 5,2982s                       | 5,0698s                       |
+| Studentų skirstymas = | 5,0718s                       | 4,2642s                       | 4,3094s                       |
+| .exe failo dydis =    | 194Kb                         | 194Kb                         | 197Kb                         |
 
-### TYRIMŲ REZULTATAI SU CLASS
-                                                 100000 Studentų
+## Aprašymas apie perdengtus metodus
 
-|                       | -O1                           | -O2                           | -O3                           |
-|-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 0,3567s                       | 0,372s                        | 0,3472s                       |
-| Studentų rūšiavimas = | 0,1302s                       | 0,1316s                       | 0,1362s                       |
-| Studentų skirstymas = | 0,0748s                       | 0,0606s                       | 0,065s                        |
-| .exe failo dydis =    | 203Kb                         | 197Kb                         | 207Kb                         |
+### Įvesties perdengimo metodai
+- Duomenų įvestis rankiniu ir automatiniu būdu įvyksta, kai duomenų skaitymui yra naudojamas istream objektas (šios programos atveju cin), o tada žiūrima pagal vartotojo pasirinkta programos veikimą. Jei programos_veikimas == 1, tai rankiniu būdu, jei programos_veikimas == 2, tai vardą ir pavardę rankiniu būdu, o pažymiai yra sugeneruojami, jei programos_veikimas == 3, tai studentų yra sugeneruojama tiek, kiek nori vartotojas.
+- Duomenų įvestis iš failo įvyksta, kai duomenų skaitymui naudojamas istringstream objektas.
 
-                                                 1000000 Studentų
-
-|                       | -O1                           | -O2                           | -O3                           |
-|-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 3,2986s                       | 3,554667s                     | 3,3614s                       |
-| Studentų rūšiavimas = | 1,6696s                       | 2,137667s                     | 2,076s                        |
-| Studentų skirstymas = | 0,7604s                       | 0,861333s                     | 0,8094s                       |
-| .exe failo dydis =    | 203Kb                         | 197Kb                         | 207Kb                         |
-
-                                                 10000000 Studentų
-
-|                       | -O1                           | -O2                           | -O3                           |
-|-----------------------|-------------------------------|-------------------------------|-------------------------------|
-| Skaitymas iš failo =  | 27,6668s                      | 31,9894s                      | 27,0716s                      |
-| Studentų rūšiavimas = | 17,6838s                      | 17,8376s                      | 16,5052s                      |
-| Studentų skirstymas = | 4,693s                        | 5,0644s                       | 4,5088s                       |
-| .exe failo dydis =    | 203Kb                         | 197Kb                         | 207Kb                         |
+### Išvesties perdengimo metodai
+- Duomenų išvedimas per konsolę įvyksta, kai duomenų išvedimui yra naudojamas ostream objektas (Šios programos atveju cout).
+- Duomenų išvedimas į failą įvyksta, kai duomenų išvedimui yra naudojamas ofstream objektas. 
 
 # Instaliavimo instrukcija
 - Jeigu neturite CMake, tuomet reikia atsisiųsti iš https://cmake.org/download/ ir instaliuojant programą pasirinkti, kad nustatytų sistemos kintamuosius arba galite žiūrėti šitą video: https://www.youtube.com/watch?v=8_X5Iq9niDE.
 - Tuomet tam folderyje, raskite run.bat script'ą ir jums viska sutvarkys automatiškai.
-- V1_1_Vector.exe failą rasite Debug folderyje, kuris atsiras po CMake įvykdymo.
+- V1_2_Vector.exe failą rasite Debug folderyje, kuris atsiras po CMake įvykdymo.
