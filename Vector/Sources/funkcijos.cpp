@@ -87,11 +87,12 @@ istringstream& operator>>(istringstream& filename, Studentas &LaikinasStudentas)
         LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
         LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
     }
-    cout << "As esu ivedimo is failo operatoriuje >>" << endl;
+    //cout << "As esu ivedimo is failo operatoriuje >>" << endl;
     return filename;
 }
 
 istream& operator>>(istream& manual, Studentas &LaikinasStudentas){
+    if(programos_veikimas == 1){
     string vardas, pavarde;
     char choice3;
     cout << "Iveskite studento varda: ";
@@ -139,7 +140,28 @@ istream& operator>>(istream& manual, Studentas &LaikinasStudentas){
         else
             cout << "Ivedete netinkama skaiciu, prasome pakartoti! " << endl;
     }
-    cout << "As esu rankinio budi ivedimo operatoriuje >>" << endl;
+    LaikinasStudentas.nd_rusiavimas();
+    LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
+    LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
+    //cout << "As esu ten kur Programos_veikimas == 1 ivedimo per konsole operatoriuje >>" << endl;
+    }
+    if(programos_veikimas == 2) {
+        string vardas, pavarde;
+        cout << "Iveskite studento varda: "; manual >> vardas;
+        LaikinasStudentas.SetVardas(vardas);
+        cout << "Iveskite studento pavarde: "; manual >> pavarde;
+        LaikinasStudentas.SetPavarde(pavarde);
+        GeneruotiPazymius(LaikinasStudentas);
+        LaikinasStudentas.nd_rusiavimas();
+        LaikinasStudentas.SetMediana(LaikinasStudentas.medianosSkaiciavimas(LaikinasStudentas.Get_Nd(), LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Get_Egzaminas()));
+        LaikinasStudentas.setVidurkis(LaikinasStudentas.Vidurkis(LaikinasStudentas.Nd_dydis(), LaikinasStudentas.Nd_Suma(), LaikinasStudentas.Get_Egzaminas()));
+        //cout << "As esu ten kur Programos_veikimas == 2 ivedimo per konsole operatoriuje >>" << endl;	
+    }
+    if(programos_veikimas == 3) {
+        GeneruotiStudenta(LaikinasStudentas);
+        cout << "As esu ten kur Programos_veikimas == 3 ivedimo per konsole operatoriuje >>" << endl;
+    }
+    //cout << "As esu ivedimo per konsole operatoriuje >>" << endl;
     return manual;
 }
 

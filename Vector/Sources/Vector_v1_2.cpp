@@ -1,11 +1,11 @@
 #include "../Headers/funkcijos.h"
 
 const int N = 10;
+int programos_veikimas;
 
 int main() {
     try {
         int norima_isvedimo_vieta;
-        int programos_veikimas;
         int norimas_rikiavimas;
         int norima_strategija;
         vector<Studentas> Studentai;
@@ -43,6 +43,22 @@ int main() {
             Studentas Studentokai;
             char programos_tesinys;
             char choice3;
+
+            if(programos_veikimas == 1 || programos_veikimas == 2){
+                cin >> Studentokai;
+                Studentai.push_back(move(Studentokai));
+            }
+
+            if(programos_veikimas == 3){
+                int KiekisGeneravimui;
+                cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
+                Studentai.reserve(KiekisGeneravimui);
+                for(int i = 0; i < KiekisGeneravimui; i++){
+                    cin >> Studentokai;
+                    Studentai.push_back(move(Studentokai));
+                }
+                cout << "Generavimas baigtas:)" << endl;
+            }
 
             if(programos_veikimas == 4){
                 break;
@@ -97,41 +113,11 @@ int main() {
                 GeneruotiFaila(kiekis, nd_kiekis);
             }
 
-            if(programos_veikimas == 3){
-                int KiekisGeneravimui;
-                cout << "Kiek studentu generuoti?: "; cin >> KiekisGeneravimui; 
-                Studentai.reserve(KiekisGeneravimui);
-                for(int i = 0; i < KiekisGeneravimui; i++){
-                    GeneruotiStudenta(Studentokai);
-                    Studentai.push_back(move(Studentokai));
-                }
-                cout << "Generavimas baigtas:)" << endl;
-            }
-
-            if(programos_veikimas == 1){
-                cin >> Studentokai;
-            }
-
-            if(programos_veikimas == 2){
-                string vardas, pavarde;
-                cout << "Iveskite " << Studentai.size()+1 << " studento varda: ";
-                cin >> vardas;
-                Studentokai.SetVardas(vardas);
-
-                cout << "Iveskite " << Studentai.size()+1 << " studento pavarde: ";
-                cin >> pavarde;
-                Studentokai.SetPavarde(pavarde);
-                GeneruotiPazymius(Studentokai);
-                cout << "Skaiciu generavimas baigtas sekmingai:)" << endl;
-            }
-
             if(Studentokai.Nd_dydis() > 0 && programos_veikimas != 5 && programos_veikimas != 6){
                 Studentokai.nd_rusiavimas();
                 Studentokai.SetMediana(Studentokai.medianosSkaiciavimas(Studentokai.Get_Nd(), Studentokai.Nd_dydis(), Studentokai.Get_Egzaminas()));
                 Studentokai.setVidurkis(Studentokai.Vidurkis(Studentokai.Nd_dydis(), Studentokai.Nd_Suma(), Studentokai.Get_Egzaminas()));
             }
-            if(programos_veikimas != 5 && programos_veikimas != 3 && !Studentokai.Get_Nd().empty())
-                Studentai.push_back(move(Studentokai));
 
             cout << "Ar noresite ivesti dar viena studenta? (Y/N): ";
             cin >> programos_tesinys;
@@ -214,8 +200,12 @@ int main() {
         }
 
         if(!Studentai.empty()){
-            IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
-            IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
+            if(norimas_rikiavimas == 1 || norimas_rikiavimas == 2)
+                IsvestiRezultatus("Studentai", Studentai, norima_isvedimo_vieta);
+            if(norimas_rikiavimas == 3 || norimas_rikiavimas == 4){
+                IsvestiRezultatus("Lievi", Studentai, norima_isvedimo_vieta);
+                IsvestiRezultatus("Kieti", Kieti, norima_isvedimo_vieta);
+            }
         }
 
         system("pause");
