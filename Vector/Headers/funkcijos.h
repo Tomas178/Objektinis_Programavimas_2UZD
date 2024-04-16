@@ -1,6 +1,7 @@
 #ifndef FUNKCIJOS_H
 #define FUNKCIJOS_H
 
+#include "Zmogus.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -15,19 +16,15 @@
 
 using namespace std;
 
-class Studentas {
+class Studentas : public Zmogus {
     private:
-        string vardas;
-        string pavarde;
         vector<int> namu_darbai;
         int egzaminas;
         double mediana;
         double vidurkis;
     public:
         Studentas();
-        Studentas(string vard, string pavard);
-        inline string Get_Vardas() const { return vardas; }
-        inline string Get_Pavarde() const { return pavarde; }
+        Studentas(const string &vard, const string &pavard);
         vector<int> Get_Nd() const { return namu_darbai; }
         int Get_Egzaminas() const { return egzaminas; }
         double Get_Mediana() const { return mediana; }
@@ -39,8 +36,6 @@ class Studentas {
         int Get_Last_Nd() { return namu_darbai.back(); }
         ~Studentas();
 
-        void SetVardas(string vard) { this->vardas = vard; }
-        void SetPavarde(string pav) { this->pavarde = pav; }
         void setEgzaminas(int egz) { this->egzaminas = egz; }
         void SetMediana(double med) { this->mediana = med; }
         void setVidurkis(double vid) { this->vidurkis = vid; }

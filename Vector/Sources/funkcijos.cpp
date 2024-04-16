@@ -1,17 +1,14 @@
+#include "../Headers/Zmogus.h"
 #include "../Headers/funkcijos.h"
 
-Studentas::Studentas() {
-    vardas = "Nera Vardo";
-    pavarde = "Nera Pavardes";
+Studentas::Studentas() : Zmogus() {
     namu_darbai.clear();
     egzaminas = 0;
     mediana = 0.0;
     vidurkis = 0.0;
 }
 
-Studentas::Studentas(string vard, string pavard) {
-    vardas = vard;
-    pavarde = pavard;
+Studentas::Studentas(const string &vard, const string &pavard) : Zmogus(vard, pavard) {
     namu_darbai.clear();
     egzaminas = 0;
     mediana = 0.0;
@@ -19,18 +16,14 @@ Studentas::Studentas(string vard, string pavard) {
 }
 
 //Kopijavimo konstruktorius
-Studentas::Studentas(const Studentas &LaikinasStudentas) {
-    vardas = LaikinasStudentas.vardas;
-    pavarde = LaikinasStudentas.pavarde;
+Studentas::Studentas(const Studentas &LaikinasStudentas) : Zmogus(LaikinasStudentas.vardas, LaikinasStudentas.pavarde) {
     namu_darbai = LaikinasStudentas.namu_darbai;
     egzaminas = LaikinasStudentas.egzaminas;
     mediana = LaikinasStudentas.mediana;
     vidurkis = LaikinasStudentas.vidurkis;
 }
 
-Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept{
-    vardas = move(LaikinasStudentas.vardas);
-    pavarde = move(LaikinasStudentas.pavarde);
+Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept : Zmogus(move(LaikinasStudentas.vardas), move(LaikinasStudentas.pavarde)){
     namu_darbai = move(LaikinasStudentas.namu_darbai);
     egzaminas = move(LaikinasStudentas.egzaminas);
     mediana = move(LaikinasStudentas.mediana);

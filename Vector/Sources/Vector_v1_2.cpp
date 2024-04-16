@@ -1,3 +1,4 @@
+#include "../Headers/Zmogus.h"
 #include "../Headers/funkcijos.h"
 
 const int N = 10;
