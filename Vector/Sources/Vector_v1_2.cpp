@@ -12,21 +12,38 @@ int main() {
         vector<Studentas> Kieti;
         srand(time(nullptr));
 
+        Studentas Studentas1("Tomas", "Petronis");
+        Studentas Studentas2("Jonas", "Jonaitis");
+        cout << Studentas1 << endl;
+        cout << Studentas2 << endl;
+        Studentas Studentas3(Studentas1);
+        Studentas Studentas4(move(Studentas2));
+        Studentas Studentas5;
+        Studentas5 = Studentas1;
+        Studentas Studentas6;
+        Studentas6 = move(Studentas4);
+        cout << Studentas1 << endl;
+        cout << Studentas2 << endl;
+        cout << Studentas3 << endl;
+        cout << Studentas4 << endl;
+        cout << Studentas5 << endl;
+        cout << Studentas6 << endl;
+
         do {
             try {
-                while (true) {
-                    cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\n6 - Generuoti faila.\nPasirinkite: ";
-                    cin >> programos_veikimas;
-                    if (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        throw runtime_error("Iveskite skaiciu!");
-                    }
-                    if (programos_veikimas > 0 && programos_veikimas < 7)
-                        break;
-                    else
-                        throw runtime_error("Iveskite skaiciu intervale [1, 6]");
+            while (true) {
+                cout << "Pasirinkite programos eiga:\n1 - Vedimas ranka.\n2 - Generuoti pazymius.\n3 - Generuoti ir studentu pazymius, ir vardus bei pavardes.\n4 - Baigti darba.\n5 - imti duomenis is failo.\n6 - Generuoti faila.\nPasirinkite: ";
+                cin >> programos_veikimas;
+                if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Iveskite skaiciu!");
                 }
+                if (programos_veikimas > 0 && programos_veikimas < 7)
+                break;
+                else
+                throw runtime_error("Iveskite skaiciu intervale [1, 6]");
+            }
             } catch (const invalid_argument& e) {
                 cerr << "Klaida: " << e.what() << endl;
                 continue;

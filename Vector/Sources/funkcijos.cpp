@@ -26,9 +26,10 @@ Studentas::Studentas(const Studentas &LaikinasStudentas) {
     egzaminas = LaikinasStudentas.egzaminas;
     mediana = LaikinasStudentas.mediana;
     vidurkis = LaikinasStudentas.vidurkis;
-}
+    cout << "Kopijavimo konstruktorius suveike" << endl;
+    }
 
-Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept{
+Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept {
     vardas = move(LaikinasStudentas.vardas);
     pavarde = move(LaikinasStudentas.pavarde);
     namu_darbai = move(LaikinasStudentas.namu_darbai);
@@ -37,6 +38,7 @@ Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept{
     vidurkis = move(LaikinasStudentas.vidurkis);
 
     LaikinasStudentas.ClearEverything();
+    cout << "Perkelimo konstruktorius suveike" << endl;
 }
 
 Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
@@ -48,20 +50,19 @@ Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
         mediana = LaikinasStudentas.mediana;
         vidurkis = LaikinasStudentas.vidurkis;
     }
+    cout << "Priskyrimo operatorius suveike" << endl;
     return *this;
 }
 
 Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
-    if(this != &LaikinasStudentas){
-        vardas = move(LaikinasStudentas.vardas);
-        pavarde = move(LaikinasStudentas.pavarde);
-        namu_darbai = move(LaikinasStudentas.namu_darbai);
-        egzaminas = move(LaikinasStudentas.egzaminas);
-        mediana = move(LaikinasStudentas.mediana);
-        vidurkis = move(LaikinasStudentas.vidurkis);
-
+        vardas = LaikinasStudentas.vardas;
+        pavarde = LaikinasStudentas.pavarde;
+        namu_darbai = LaikinasStudentas.namu_darbai;
+        egzaminas = LaikinasStudentas.egzaminas;
+        mediana = LaikinasStudentas.mediana;
+        vidurkis = LaikinasStudentas.vidurkis;
         LaikinasStudentas.ClearEverything();
-    }
+    cout << "Perkelimo operatorius suveike" << endl;
     return *this;
 }
 
