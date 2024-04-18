@@ -21,6 +21,7 @@ Studentas::Studentas(const Studentas &LaikinasStudentas) : Zmogus(LaikinasStuden
     egzaminas = LaikinasStudentas.egzaminas;
     mediana = LaikinasStudentas.mediana;
     vidurkis = LaikinasStudentas.vidurkis;
+    //cout << "Kopijavimo konstruktorius suveike" << endl;
 }
 
 Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept : Zmogus(move(LaikinasStudentas.vardas), move(LaikinasStudentas.pavarde)){
@@ -30,6 +31,7 @@ Studentas::Studentas(Studentas &&LaikinasStudentas) noexcept : Zmogus(move(Laiki
     vidurkis = move(LaikinasStudentas.vidurkis);
 
     LaikinasStudentas.ClearEverything();
+    //cout << "Perkelimo konstruktorius suveike" << endl;
 }
 
 Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
@@ -41,6 +43,7 @@ Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
         mediana = LaikinasStudentas.mediana;
         vidurkis = LaikinasStudentas.vidurkis;
     }
+    //cout << "kopijavimo operatorius suveike" << endl;
     return *this;
 }
 
@@ -55,6 +58,7 @@ Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
 
         LaikinasStudentas.ClearEverything();
     }
+    //cout << "Perkelimo operatorius suveike" << endl;
     return *this;
 }
 
