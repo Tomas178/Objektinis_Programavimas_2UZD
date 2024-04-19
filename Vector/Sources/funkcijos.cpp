@@ -54,13 +54,13 @@ Studentas& Studentas::operator=(const Studentas &LaikinasStudentas){
     return *this;
 }
 
-Studentas& Studentas::operator=(Studentas &&LaikinasStudentas){
-        vardas = LaikinasStudentas.vardas;
-        pavarde = LaikinasStudentas.pavarde;
-        namu_darbai = LaikinasStudentas.namu_darbai;
-        egzaminas = LaikinasStudentas.egzaminas;
-        mediana = LaikinasStudentas.mediana;
-        vidurkis = LaikinasStudentas.vidurkis;
+Studentas& Studentas::operator=(Studentas &&LaikinasStudentas) noexcept {
+        vardas = move(LaikinasStudentas.vardas);
+        pavarde = move(LaikinasStudentas.pavarde);
+        namu_darbai = move(LaikinasStudentas.namu_darbai);
+        egzaminas = move(LaikinasStudentas.egzaminas);
+        mediana = move(LaikinasStudentas.mediana);
+        vidurkis =move(LaikinasStudentas.vidurkis);
         LaikinasStudentas.ClearEverything();
     cout << "Perkelimo operatorius suveike" << endl;
     return *this;

@@ -54,7 +54,7 @@ class Studentas {
         Studentas(const Studentas &LaikinasStudentas);
         Studentas(Studentas &&LaikinasStudentas) noexcept;
         Studentas& operator=(const Studentas &LaikinasStudentas);
-        Studentas& operator=(Studentas &&LaikinasStudentas);
+        Studentas& operator=(Studentas &&LaikinasStudentas) noexcept;
         friend istringstream& operator>>(istringstream& filename, Studentas &LaikinasStudentas);
         friend istream& operator>>(istream& manual, Studentas &LaikinasStudentas);
         friend ostream& operator<<(ostream& console, const Studentas &LaikinasStudentas);
