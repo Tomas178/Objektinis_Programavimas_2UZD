@@ -10,6 +10,7 @@ class Zmogus {
         string vardas, pavarde;
         Zmogus() : vardas(""), pavarde("") {};
         Zmogus(const string &vard, const string &pavard) : vardas(vard), pavarde(pavard) {};  
+        ~Zmogus() {};
     public:  
         inline string Get_Vardas() const { return vardas; }
         inline string Get_Pavarde() const { return pavarde; } 
