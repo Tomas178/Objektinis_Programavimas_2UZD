@@ -14,10 +14,17 @@ int main() {
 
         Studentas Studentas1("Tomas", "Petronis");
         Studentas Studentas2("Jonas", "Jonaitis");
+        Studentas2.setNd({1});
+        Studentas2.setNd({5});
+        Studentas2.setEgzaminas(8);
+        Studentas2.SetMediana(8);
+
         cout << Studentas1 << endl;
         cout << Studentas2 << endl;
         Studentas Studentas3(Studentas1);
+        cout << Studentas3 << endl;
         Studentas Studentas4(move(Studentas2));
+        cout << Studentas4 << endl;
         Studentas Studentas5;
         Studentas5 = Studentas1;
         Studentas Studentas6;
