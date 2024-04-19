@@ -13,7 +13,7 @@ int main() {
         vector<Studentas> Kieti;
         srand(time(nullptr));
 
-        /*Testavimo reikalai
+        //Testavimo reikalai
         //Zmogus zmogus1("Vardenis", "Pavardenis");
         //Zmogus zmogus2;
         Studentas studentas1("Tomas", "Petronis");
@@ -30,7 +30,7 @@ int main() {
         studentas2 = move(studentas4);
         cout << studentas4 << endl;
         cout << studentas2 << endl;
-        */
+        
 
 
         do {
