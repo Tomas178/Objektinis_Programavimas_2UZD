@@ -45,6 +45,7 @@ class Studentas : public Zmogus {
         void ND_clear() { this->namu_darbai.clear(); } 
         double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas);
         double medianosSkaiciavimas(const vector<int> &namu_darbai, int nd_kiekis, int egzaminas);
+        void Print() const;
 
         Studentas(const Studentas &LaikinasStudentas);
         Studentas(Studentas &&LaikinasStudentas) noexcept;

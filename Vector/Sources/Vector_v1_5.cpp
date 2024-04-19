@@ -14,22 +14,30 @@ int main() {
         srand(time(nullptr));
 
         //Testavimo reikalai
-        //Zmogus zmogus1("Vardenis", "Pavardenis");
-        //Zmogus zmogus2;
-        Studentas studentas1("Tomas", "Petronis");
-        cout << studentas1 << endl;
-        Studentas studentas2;
-        cout << studentas2 << endl;
-        Studentas studentas3;
-        Studentas studentas4(studentas1);
-        cout << studentas4 << endl;
-        Studentas studentas5(move(studentas2));
-        cout << studentas5 << endl;
-        studentas3 = studentas1;
-        cout << studentas3 << endl;
-        studentas2 = move(studentas4);
-        cout << studentas4 << endl;
-        cout << studentas2 << endl;
+        //Zmogus zmogus;
+        Studentas Studentas1("Tomas", "Petronis");
+        Studentas Studentas2("Jonas", "Jonaitis");
+        Studentas2.setNd({1});
+        Studentas2.setNd({5});
+        Studentas2.setEgzaminas(8);
+        Studentas2.SetMediana(8);
+
+        cout << Studentas1 << endl;
+        cout << Studentas2 << endl;
+        Studentas Studentas3(Studentas1);
+        cout << Studentas3 << endl;
+        Studentas Studentas4(move(Studentas2));
+        cout << Studentas4 << endl;
+        Studentas Studentas5;
+        Studentas5 = Studentas1;
+        Studentas Studentas6;
+        Studentas6 = move(Studentas4);
+        cout << Studentas1 << endl;
+        cout << Studentas2 << endl;
+        cout << Studentas3 << endl;
+        cout << Studentas4 << endl;
+        cout << Studentas5 << endl;
+        cout << Studentas6 << endl;
         
 
 

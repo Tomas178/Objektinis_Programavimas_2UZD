@@ -16,6 +16,7 @@ class Zmogus {
         inline string Get_Pavarde() const { return pavarde; } 
         void SetVardas(string vard) { this->vardas = vard; }
         void SetPavarde(string pav) { this->pavarde = pav; }
+        virtual void Print() const = 0;
 };
 
 #endif
