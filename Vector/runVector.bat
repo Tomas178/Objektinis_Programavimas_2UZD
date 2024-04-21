@@ -3,4 +3,4 @@ cmake --install .
 cmake --build .
 copy Sources\*.txt DebugVector\*.txt
 cd DebugVector
-V1_5_Vector.exe
+V2_0_Vector.exe

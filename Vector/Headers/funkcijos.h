@@ -156,7 +156,7 @@ class Studentas : public Zmogus {
         /**
          * @brief Tik tam, kad būtų galima paveldėti Zmogus klasę.
          */
-        void Print() const;
+        void Print() const override {};
 
         /**
          * @brief Kopijavimo konstruktorius.
