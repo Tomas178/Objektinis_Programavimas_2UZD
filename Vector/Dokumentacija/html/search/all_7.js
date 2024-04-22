@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['setegzaminas_0',['setEgzaminas',['../class_studentas.html#af05b2d44e906fc5a92a23b28d7ffda95',1,'Studentas']]],
-  ['setmediana_1',['SetMediana',['../class_studentas.html#aaacb336ad3985b54cecb915fb083a51a',1,'Studentas']]],
-  ['setnd_2',['setNd',['../class_studentas.html#a38c387b8cd5766d5a11c5af6b60b5b76',1,'Studentas']]],
-  ['setpavarde_3',['SetPavarde',['../class_zmogus.html#a00ca7f83a4ea4a5cf63b929b6bd16e91',1,'Zmogus']]],
-  ['setvardas_4',['SetVardas',['../class_zmogus.html#ad589de20c8dc30b864a24e3ef9e3c59f',1,'Zmogus']]],
-  ['setvidurkis_5',['setVidurkis',['../class_studentas.html#a0df8afed44c049bf50a11b022834129d',1,'Studentas']]],
-  ['studentas_6',['Studentas',['../class_studentas.html',1,'Studentas'],['../class_studentas.html#ab459e995e8c9b24cdc9aec5b09a66539',1,'Studentas::Studentas()'],['../class_studentas.html#a079895419380a5965b844618d710c470',1,'Studentas::Studentas(const string &amp;vard, const string &amp;pavard)'],['../class_studentas.html#aeb0e2bfb3980a8d1261892c37474d4c6',1,'Studentas::Studentas(const Studentas &amp;LaikinasStudentas)'],['../class_studentas.html#a519eff284b5a25c4cf1178d25873783e',1,'Studentas::Studentas(Studentas &amp;&amp;LaikinasStudentas) noexcept']]]
+  ['n_0',['N',['../_vector__v2__0_8cpp.html#ab2b6b0c222cd1ce70d6a831f57241e59',1,'Vector_v2_0.cpp']]],
+  ['nd_5fclear_1',['ND_clear',['../class_studentas.html#ae5d8aa363c3a6f1dd4e9d12b28d216b2',1,'Studentas']]],
+  ['nd_5fdydis_2',['Nd_dydis',['../class_studentas.html#a68a87906865bf72fbc9fa19f6cb0deca',1,'Studentas']]],
+  ['nd_5fempty_3',['Nd_empty',['../class_studentas.html#a455fc04a82a346f1996f30b1159b7c20',1,'Studentas']]],
+  ['nd_5frusiavimas_4',['nd_rusiavimas',['../class_studentas.html#ae377cf92fbbf9d9d96a6f4780523fb20',1,'Studentas']]],
+  ['nd_5fsuma_5',['Nd_Suma',['../class_studentas.html#a69e6ab7327450f5d3a30f5c53eea6c87',1,'Studentas']]],
+  ['norima_5fisvedimo_5fvieta_6',['norima_isvedimo_vieta',['../funkcijos_8h.html#ac91f3bc51042a2b63312dbac98f066e7',1,'funkcijos.h']]],
+  ['norimas_5frikiavimas_7',['norimas_rikiavimas',['../funkcijos_8h.html#a076ad6c30f3965d96e686cb11d91b31e',1,'funkcijos.h']]]
 ];

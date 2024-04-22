@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pavarde_0',['pavarde',['../class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5',1,'Zmogus']]],
-  ['print_1',['Print',['../class_studentas.html#aaf7f9739be971ed83da03f6d65f9de33',1,'Studentas::Print()'],['../class_zmogus.html#abc7d6fce59c0f21c369d9150a46b1ab2',1,'Zmogus::Print()']]]
+  ['main_0',['main',['../_vector__v2__0_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'Vector_v2_0.cpp']]],
+  ['medianosskaiciavimas_1',['medianosSkaiciavimas',['../class_studentas.html#a5d73e0c163ec392074a11830ccf2736e',1,'Studentas']]]
 ];

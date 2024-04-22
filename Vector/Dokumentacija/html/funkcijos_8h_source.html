@@ -10,6 +10,10 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +29,7 @@
   <td id="projectalign">
    <div id="projectname">Objektinis Programavimas<span id="projectnumber">&#160;V2.0</span>
    </div>
-   <div id="projectbrief">Programėle skirta darbui su studentais</div>
+   <div id="projectbrief">Programėlė darbui su studentais</div>
   </td>
  </tr>
  </tbody>
@@ -54,6 +58,23 @@ $(function() {
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('funkcijos_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -75,19 +96,14 @@ $(function() { codefold.init(0); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_692516b589a32b3bfce781ca9f6d1534.html">Headers</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">funkcijos.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef FUNKCIJOS_H</span></div>
+<a href="funkcijos_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef FUNKCIJOS_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define FUNKCIJOS_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Zmogus.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_zmogus_8h.html">Zmogus.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -144,7 +160,7 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="class_studentas.html#a888459691f10878d42cbcaf5e1f8c496">  126</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#a888459691f10878d42cbcaf5e1f8c496">DeleteLastNd</a>() { this-&gt;namu_darbai.pop_back(); }</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="class_studentas.html#a26e0aa7f2029b725675fa52e476eb8bc">  131</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#a26e0aa7f2029b725675fa52e476eb8bc">ClearEverything</a>() { this-&gt;vardas.clear(); this-&gt;<a class="code hl_variable" href="class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5">pavarde</a>.clear(); this-&gt;namu_darbai.clear(); this-&gt;egzaminas = 0; this-&gt;mediana = 0.0; this-&gt;vidurkis = 0.0; }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="class_studentas.html#a26e0aa7f2029b725675fa52e476eb8bc">  131</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#a26e0aa7f2029b725675fa52e476eb8bc">ClearEverything</a>() { this-&gt;<a class="code hl_variable" href="class_zmogus.html#a56da52b45c537a31d2c1fc3a53a73c65">vardas</a>.clear(); this-&gt;<a class="code hl_variable" href="class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5">pavarde</a>.clear(); this-&gt;namu_darbai.clear(); this-&gt;egzaminas = 0; this-&gt;mediana = 0.0; this-&gt;vidurkis = 0.0; }</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="class_studentas.html#ae5d8aa363c3a6f1dd4e9d12b28d216b2">  136</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#ae5d8aa363c3a6f1dd4e9d12b28d216b2">ND_clear</a>() { this-&gt;namu_darbai.clear(); } </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
@@ -152,7 +168,7 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordtype">double</span> <a class="code hl_function" href="class_studentas.html#a5d73e0c163ec392074a11830ccf2736e">medianosSkaiciavimas</a>(<span class="keyword">const</span> vector&lt;int&gt; &amp;namu_darbai, <span class="keywordtype">int</span> nd_kiekis, <span class="keywordtype">int</span> egzaminas);</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="class_studentas.html#aaf7f9739be971ed83da03f6d65f9de33">  159</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#aaf7f9739be971ed83da03f6d65f9de33">Print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="class_studentas.html#a31262376d9117ae2a59ed8e1ca98913b">  159</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_studentas.html#a31262376d9117ae2a59ed8e1ca98913b">Print</a>()<span class="keyword"> const override </span>{};</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <a class="code hl_function" href="class_studentas.html#ab459e995e8c9b24cdc9aec5b09a66539">Studentas</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;LaikinasStudentas);</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
@@ -172,34 +188,35 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>};</div>
 </div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">extern</span> <span class="keywordtype">int</span> norima_isvedimo_vieta; </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="keyword">extern</span> <span class="keywordtype">int</span> programos_veikimas; </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword">extern</span> <span class="keywordtype">int</span> norimas_rikiavimas; </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keyword">extern</span> <span class="keywordtype">char</span> programos_tesinys; </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">extern</span> <span class="keywordtype">char</span> choice3; </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">extern</span> vector&lt;string&gt; Vardai; </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">extern</span> vector&lt;string&gt; Pavardes; </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keyword">extern</span> vector&lt;Studentas&gt; Lievi; </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keyword">extern</span> vector&lt;Studentas&gt; Studentai; </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keywordtype">bool</span> palygintiPagalVarda(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="funkcijos_8h.html#ac91f3bc51042a2b63312dbac98f066e7">norima_isvedimo_vieta</a>; </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="funkcijos_8h.html#a234f968cfd4042148118185d186a4801">programos_veikimas</a>; </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="funkcijos_8h.html#a076ad6c30f3965d96e686cb11d91b31e">norimas_rikiavimas</a>; </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keyword">extern</span> <span class="keywordtype">char</span> <a class="code hl_variable" href="funkcijos_8h.html#a0e865d391a429dee30a321caaf3e7bfb">programos_tesinys</a>; </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="keyword">extern</span> <span class="keywordtype">char</span> <a class="code hl_variable" href="funkcijos_8h.html#a40716f4d271a9037bd7cdaeff0c7a78c">choice3</a>; </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keyword">extern</span> vector&lt;string&gt; <a class="code hl_variable" href="funkcijos_8h.html#a58a61707b089f2ed516b94d573611526">Vardai</a>; </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="keyword">extern</span> vector&lt;string&gt; <a class="code hl_variable" href="funkcijos_8h.html#a281f640a231e4ddb06b91f03cde6aa10">Pavardes</a>; </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keyword">extern</span> vector&lt;Studentas&gt; <a class="code hl_variable" href="funkcijos_8h.html#a1b4f728796612561bf7d1317f1b6eee3">Lievi</a>; </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="keyword">extern</span> vector&lt;Studentas&gt; <a class="code hl_variable" href="funkcijos_8h.html#aafa3c3ea92f8b8b39b03fcf8af149434">Studentai</a>; </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="keywordtype">bool</span> <a class="code hl_function" href="funkcijos_8h.html#a3829ffcbdc96532bcd2696c01759271c">palygintiPagalVarda</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keywordtype">bool</span> palygintiPagalPavarde(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keywordtype">bool</span> <a class="code hl_function" href="funkcijos_8h.html#a2116d42634e6cb9f3e60a68cb39401f1">palygintiPagalPavarde</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keywordtype">bool</span> palygintiPagalVidurki(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="keywordtype">bool</span> <a class="code hl_function" href="funkcijos_8h.html#aa38a94b1155c2f8ea6290bfe64561e34">palygintiPagalVidurki</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keywordtype">bool</span> palygintiPagalMediana(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="keywordtype">bool</span> <a class="code hl_function" href="funkcijos_8h.html#ab24f7a3333f500bc116ac08f01154735">palygintiPagalMediana</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;a, <span class="keyword">const</span> <a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;b);</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keywordtype">void</span> PasalintiKietusStudentus(vector&lt;Studentas&gt; &amp;Studentai, <span class="keywordtype">int</span> norimas_rikiavimas);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keywordtype">void</span> <a class="code hl_function" href="funkcijos_8h.html#ad6dd1d1d10718e40416e369ad01595fd">PasalintiKietusStudentus</a>(vector&lt;Studentas&gt; &amp;<a class="code hl_variable" href="funkcijos_8h.html#aafa3c3ea92f8b8b39b03fcf8af149434">Studentai</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="funkcijos_8h.html#a076ad6c30f3965d96e686cb11d91b31e">norimas_rikiavimas</a>);</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="keywordtype">void</span> GeneruotiFaila(<span class="keywordtype">int</span> kiekis, <span class="keywordtype">int</span> nd_kiekis);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="keywordtype">void</span> <a class="code hl_function" href="funkcijos_8h.html#aeed004639de141999c3fb136e282af83">GeneruotiFaila</a>(<span class="keywordtype">int</span> kiekis, <span class="keywordtype">int</span> nd_kiekis);</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="keywordtype">void</span> GeneruotiPazymius(<a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;LaikinasStudentas);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="keywordtype">void</span> <a class="code hl_function" href="funkcijos_8h.html#aea734753c680fd2357108d3cd3ec824f">GeneruotiPazymius</a>(<a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;LaikinasStudentas);</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keywordtype">void</span> GeneruotiStudenta(<a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;LaikinasStudentas);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keywordtype">void</span> <a class="code hl_function" href="funkcijos_8h.html#a927e9c8d810241687764d0fa9c5fd396">GeneruotiStudenta</a>(<a class="code hl_class" href="class_studentas.html">Studentas</a> &amp;LaikinasStudentas);</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="keywordtype">void</span> IsvestiRezultatus(<span class="keywordtype">string</span> pavadinimas, <span class="keyword">const</span> vector&lt;Studentas&gt; &amp;Studentai, <span class="keywordtype">int</span> norima_isvedimo_vieta);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="keywordtype">void</span> <a class="code hl_function" href="funkcijos_8h.html#aef9f0785c63d324e46fd13f79696016f">IsvestiRezultatus</a>(<span class="keywordtype">string</span> pavadinimas, <span class="keyword">const</span> vector&lt;Studentas&gt; &amp;<a class="code hl_variable" href="funkcijos_8h.html#aafa3c3ea92f8b8b39b03fcf8af149434">Studentai</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="funkcijos_8h.html#ac91f3bc51042a2b63312dbac98f066e7">norima_isvedimo_vieta</a>);</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_zmogus_8h_html"><div class="ttname"><a href="_zmogus_8h.html">Zmogus.h</a></div></div>
 <div class="ttc" id="aclass_studentas_html"><div class="ttname"><a href="class_studentas.html">Studentas</a></div><div class="ttdoc">Studento klasė.</div><div class="ttdef"><b>Definition</b> funkcijos.h:22</div></div>
 <div class="ttc" id="aclass_studentas_html_a054ae9171e03b6ca66f11dc53599a7e9"><div class="ttname"><a href="class_studentas.html#a054ae9171e03b6ca66f11dc53599a7e9">Studentas::operator&gt;&gt;</a></div><div class="ttdeci">friend istringstream &amp; operator&gt;&gt;(istringstream &amp;filename, Studentas &amp;LaikinasStudentas)</div><div class="ttdoc">Perkrautas įvesties operatorius darbui su failais.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:108</div></div>
 <div class="ttc" id="aclass_studentas_html_a0df8afed44c049bf50a11b022834129d"><div class="ttname"><a href="class_studentas.html#a0df8afed44c049bf50a11b022834129d">Studentas::setVidurkis</a></div><div class="ttdeci">void setVidurkis(double vid)</div><div class="ttdoc">Priskirti galutinį balą pagal vidurkį.</div><div class="ttdef"><b>Definition</b> funkcijos.h:115</div></div>
@@ -207,6 +224,7 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="aclass_studentas_html_a26e0aa7f2029b725675fa52e476eb8bc"><div class="ttname"><a href="class_studentas.html#a26e0aa7f2029b725675fa52e476eb8bc">Studentas::ClearEverything</a></div><div class="ttdeci">void ClearEverything()</div><div class="ttdoc">Išvalyti visą studentą.</div><div class="ttdef"><b>Definition</b> funkcijos.h:131</div></div>
 <div class="ttc" id="aclass_studentas_html_a2b8287a918aa4407c0b9c40034a8b96d"><div class="ttname"><a href="class_studentas.html#a2b8287a918aa4407c0b9c40034a8b96d">Studentas::Get_Vidurkis</a></div><div class="ttdeci">double Get_Vidurkis() const</div><div class="ttdoc">Gauti galutinį balą pagal vidurkį.</div><div class="ttdef"><b>Definition</b> funkcijos.h:63</div></div>
 <div class="ttc" id="aclass_studentas_html_a2e68e0b7d10a94ca78dbeb2a5d5a0de3"><div class="ttname"><a href="class_studentas.html#a2e68e0b7d10a94ca78dbeb2a5d5a0de3">Studentas::Get_Nd</a></div><div class="ttdeci">vector&lt; int &gt; Get_Nd() const</div><div class="ttdoc">Namų darbų gavimui.</div><div class="ttdef"><b>Definition</b> funkcijos.h:45</div></div>
+<div class="ttc" id="aclass_studentas_html_a31262376d9117ae2a59ed8e1ca98913b"><div class="ttname"><a href="class_studentas.html#a31262376d9117ae2a59ed8e1ca98913b">Studentas::Print</a></div><div class="ttdeci">void Print() const override</div><div class="ttdoc">Tik tam, kad būtų galima paveldėti Zmogus klasę.</div><div class="ttdef"><b>Definition</b> funkcijos.h:159</div></div>
 <div class="ttc" id="aclass_studentas_html_a38c387b8cd5766d5a11c5af6b60b5b76"><div class="ttname"><a href="class_studentas.html#a38c387b8cd5766d5a11c5af6b60b5b76">Studentas::setNd</a></div><div class="ttdeci">void setNd(int nd)</div><div class="ttdoc">Pridėti namų darbo rezultatą i vektorių.</div><div class="ttdef"><b>Definition</b> funkcijos.h:121</div></div>
 <div class="ttc" id="aclass_studentas_html_a455fc04a82a346f1996f30b1159b7c20"><div class="ttname"><a href="class_studentas.html#a455fc04a82a346f1996f30b1159b7c20">Studentas::Nd_empty</a></div><div class="ttdeci">bool Nd_empty() const</div><div class="ttdoc">Patikrinti ar namų darbų vektorius yra tuščias.</div><div class="ttdef"><b>Definition</b> funkcijos.h:69</div></div>
 <div class="ttc" id="aclass_studentas_html_a5899bdc47eef522e1170db28a16570cb"><div class="ttname"><a href="class_studentas.html#a5899bdc47eef522e1170db28a16570cb">Studentas::Vidurkis</a></div><div class="ttdeci">double Vidurkis(int nd_kiekis, int nd_suma, int egzaminas)</div><div class="ttdoc">Apskaičiuoti galutinį balą pagal vidurkį.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:258</div></div>
@@ -217,7 +235,6 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="aclass_studentas_html_a69e6ab7327450f5d3a30f5c53eea6c87"><div class="ttname"><a href="class_studentas.html#a69e6ab7327450f5d3a30f5c53eea6c87">Studentas::Nd_Suma</a></div><div class="ttdeci">int Nd_Suma()</div><div class="ttdoc">Apskaičiuoti namų darbų sumą.</div><div class="ttdef"><b>Definition</b> funkcijos.h:86</div></div>
 <div class="ttc" id="aclass_studentas_html_a888459691f10878d42cbcaf5e1f8c496"><div class="ttname"><a href="class_studentas.html#a888459691f10878d42cbcaf5e1f8c496">Studentas::DeleteLastNd</a></div><div class="ttdeci">void DeleteLastNd()</div><div class="ttdoc">Ištrinti paskutinį namų darbų rezultatą.</div><div class="ttdef"><b>Definition</b> funkcijos.h:126</div></div>
 <div class="ttc" id="aclass_studentas_html_aaacb336ad3985b54cecb915fb083a51a"><div class="ttname"><a href="class_studentas.html#aaacb336ad3985b54cecb915fb083a51a">Studentas::SetMediana</a></div><div class="ttdeci">void SetMediana(double med)</div><div class="ttdoc">Priskirti galutinį balą pagal medianą.</div><div class="ttdef"><b>Definition</b> funkcijos.h:109</div></div>
-<div class="ttc" id="aclass_studentas_html_aaf7f9739be971ed83da03f6d65f9de33"><div class="ttname"><a href="class_studentas.html#aaf7f9739be971ed83da03f6d65f9de33">Studentas::Print</a></div><div class="ttdeci">void Print() const</div><div class="ttdoc">Tik tam, kad būtų galima paveldėti Zmogus klasę.</div></div>
 <div class="ttc" id="aclass_studentas_html_ab459e995e8c9b24cdc9aec5b09a66539"><div class="ttname"><a href="class_studentas.html#ab459e995e8c9b24cdc9aec5b09a66539">Studentas::Studentas</a></div><div class="ttdeci">Studentas()</div><div class="ttdoc">Default'inis konstruktorius.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:10</div></div>
 <div class="ttc" id="aclass_studentas_html_ab7dd5c6a6ff15989e498e967642b7170"><div class="ttname"><a href="class_studentas.html#ab7dd5c6a6ff15989e498e967642b7170">Studentas::operator&lt;&lt;</a></div><div class="ttdeci">friend ostream &amp; operator&lt;&lt;(ostream &amp;console, const Studentas &amp;LaikinasStudentas)</div><div class="ttdoc">Perkrautas išvesties operatorius į konsolę.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:220</div></div>
 <div class="ttc" id="aclass_studentas_html_ae377cf92fbbf9d9d96a6f4780523fb20"><div class="ttname"><a href="class_studentas.html#ae377cf92fbbf9d9d96a6f4780523fb20">Studentas::nd_rusiavimas</a></div><div class="ttdeci">void nd_rusiavimas()</div><div class="ttdoc">Namų darbų rūšiavimas didėjimo tvarka.</div><div class="ttdef"><b>Definition</b> funkcijos.h:80</div></div>
@@ -227,10 +244,33 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="aclass_studentas_html_afda82ac0024a067785712cf19ce12b93"><div class="ttname"><a href="class_studentas.html#afda82ac0024a067785712cf19ce12b93">Studentas::operator=</a></div><div class="ttdeci">Studentas &amp; operator=(const Studentas &amp;LaikinasStudentas)</div><div class="ttdoc">Kopijavimo priskyrimo operatorius.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:69</div></div>
 <div class="ttc" id="aclass_zmogus_html"><div class="ttname"><a href="class_zmogus.html">Zmogus</a></div><div class="ttdoc">Abstrakti žmogaus klasė.</div><div class="ttdef"><b>Definition</b> Zmogus.h:15</div></div>
 <div class="ttc" id="aclass_zmogus_html_a00799e1396c82e4f6dffa0edec1f24e5"><div class="ttname"><a href="class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5">Zmogus::pavarde</a></div><div class="ttdeci">string pavarde</div><div class="ttdef"><b>Definition</b> Zmogus.h:17</div></div>
+<div class="ttc" id="aclass_zmogus_html_a56da52b45c537a31d2c1fc3a53a73c65"><div class="ttname"><a href="class_zmogus.html#a56da52b45c537a31d2c1fc3a53a73c65">Zmogus::vardas</a></div><div class="ttdeci">string vardas</div><div class="ttdef"><b>Definition</b> Zmogus.h:17</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a076ad6c30f3965d96e686cb11d91b31e"><div class="ttname"><a href="funkcijos_8h.html#a076ad6c30f3965d96e686cb11d91b31e">norimas_rikiavimas</a></div><div class="ttdeci">int norimas_rikiavimas</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a0e865d391a429dee30a321caaf3e7bfb"><div class="ttname"><a href="funkcijos_8h.html#a0e865d391a429dee30a321caaf3e7bfb">programos_tesinys</a></div><div class="ttdeci">char programos_tesinys</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a1b4f728796612561bf7d1317f1b6eee3"><div class="ttname"><a href="funkcijos_8h.html#a1b4f728796612561bf7d1317f1b6eee3">Lievi</a></div><div class="ttdeci">vector&lt; Studentas &gt; Lievi</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a2116d42634e6cb9f3e60a68cb39401f1"><div class="ttname"><a href="funkcijos_8h.html#a2116d42634e6cb9f3e60a68cb39401f1">palygintiPagalPavarde</a></div><div class="ttdeci">bool palygintiPagalPavarde(const Studentas &amp;a, const Studentas &amp;b)</div><div class="ttdoc">Palyginti su studentus pagal pavardę.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:293</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a234f968cfd4042148118185d186a4801"><div class="ttname"><a href="funkcijos_8h.html#a234f968cfd4042148118185d186a4801">programos_veikimas</a></div><div class="ttdeci">int programos_veikimas</div><div class="ttdef"><b>Definition</b> Vector_v2_0.cpp:5</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a281f640a231e4ddb06b91f03cde6aa10"><div class="ttname"><a href="funkcijos_8h.html#a281f640a231e4ddb06b91f03cde6aa10">Pavardes</a></div><div class="ttdeci">vector&lt; string &gt; Pavardes</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a3829ffcbdc96532bcd2696c01759271c"><div class="ttname"><a href="funkcijos_8h.html#a3829ffcbdc96532bcd2696c01759271c">palygintiPagalVarda</a></div><div class="ttdeci">bool palygintiPagalVarda(const Studentas &amp;a, const Studentas &amp;b)</div><div class="ttdoc">Palyginti du studentus pagal vardą.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:285</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a40716f4d271a9037bd7cdaeff0c7a78c"><div class="ttname"><a href="funkcijos_8h.html#a40716f4d271a9037bd7cdaeff0c7a78c">choice3</a></div><div class="ttdeci">char choice3</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a58a61707b089f2ed516b94d573611526"><div class="ttname"><a href="funkcijos_8h.html#a58a61707b089f2ed516b94d573611526">Vardai</a></div><div class="ttdeci">vector&lt; string &gt; Vardai</div></div>
+<div class="ttc" id="afunkcijos_8h_html_a927e9c8d810241687764d0fa9c5fd396"><div class="ttname"><a href="funkcijos_8h.html#a927e9c8d810241687764d0fa9c5fd396">GeneruotiStudenta</a></div><div class="ttdeci">void GeneruotiStudenta(Studentas &amp;LaikinasStudentas)</div><div class="ttdoc">Generuoti atsitiktinį studentą.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:442</div></div>
+<div class="ttc" id="afunkcijos_8h_html_aa38a94b1155c2f8ea6290bfe64561e34"><div class="ttname"><a href="funkcijos_8h.html#aa38a94b1155c2f8ea6290bfe64561e34">palygintiPagalVidurki</a></div><div class="ttdeci">bool palygintiPagalVidurki(const Studentas &amp;a, const Studentas &amp;b)</div><div class="ttdoc">Palyginti dviejų studentų balus pagal vidurkį.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:301</div></div>
+<div class="ttc" id="afunkcijos_8h_html_aafa3c3ea92f8b8b39b03fcf8af149434"><div class="ttname"><a href="funkcijos_8h.html#aafa3c3ea92f8b8b39b03fcf8af149434">Studentai</a></div><div class="ttdeci">vector&lt; Studentas &gt; Studentai</div></div>
+<div class="ttc" id="afunkcijos_8h_html_ab24f7a3333f500bc116ac08f01154735"><div class="ttname"><a href="funkcijos_8h.html#ab24f7a3333f500bc116ac08f01154735">palygintiPagalMediana</a></div><div class="ttdeci">bool palygintiPagalMediana(const Studentas &amp;a, const Studentas &amp;b)</div><div class="ttdoc">Palyginti dviejų studentų balus pagal medianą.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:309</div></div>
+<div class="ttc" id="afunkcijos_8h_html_ac91f3bc51042a2b63312dbac98f066e7"><div class="ttname"><a href="funkcijos_8h.html#ac91f3bc51042a2b63312dbac98f066e7">norima_isvedimo_vieta</a></div><div class="ttdeci">int norima_isvedimo_vieta</div></div>
+<div class="ttc" id="afunkcijos_8h_html_ad6dd1d1d10718e40416e369ad01595fd"><div class="ttname"><a href="funkcijos_8h.html#ad6dd1d1d10718e40416e369ad01595fd">PasalintiKietusStudentus</a></div><div class="ttdeci">void PasalintiKietusStudentus(vector&lt; Studentas &gt; &amp;Studentai, int norimas_rikiavimas)</div><div class="ttdoc">Panaikinti studentus, kuriu galutinis balas &gt;= 5.0.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:316</div></div>
+<div class="ttc" id="afunkcijos_8h_html_aea734753c680fd2357108d3cd3ec824f"><div class="ttname"><a href="funkcijos_8h.html#aea734753c680fd2357108d3cd3ec824f">GeneruotiPazymius</a></div><div class="ttdeci">void GeneruotiPazymius(Studentas &amp;LaikinasStudentas)</div><div class="ttdoc">Generuoti atsitiktinius pažymius studentui.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:428</div></div>
+<div class="ttc" id="afunkcijos_8h_html_aeed004639de141999c3fb136e282af83"><div class="ttname"><a href="funkcijos_8h.html#aeed004639de141999c3fb136e282af83">GeneruotiFaila</a></div><div class="ttdeci">void GeneruotiFaila(int kiekis, int nd_kiekis)</div><div class="ttdoc">Generuoti studentų failą.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:355</div></div>
+<div class="ttc" id="afunkcijos_8h_html_aef9f0785c63d324e46fd13f79696016f"><div class="ttname"><a href="funkcijos_8h.html#aef9f0785c63d324e46fd13f79696016f">IsvestiRezultatus</a></div><div class="ttdeci">void IsvestiRezultatus(string pavadinimas, const vector&lt; Studentas &gt; &amp;Studentai, int norima_isvedimo_vieta)</div><div class="ttdoc">Išvesti rezultatus i ekraną arba į failą.</div><div class="ttdef"><b>Definition</b> funkcijos.cpp:399</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_692516b589a32b3bfce781ca9f6d1534.html">Headers</a></li><li class="navelem"><a class="el" href="funkcijos_8h.html">funkcijos.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
 </body>
 </html>

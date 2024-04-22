@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pavarde_0',['pavarde',['../class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5',1,'Zmogus']]]
+  ['choice3_0',['choice3',['../funkcijos_8h.html#a40716f4d271a9037bd7cdaeff0c7a78c',1,'funkcijos.h']]]
 ];

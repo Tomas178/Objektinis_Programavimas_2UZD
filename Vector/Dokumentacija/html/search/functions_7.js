@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['setegzaminas_0',['setEgzaminas',['../class_studentas.html#af05b2d44e906fc5a92a23b28d7ffda95',1,'Studentas']]],
-  ['setmediana_1',['SetMediana',['../class_studentas.html#aaacb336ad3985b54cecb915fb083a51a',1,'Studentas']]],
-  ['setnd_2',['setNd',['../class_studentas.html#a38c387b8cd5766d5a11c5af6b60b5b76',1,'Studentas']]],
-  ['setpavarde_3',['SetPavarde',['../class_zmogus.html#a00ca7f83a4ea4a5cf63b929b6bd16e91',1,'Zmogus']]],
-  ['setvardas_4',['SetVardas',['../class_zmogus.html#ad589de20c8dc30b864a24e3ef9e3c59f',1,'Zmogus']]],
-  ['setvidurkis_5',['setVidurkis',['../class_studentas.html#a0df8afed44c049bf50a11b022834129d',1,'Studentas']]],
-  ['studentas_6',['Studentas',['../class_studentas.html#ab459e995e8c9b24cdc9aec5b09a66539',1,'Studentas::Studentas()'],['../class_studentas.html#a079895419380a5965b844618d710c470',1,'Studentas::Studentas(const string &amp;vard, const string &amp;pavard)'],['../class_studentas.html#aeb0e2bfb3980a8d1261892c37474d4c6',1,'Studentas::Studentas(const Studentas &amp;LaikinasStudentas)'],['../class_studentas.html#a519eff284b5a25c4cf1178d25873783e',1,'Studentas::Studentas(Studentas &amp;&amp;LaikinasStudentas) noexcept']]]
+  ['palygintipagalmediana_0',['palygintiPagalMediana',['../funkcijos_8h.html#ab24f7a3333f500bc116ac08f01154735',1,'palygintiPagalMediana(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp'],['../funkcijos_8cpp.html#ab24f7a3333f500bc116ac08f01154735',1,'palygintiPagalMediana(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp']]],
+  ['palygintipagalpavarde_1',['palygintiPagalPavarde',['../funkcijos_8h.html#a2116d42634e6cb9f3e60a68cb39401f1',1,'palygintiPagalPavarde(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp'],['../funkcijos_8cpp.html#a2116d42634e6cb9f3e60a68cb39401f1',1,'palygintiPagalPavarde(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp']]],
+  ['palygintipagalvarda_2',['palygintiPagalVarda',['../funkcijos_8h.html#a3829ffcbdc96532bcd2696c01759271c',1,'palygintiPagalVarda(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp'],['../funkcijos_8cpp.html#a3829ffcbdc96532bcd2696c01759271c',1,'palygintiPagalVarda(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp']]],
+  ['palygintipagalvidurki_3',['palygintiPagalVidurki',['../funkcijos_8h.html#aa38a94b1155c2f8ea6290bfe64561e34',1,'palygintiPagalVidurki(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp'],['../funkcijos_8cpp.html#aa38a94b1155c2f8ea6290bfe64561e34',1,'palygintiPagalVidurki(const Studentas &amp;a, const Studentas &amp;b):&#160;funkcijos.cpp']]],
+  ['pasalintikietusstudentus_4',['PasalintiKietusStudentus',['../funkcijos_8h.html#ad6dd1d1d10718e40416e369ad01595fd',1,'PasalintiKietusStudentus(vector&lt; Studentas &gt; &amp;Studentai, int norimas_rikiavimas):&#160;funkcijos.cpp'],['../funkcijos_8cpp.html#ad6dd1d1d10718e40416e369ad01595fd',1,'PasalintiKietusStudentus(vector&lt; Studentas &gt; &amp;Studentai, int norimas_rikiavimas):&#160;funkcijos.cpp']]],
+  ['print_5',['Print',['../class_studentas.html#a31262376d9117ae2a59ed8e1ca98913b',1,'Studentas::Print()'],['../class_zmogus.html#abc7d6fce59c0f21c369d9150a46b1ab2',1,'Zmogus::Print()']]]
 ];

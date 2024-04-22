@@ -10,6 +10,10 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
@@ -25,7 +29,7 @@
   <td id="projectalign">
    <div id="projectname">Objektinis Programavimas<span id="projectnumber">&#160;V2.0</span>
    </div>
-   <div id="projectbrief">Programėle skirta darbui su studentais</div>
+   <div id="projectbrief">Programėlė darbui su studentais</div>
   </td>
  </tr>
  </tbody>
@@ -49,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('class_studentas.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -70,7 +91,6 @@ $(function() {
 </div>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">Studentas Member List</div></div>
 </div><!--header-->
@@ -100,7 +120,7 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="class_studentas.html#a054ae9171e03b6ca66f11dc53599a7e9">operator&gt;&gt;</a></td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#ae977acbb6b066652852fb75afea227fb">operator&gt;&gt;</a></td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_zmogus.html#a00799e1396c82e4f6dffa0edec1f24e5">pavarde</a></td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#aaf7f9739be971ed83da03f6d65f9de33">Print</a>() const</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#a31262376d9117ae2a59ed8e1ca98913b">Print</a>() const override</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_studentas.html#af05b2d44e906fc5a92a23b28d7ffda95">setEgzaminas</a>(int egz)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#aaacb336ad3985b54cecb915fb083a51a">SetMediana</a>(double med)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_studentas.html#a38c387b8cd5766d5a11c5af6b60b5b76">setNd</a>(int nd)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
@@ -111,16 +131,19 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#a079895419380a5965b844618d710c470">Studentas</a>(const string &amp;vard, const string &amp;pavard)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_studentas.html#aeb0e2bfb3980a8d1261892c37474d4c6">Studentas</a>(const Studentas &amp;LaikinasStudentas)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#a519eff284b5a25c4cf1178d25873783e">Studentas</a>(Studentas &amp;&amp;LaikinasStudentas) noexcept</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>vardas</b> (defined in <a class="el" href="class_zmogus.html">Zmogus</a>)</td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_zmogus.html#a56da52b45c537a31d2c1fc3a53a73c65">vardas</a></td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_studentas.html#a5899bdc47eef522e1170db28a16570cb">Vidurkis</a>(int nd_kiekis, int nd_suma, int egzaminas)</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Zmogus</b>() (defined in <a class="el" href="class_zmogus.html">Zmogus</a>)</td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_zmogus.html#aa7a8ba4d3c4778f9b35d59eef3e72574">Zmogus</a>()</td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_zmogus.html#a276bcbc3ce005eb7f9ddd97a509c4fb7">Zmogus</a>(const string &amp;vard, const string &amp;pavard)</td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_studentas.html#a63e449e0f51a0b14340d02ee71b4be23">~Studentas</a>()</td><td class="entry"><a class="el" href="class_studentas.html">Studentas</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_zmogus.html#ac5615bf607a8f2f1b303ffa04328d24d">~Zmogus</a>()</td><td class="entry"><a class="el" href="class_zmogus.html">Zmogus</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
 </body>
 </html>
