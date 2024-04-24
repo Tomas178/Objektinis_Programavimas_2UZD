@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 3.25)
-project(V1_0_Deque)
-include_directories(Headers)
-file(GLOB SOURCES "Sources/*.cpp")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/DebugDeque)
-add_executable(${PROJECT_NAME} ${SOURCES})
