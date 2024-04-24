@@ -50,7 +50,7 @@
 # Instaliavimo instrukcija
 - Jeigu neturite CMake, tuomet reikia atsisiųsti iš https://cmake.org/download/ ir instaliuojant programą pasirinkti, kad nustatytų sistemos kintamuosius arba galite žiūrėti šitą video: https://www.youtube.com/watch?v=8_X5Iq9niDE.
 - Taip pat reikės atsisiųsti googletest darant šiuos žingsnius folderyje: 
-    - git clone https://github.com/google/googletest.git -b v1.14.0
+    - git clone https://github.com/google/googletest.git
     - cd googletest        # Main directory of the cloned repository.
     - mkdir build          # Create a directory to hold the build output.
     - cd build
