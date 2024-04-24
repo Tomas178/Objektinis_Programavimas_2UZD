@@ -49,5 +49,12 @@
 
 # Instaliavimo instrukcija
 - Jeigu neturite CMake, tuomet reikia atsisiųsti iš https://cmake.org/download/ ir instaliuojant programą pasirinkti, kad nustatytų sistemos kintamuosius arba galite žiūrėti šitą video: https://www.youtube.com/watch?v=8_X5Iq9niDE.
+- Taip pat reikės atsisiųsti googletest darant šiuos žingsnius folderyje: 
+    - git clone https://github.com/google/googletest.git -b v1.14.0
+    - cd googletest        # Main directory of the cloned repository.
+    - mkdir build          # Create a directory to hold the build output.
+    - cd build
+    - cmake ..             # Generate native build scripts for GoogleTest.
+- Tuomet build folder'yje turėtu atsirasti libgtest.a ir libgtest_main.a failai ir tada žiūrėkite į CMakeLists.txt ir nustatykite kelią iki tų failų pagal savo failų lokaciją.
 - Tuomet tam folderyje, raskite run.bat script'ą ir jums viska sutvarkys automatiškai.
-- V1_2_Vector.exe failą rasite Debug folderyje, kuris atsiras po CMake įvykdymo.
+- V2_0_Vector.exe failą rasite Debug folder'yje, o Testas.exe rasite Testavimo_rezultatai folder'yje, kurie atsiras po CMake įvykdymo.
