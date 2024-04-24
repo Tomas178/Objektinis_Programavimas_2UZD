@@ -1,4 +1,4 @@
-# V1.2
+# V2.0
 
 - Visi tyrimai yra atlikti iš 5 bandymų.
 - Visi failai turi po 7 namų darbus.
