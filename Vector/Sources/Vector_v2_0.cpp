@@ -13,34 +13,6 @@ int main() {
         vector<Studentas> Kieti;
         srand(time(nullptr));
 
-        //Testavimo reikalai
-        //Zmogus zmogus;
-        Studentas Studentas1("Tomas", "Petronis");
-        Studentas Studentas2("Jonas", "Jonaitis");
-        Studentas2.setNd({1});
-        Studentas2.setNd({5});
-        Studentas2.setEgzaminas(8);
-        Studentas2.SetMediana(8);
-
-        cout << Studentas1 << endl;
-        cout << Studentas2 << endl;
-        Studentas Studentas3(Studentas1);
-        cout << Studentas3 << endl;
-        Studentas Studentas4(move(Studentas2));
-        cout << Studentas4 << endl;
-        Studentas Studentas5;
-        Studentas5 = Studentas1;
-        Studentas Studentas6;
-        Studentas6 = move(Studentas4);
-        cout << Studentas1 << endl;
-        cout << Studentas2 << endl;
-        cout << Studentas3 << endl;
-        cout << Studentas4 << endl;
-        cout << Studentas5 << endl;
-        cout << Studentas6 << endl;
-        
-
-
         do {
             try {
                 while (true) {
