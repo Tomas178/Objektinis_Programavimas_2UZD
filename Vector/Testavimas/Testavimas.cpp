@@ -29,7 +29,7 @@ TEST(Studento_Testavimas, Studento_Parametirinis_Konstruktorius) {
 TEST(Studento_Testavimas, Studento_Move_konstruktorius) {
     Studentas studentas("Tomas", "Petronis");
     studentas.SetMediana(8.0);
-    Studentas studentas2(std::move(studentas));
+    Studentas studentas2(move(studentas));
     EXPECT_EQ(studentas.Get_Vardas(), "");
     EXPECT_EQ(studentas.Get_Pavarde(), "");
     EXPECT_EQ(studentas.Get_Mediana(), 0.0);
@@ -65,7 +65,7 @@ TEST(Studento_Testavimas, Studento_kopijavimo_operatorius) {
 TEST(Studento_Testavimas, Studento_move_operatorius) {
     Studentas studentas("Tomas", "Petronis");
     studentas.SetMediana(8.0);
-    Studentas studentas2 = std::move(studentas);
+    Studentas studentas2 = move(studentas);
     EXPECT_EQ(studentas.Get_Vardas(), "");
     EXPECT_EQ(studentas.Get_Pavarde(), "");
     EXPECT_EQ(studentas.Get_Mediana(), 0.0);
