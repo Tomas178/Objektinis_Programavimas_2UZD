@@ -26,6 +26,54 @@ TEST(Studento_Testavimas, Studento_Parametirinis_Konstruktorius) {
     EXPECT_EQ(studentas.Get_Mediana(), 0.0);
 }
 
+TEST(Studento_Testavimas, Studento_Move_konstruktorius) {
+    Studentas studentas("Tomas", "Petronis");
+    studentas.SetMediana(8.0);
+    Studentas studentas2(std::move(studentas));
+    EXPECT_EQ(studentas.Get_Vardas(), "");
+    EXPECT_EQ(studentas.Get_Pavarde(), "");
+    EXPECT_EQ(studentas.Get_Mediana(), 0.0);
+    EXPECT_EQ(studentas2.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas2.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas2.Get_Mediana(), 8.0);
+}
+
+TEST(Studento_Testavimas, Studento_Copy_konstruktorius) {
+    Studentas studentas("Tomas", "Petronis");
+    studentas.SetMediana(8.0);
+    Studentas studentas2(studentas);
+    EXPECT_EQ(studentas.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas.Get_Mediana(), 8.0);
+    EXPECT_EQ(studentas2.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas2.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas2.Get_Mediana(), 8.0);
+}
+
+TEST(Studento_Testavimas, Studento_kopijavimo_operatorius) {
+    Studentas studentas("Tomas", "Petronis");
+    studentas.SetMediana(8.0);
+    Studentas studentas2 = studentas;
+    EXPECT_EQ(studentas.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas.Get_Mediana(), 8.0);
+    EXPECT_EQ(studentas2.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas2.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas2.Get_Mediana(), 8.0);
+}
+
+TEST(Studento_Testavimas, Studento_move_operatorius) {
+    Studentas studentas("Tomas", "Petronis");
+    studentas.SetMediana(8.0);
+    Studentas studentas2 = std::move(studentas);
+    EXPECT_EQ(studentas.Get_Vardas(), "");
+    EXPECT_EQ(studentas.Get_Pavarde(), "");
+    EXPECT_EQ(studentas.Get_Mediana(), 0.0);
+    EXPECT_EQ(studentas2.Get_Vardas(), "Tomas");
+    EXPECT_EQ(studentas2.Get_Pavarde(), "Petronis");
+    EXPECT_EQ(studentas2.Get_Mediana(), 8.0);
+}
+
 TEST(Studento_Testavimas, Studento_Seteriai_ir_Geteriai) {
     Studentas studentas;
     studentas.SetVardas("Tomas");
