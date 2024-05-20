@@ -60,10 +60,53 @@ TEST(Vektoriaus_Element_Access_Funkciju_Testavimas, Data_Funkcija){
     EXPECT_EQ(v.data()[1], 2);
 }
 
+TEST(Vektoriaus_Iterator_Funkciju_Testavimas, Begin_Funkcija){
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(*v.begin(), 1);
+}
+
+TEST(Vektoriaus_Iterator_Funkciju_Testavimas, End_Funkcija){
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(*(v.end() - 1), 2);
+}
+
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Capacity_Funkcija){
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(v.capacity(), 2);
+}
+
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Size_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(v.size(), 2);
+    v.push_back(3);
+    EXPECT_EQ(v.size(), 3);
+}
+
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Empty_Funkcija) {
+    Vector<int> v;
+    EXPECT_EQ(v.empty(), true);
+    v.push_back(1);
+    EXPECT_EQ(v.empty(), false);
+}
+
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Reserve_Funkcija) {
+    Vector<int> v;
+    EXPECT_EQ(v.capacity(), 1);
+    v.reserve(10);
+    EXPECT_EQ(v.capacity(), 10);
+}
+
 
 int main(int argc, char** argv) {
     // Initialize Google Test framework
     ::testing::InitGoogleTest(&argc, argv);
-    
     return RUN_ALL_TESTS();
 }
