@@ -99,7 +99,11 @@ class Vector {
             if (dydis == talpa) reserve(talpa * 2);
             duomenys[dydis++] = std::move(value);
         }
-        void pop_back() {dydis--;}
+        void pop_back() {
+            if (dydis > 0) {
+                --dydis;
+            }
+        }
         void resize(unsigned int naujas_dydis) {
             if (naujas_dydis > talpa) reserve(naujas_dydis);
             for (unsigned int i = dydis; i < naujas_dydis; i++) {

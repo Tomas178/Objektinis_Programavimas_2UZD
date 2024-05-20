@@ -104,6 +104,110 @@ TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Reserve_Funkcija) {
     EXPECT_EQ(v.capacity(), 10);
 }
 
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Shrink_to_fit_Funkcija) {
+    Vector<int> v;
+    v.reserve(10);
+    v.push_back(1);
+    v.push_back(2);
+    v.shrink_to_fit();
+    EXPECT_EQ(v.capacity(), 2);
+}
+
+TEST(Vektoriaus_Capacity_Funkciju_Testavimas, Assign_Funkcija) {
+    Vector<int> v;
+    v.assign(10, 5);
+    EXPECT_EQ(v.size(), 10);
+    for (int i = 0; i < 10; i++) {
+        EXPECT_EQ(v[i], 5);
+    }
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Clear_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(v.size(), 2);
+    v.clear();
+    EXPECT_EQ(v.size(), 0);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Push_Back_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    EXPECT_EQ(v.size(), 1);
+    EXPECT_EQ(v.capacity(), 1);
+    EXPECT_EQ(v[0], 1);
+    v.push_back(2);
+    EXPECT_EQ(v.size(), 2);
+    EXPECT_EQ(v.capacity(), 2);
+    EXPECT_EQ(v[1], 2);
+    v.push_back(3);
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v.capacity(), 4);
+    EXPECT_EQ(v[2], 3);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Emplace_Back_Funkcija) {
+    Vector<int> v;
+    v.emplace_back(1);
+    EXPECT_EQ(v.size(), 1);
+    EXPECT_EQ(v.capacity(), 1);
+    EXPECT_EQ(v[0], 1);
+    v.emplace_back(2);
+    EXPECT_EQ(v.size(), 2);
+    EXPECT_EQ(v.capacity(), 2);
+    EXPECT_EQ(v[1], 2);
+    v.emplace_back(3);
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v.capacity(), 4);
+    EXPECT_EQ(v[2], 3);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Pop_Back_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    EXPECT_EQ(v.size(), 3);
+    v.pop_back();
+    EXPECT_EQ(v.size(), 2);
+    EXPECT_EQ(v[0], 1);
+    EXPECT_EQ(v[1], 2);
+    EXPECT_THROW(v.at(2), std::out_of_range);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Resize_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    EXPECT_EQ(v.size(), 2);
+    v.resize(4);
+    EXPECT_EQ(v.size(), 4);
+    EXPECT_EQ(v[0], 1);
+    EXPECT_EQ(v[1], 2);
+    EXPECT_EQ(v[2], 0);
+    EXPECT_EQ(v[3], 0);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Swap_Funkcija) {
+    Vector<int> v1;
+    v1.reserve(10);
+    v1.push_back(1);
+    v1.push_back(2);
+    Vector<int> v2;
+    v2.push_back(3);
+    v2.push_back(4);
+    v1.swap(v2);
+    EXPECT_EQ(v1.size(), 2);
+    EXPECT_EQ(v1.capacity(), 2);
+    EXPECT_EQ(v2.size(), 2);
+    EXPECT_EQ(v2.capacity(), 10);
+    EXPECT_EQ(v1[0], 3);
+    EXPECT_EQ(v1[1], 4);
+    EXPECT_EQ(v2[0], 1);
+    EXPECT_EQ(v2[1], 2);
+}
+
 
 int main(int argc, char** argv) {
     // Initialize Google Test framework
