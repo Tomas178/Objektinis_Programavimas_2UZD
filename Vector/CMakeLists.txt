@@ -12,7 +12,7 @@ include_directories(Headers)
 
 file(GLOB SOURCES "Sources/Vector_v2_0.cpp")
 file(GLOB FUNKCIJOS "Sources/funkcijos.cpp")
-# file(GLOB PROGRAMOS_TESTAVIMAS "Testavimas/Testavimas.cpp")
+file(GLOB PROGRAMOS_TESTAVIMAS "Testavimas/Testavimas.cpp")
 file(GLOB VEKTORIAUS_TESTAVIMAS "Testavimas/Vektoriaus_Testavimas.cpp")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/DebugVector)
@@ -24,9 +24,9 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${FUNKCIJOS})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Testavimo_Rezultatai)
 
-# add_executable(Programos_Testas ${PROGRAMOS_TESTAVIMAS} ${FUNKCIJOS})
+add_executable(Programos_Testas ${PROGRAMOS_TESTAVIMAS} ${FUNKCIJOS})
 
-# target_link_libraries(Programos_Testas ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY})
+target_link_libraries(Programos_Testas ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY})
 
 add_executable(Vektoriaus_Testas ${VEKTORIAUS_TESTAVIMAS})
 

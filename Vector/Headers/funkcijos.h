@@ -3,7 +3,6 @@
 
 #include "Zmogus.h"
 #include "Vector.h"
-#include <vector>
 #include <iostream>
 #include <iomanip>
 #include <algorithm>

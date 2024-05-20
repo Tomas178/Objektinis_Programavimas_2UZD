@@ -155,7 +155,7 @@ istream& operator>>(istream& manual, Studentas &LaikinasStudentas){
     }
     if(programos_veikimas == 3) {
         GeneruotiStudenta(LaikinasStudentas);
-        cout << "As esu ten kur Programos_veikimas == 3 ivedimo per konsole operatoriuje >>" << endl;
+        //cout << "As esu ten kur Programos_veikimas == 3 ivedimo per konsole operatoriuje >>" << endl;
     }
     //cout << "As esu ivedimo per konsole operatoriuje >>" << endl;
     return manual;
