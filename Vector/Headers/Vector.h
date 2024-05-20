@@ -95,6 +95,32 @@ class Vector {
             if (dydis == talpa) reserve(talpa == 0 ? 1 : talpa * 2);
             duomenys[dydis++] = value;
         }
+        void insert(unsigned int indeksas, const T& value) {
+            if (dydis == talpa) reserve(talpa == 0 ? 1 : talpa * 2);
+            for (unsigned int i = dydis; i > indeksas; i--) {
+                duomenys[i] = duomenys[i - 1];
+            }
+            duomenys[indeksas] = value;
+            dydis++;
+        }
+        void insert_range(unsigned int indeksas, unsigned int n, const T& value) {
+            if (dydis + n > talpa) reserve(dydis + n);
+            for (unsigned int i = dydis + n - 1; i > indeksas + n - 1; i--) {
+                duomenys[i] = duomenys[i - n];
+            }
+            for (unsigned int i = indeksas; i < indeksas + n; i++) {
+                duomenys[i] = value;
+            }
+            dydis += n;
+        }
+        void emplace(unsigned int indeksas, T&& value) {
+            if (dydis == talpa) reserve(talpa == 0 ? 1 : talpa * 2);
+            for (unsigned int i = dydis; i > indeksas; i--) {
+                duomenys[i] = duomenys[i - 1];
+            }
+            duomenys[indeksas] = std::move(value);
+            dydis++;
+        }
         void emplace_back(T&& value) {
             if (dydis == talpa) reserve(talpa * 2);
             duomenys[dydis++] = std::move(value);

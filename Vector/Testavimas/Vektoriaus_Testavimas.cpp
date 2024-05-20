@@ -147,6 +147,17 @@ TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Push_Back_Funkcija) {
     EXPECT_EQ(v[2], 3);
 }
 
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Emplace_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.emplace(1, 3);
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v[0], 1);
+    EXPECT_EQ(v[1], 3);
+    EXPECT_EQ(v[2], 2);
+}
+
 TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Emplace_Back_Funkcija) {
     Vector<int> v;
     v.emplace_back(1);
@@ -206,6 +217,29 @@ TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Swap_Funkcija) {
     EXPECT_EQ(v1[1], 4);
     EXPECT_EQ(v2[0], 1);
     EXPECT_EQ(v2[1], 2);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Insert_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.insert(1, 3);
+    EXPECT_EQ(v.size(), 3);
+    EXPECT_EQ(v[0], 1);
+    EXPECT_EQ(v[1], 3);
+    EXPECT_EQ(v[2], 2);
+}
+
+TEST(Vektoriaus_Modifiers_Funkciju_Testavimas, Insert_Range_Funkcija) {
+    Vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.insert_range(1, 2, 3);
+    EXPECT_EQ(v.size(), 4);
+    EXPECT_EQ(v[0], 1);
+    EXPECT_EQ(v[1], 3);
+    EXPECT_EQ(v[2], 3);
+    EXPECT_EQ(v[3], 2);
 }
 
 
